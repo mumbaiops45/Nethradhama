@@ -165,8 +165,7 @@ const initials = (name) =>
     .join("")
     .toUpperCase();
 
-/* Avatar: shows the photo if it loads; on any load error (file missing,
-   wrong path, etc.) it gracefully falls back to monogram initials. */
+
 function Avatar({ name, photo, size = "h-16 w-16", text = "text-lg", ring = "ring-[#0D8DD7]/15" }) {
   const [failed, setFailed] = useState(false);
   const showImg = photo && !failed;
@@ -189,40 +188,35 @@ function Avatar({ name, photo, size = "h-16 w-16", text = "text-lg", ring = "rin
   );
 }
 
-/* ──────────────────────────────────────────────────────────────
-   DATA every person already has a `photo` slot wired.
-   To add a real photo: save the file at  public/faculty/<file>.jpg
-   (square, e.g. 400×400). Different extension? Just edit the path.
-   Want to force initials for someone? Set their photo to null.
-   ────────────────────────────────────────────────────────────── */
+
 const management = [
-  { name: "Dr. Sri Ganesh", role: "Chairman & Managing Director", org: "Nethradhama Hospitals Pvt Ltd.", qual: "MBBS, MS, DNB", photo: "/faculty/sri-ganesh.jpg" },
-  { name: "Dr. Suman Shree R", role: "Director & CEO", org: "Nethradhama Hospitals Pvt Ltd.", qual: "MBBS, MD, DNB (Anaesthesiology), PGDHHM, PGDMLS", photo: "/faculty/suman-shree.jpg" },
-  { name: "Dr. Savitha Arun", role: "Principal / Professor", org: "Subject Squint & BV", qual: "MBBS, DOMS, DNB", photo: "/faculty/savitha-arun.jpg" },
+  { name: "Dr. Sri Ganesh", role: "Chairman & Managing Director", org: "Nethradhama Hospitals Pvt Ltd.", qual: "MBBS, MS, DNB", photo: "/ganesh.jpg" },
+  { name: "Dr. Suman Shree R", role: "Director & CEO", org: "Nethradhama Hospitals Pvt Ltd.", qual: "MBBS, MD, DNB (Anaesthesiology), PGDHHM, PGDMLS", photo: "/suman.jpg" },
+  { name: "Dr. Savitha Arun", role: "Principal / Professor", org: "Subject Squint & BV", qual: "MBBS, DOMS, DNB", photo: "/savitha.jpg" },
 ];
 
 const optometryFaculty = [
-  { name: "Mr. Rahul Roy", role: "Vice Principal & Assistant Professor", subject: "CEVS & Optometric Instruments, LVA & Geriatric, Binocular Vision", qual: "M.Optom", photo: "/faculty/rahul-roy.jpg" },
-  { name: "Mr. Anand P", role: "Lecturer", subject: "Basic Biochemistry & Nutrition, Microbiology", qual: "MSc", photo: "/faculty/anand-p.jpg" },
-  { name: "Mrs. Sheethal Pai H", role: "Tutor", subject: "Ocular Anatomy, Pediatric Optometry & Ocular Diseases", qual: "BSc Opt, FLVPEI", photo: "/faculty/sheethal-pai.jpg" },
-  { name: "Mr. Sharath N S", role: "Tutor", subject: "Visual Optics", qual: "BSc Opt", photo: "/faculty/sharath-ns.jpg" },
-  { name: "Mr. Chethan M", role: "Assistant Professor", subject: "Physical & Geometric Optics", qual: "M.Sc.", photo: "/faculty/chethan-m.jpg" },
-  { name: "Mrs. Deepa G K", role: "Tutor", subject: "Dispensing Optics", qual: "BSc Opt", photo: "/faculty/deepa-gk.jpg" },
-  { name: "Mr. J Sachin Singh", role: "Lecturer", subject: "Ocular Physiology, Ocular Biochemistry, CL, Squint", qual: "M.Optom", photo: "/faculty/sachin-singh.jpg" },
-  { name: "Ms. Renukha Parameswari S", role: "Lecturer", subject: "LVA & Optometric Optics", qual: "M.Optom", photo: "/faculty/renukha-parameswari.jpg" },
+  { name: "Mr. Rahul Roy", role: "Vice Principal & Assistant Professor", subject: "CEVS & Optometric Instruments, LVA & Geriatric, Binocular Vision", qual: "M.Optom", photo: "/rahul.jpg" },
+  { name: "Mr. Anand P", role: "Lecturer", subject: "Basic Biochemistry & Nutrition, Microbiology", qual: "MSc", photo: "/AnandP.jpg" },
+  { name: "Mrs. Sheethal Pai H", role: "Tutor", subject: "Ocular Anatomy, Pediatric Optometry & Ocular Diseases", qual: "BSc Opt, FLVPEI", photo: "/sheethal.jpg" },
+  { name: "Mr. Sharath N S", role: "Tutor", subject: "Visual Optics", qual: "BSc Opt", photo: "/sharathns.jpg" },
+  { name: "Mr. Chethan M", role: "Assistant Professor", subject: "Physical & Geometric Optics", qual: "M.Sc.", photo: "/chethanm.jpg" },
+  { name: "Mrs. Deepa G K", role: "Tutor", subject: "Dispensing Optics", qual: "BSc Opt", photo: "/deepa.jpg" },
+  { name: "Mr. J Sachin Singh", role: "Lecturer", subject: "Ocular Physiology, Ocular Biochemistry, CL, Squint", qual: "M.Optom", photo: "/sachin.jpg" },
+  { name: "Ms. Renukha Parameswari S", role: "Lecturer", subject: "LVA & Optometric Optics", qual: "M.Optom", photo: "/renukha.jpg" },
 ];
 
 const visitingFaculty = [
-  { name: "Dr. Vanitha Ramaswamy", role: "Professor", subject: "English", qual: "PhD (English)", photo: "/faculty/vanitha-ramaswamy.jpg" },
-  { name: "Dr. Jahanzeb", role: "Lecturer", subject: "General Anatomy", qual: "M.Sc (Anatomy), MBA (Hosp Admin), Ph.D (Human Anatomy)", photo: "/faculty/jahanzeb.jpg" },
-  { name: "Mrs. Shobha Rani", role: "Lecturer", subject: "Law & Optometry", qual: "LLB, LLM", photo: "/faculty/shobha-rani.jpg" },
-  { name: "Mr. Manjunatha R", role: "Professor", subject: "Mathematics", qual: "M.Sc, M.Phil, B.Ed", photo: "/faculty/manjunatha-r.jpg" },
-  { name: "Mrs. Swarnashree P", role: "Lecturer", subject: "Basic Accountancy", qual: "B.Com, ICWA", photo: "/faculty/swarnashree-p.jpg" },
-  { name: "Dr. Yogeesh S N", role: "Lecturer", subject: "General Physiology", qual: "MBBS, MD, PGDHA, PGDHS", photo: "/faculty/yogeesh-sn.jpg" },
+  { name: "Dr. Vanitha Ramaswamy", role: "Professor", subject: "English", qual: "PhD (English)", photo: "/vanitha.jpg" },
+  { name: "Dr. Jahanzeb", role: "Lecturer", subject: "General Anatomy", qual: "M.Sc (Anatomy), MBA (Hosp Admin), Ph.D (Human Anatomy)", photo: "/jahanzeb.jpg" },
+  { name: "Mrs. Shobha Rani", role: "Lecturer", subject: "Law & Optometry", qual: "LLB, LLM", photo: "/sobha.jpg" },
+  { name: "Mr. Manjunatha R", role: "Professor", subject: "Mathematics", qual: "M.Sc, M.Phil, B.Ed", photo: "/manjunatha.jpeg" },
+  { name: "Mrs. Swarnashree P", role: "Lecturer", subject: "Basic Accountancy", qual: "B.Com, ICWA", photo: "/swarnashreep.jpg" },
+  { name: "Dr. Yogeesh S N", role: "Lecturer", subject: "General Physiology", qual: "MBBS, MD, PGDHA, PGDHS", photo: "/yogeesh.jpg" },
 ];
 
 const administration = [
-  { name: "Mrs. N Shalini", role: "Executive Administrator", subject: "Administration", qual: "B.Sc Computer Science", photo: "/faculty/n-shalini.jpg" },
+  { name: "Mrs. N Shalini", role: "Executive Administrator", subject: "Administration", qual: "B.Sc Computer Science", photo: "/shalini.jpeg" },
 ];
 
 function FacultyCard({ p }) {

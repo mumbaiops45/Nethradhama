@@ -336,7 +336,7 @@ export default function Home() {
                             A four-year B.Sc. in Optometry built on rigorous academics, real clinical exposure and research shaping the eye-care professionals of tomorrow.
                         </p>
                         <div className="mt-8 flex flex-wrap items-center gap-4">
-                            <a href="#contact" className="rounded-full bg-[#0D8DD7] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg">
+                            <a href="/contact" className="rounded-full bg-[#0D8DD7] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg">
                                 Apply for 2025–26
                             </a>
                             <a href="#academics" className="rounded-full border border-stone-300 px-7 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-[#0D8DD7] hover:text-[#0D8DD7]">
@@ -438,7 +438,7 @@ export default function Home() {
                                
                                 <div className="mt-10">
                                     <a
-                                        href="#contact"
+                                        href="/contact"
                                         className="inline-flex items-center rounded-full bg-[#0D8DD7] px-8 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                                     >
                                         Learn More
