@@ -324,7 +324,7 @@ export default function Home() {
                     <Lens className="h-80 w-80 text-amber-200/50" />
                 </div>
 
-                <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 md:grid-cols-2 md:py-28">
+                <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-2 md:py-16">
                     <Reveal>
                         <Eyebrow>Bengaluru · Affiliated to RGUHS</Eyebrow>
                         <h1 className="mt-5 font-serif text-4xl font-semibold leading-[1.1] text-slate-900 sm:text-5xl lg:text-6xl">
@@ -355,7 +355,7 @@ export default function Home() {
                             <div className="absolute -right-6 -top-6 h-40 w-40 rounded-full bg-[#0D8DD7]/20 blur-3xl" />
                             <div className="absolute -bottom-8 -left-8 h-48 w-48 rounded-full bg-sky-200/40 blur-3xl" />
                             <div className="relative overflow-hidden rounded-[32px] border border-white/40 bg-white/20 shadow-[0_25px_80px_rgba(0,0,0,0.12)] backdrop-blur-sm">
-                                <img src="/hero.jpg"
+                                <img src="/hero.png"
                                     alt="Optometry Student"
                                     className="h-[420px] w-full object-cover object-center sm:h-[500px] lg:h-[620px]"
                                 />
@@ -589,11 +589,11 @@ export default function Home() {
                     <Lens className="h-72 w-72 text-[#0D8DD7]/10" />
                 </div>
 
-                <div className="relative mx-auto max-w-7xl px-4 py-24 lg:px-8">
+                <div className="relative  max-w-7xl  py-24 lg:px-8">
 
 
                     <Reveal>
-                        <div className="mx-auto max-w-3xl text-center">
+                        <div className="text-start px-14 max-w-3xl text-center">
                             <Eyebrow>Academics</Eyebrow>
 
                             <h2 className="mt-5 font-serif text-4xl font-semibold text-slate-900 sm:text-5xl">
@@ -608,7 +608,7 @@ export default function Home() {
                         </div>
                     </Reveal>
 
-                    <div className="mt-16 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                    <div className="mt-16 grid gap-6 px-14 md:grid-cols-2 xl:grid-cols-3">
                         {academics.map((a, i) => (
                             <Reveal key={a.k} delay={i * 80}>
                                 <div
