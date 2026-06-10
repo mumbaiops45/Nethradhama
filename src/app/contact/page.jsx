@@ -237,7 +237,7 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans text-slate-700 antialiased selection:bg-[#0D8DD7]">
+    <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
       <ScrollProgress />
 
       
@@ -251,13 +251,13 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-24">
           <Reveal className="max-w-3xl">
             <Eyebrow>Contact · Jayanagar, Bengaluru</Eyebrow>
-            <h1 className="mt-5 font-serif text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
               Get in touch
               <br />
               <span className="text-[#0D8DD7]">with us.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-              Questions about admissions, the program or a campus visit? Send us a message — or reach us directly using the details below.
+              Questions about admissions, the program or a campus visit? Send us a message or reach us directly using the details below.
             </p>
           </Reveal>
         </div>
@@ -275,7 +275,7 @@ export default function Page() {
                   <div className="grid h-14 w-14 place-items-center rounded-full bg-[#0D8DD7] text-white">
                     {Icon.check("h-7 w-7")}
                   </div>
-                  <h3 className="mt-4 font-serif text-2xl font-semibold text-slate-900">Thank you!</h3>
+                  <h3 className="mt-4  text-2xl font-semibold text-slate-900">Thank you!</h3>
                   <p className="mt-2 max-w-sm text-sm text-slate-600">
                     Your message has been received. Our administrator will get back to you soon.
                   </p>
@@ -311,7 +311,7 @@ export default function Page() {
          
           <Reveal delay={120} className="lg:col-span-2">
             <div className="h-full rounded-3xl bg-slate-900 p-6 text-stone-300 sm:p-8">
-              <h2 className="font-serif text-2xl font-semibold text-white">Get in touch</h2>
+              <h2 className=" text-2xl font-semibold text-white">Get in touch</h2>
               <p className="mt-2 text-sm text-stone-400">We'd love to hear from you.</p>
               <div className="mt-8 space-y-6">
                 {details.map((d) => (

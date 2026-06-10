@@ -2,11 +2,11 @@
 import React, { useState, useEffect, useRef } from "react";
 
 /* ──────────────────────────────────────────────────────────────
-   NSO — Faculty & Team
+   NSO Faculty & Team
    PHOTOS: every person has a `photo` path wired below. Drop the matching
    image into  public/faculty/<file>.jpg  and it appears automatically.
    No file yet (or wrong path)? The Avatar falls back to monogram initials
-   via onError — the page never shows a broken image.
+   via onError the page never shows a broken image.
    ────────────────────────────────────────────────────────────── */
 
 function useReveal() {
@@ -145,7 +145,7 @@ function Stat({ to, suffix = "", label }) {
   const val = useCountUp(to, shown);
   return (
     <div ref={ref}>
-      <div className="font-serif text-3xl font-semibold text-slate-900">
+      <div className=" text-3xl font-semibold text-slate-900">
         {val}
         {suffix}
       </div>
@@ -181,7 +181,7 @@ function Avatar({ name, photo, size = "h-16 w-16", text = "text-lg", ring = "rin
           className="h-full w-full object-cover"
         />
       ) : (
-        <span className={`grid h-full w-full place-items-center font-serif font-semibold text-[#0D8DD7] ${text}`}>
+        <span className={`grid h-full w-full place-items-center  font-semibold text-[#0D8DD7] ${text}`}>
           {initials(name)}
         </span>
       )}
@@ -190,7 +190,7 @@ function Avatar({ name, photo, size = "h-16 w-16", text = "text-lg", ring = "rin
 }
 
 /* ──────────────────────────────────────────────────────────────
-   DATA — every person already has a `photo` slot wired.
+   DATA every person already has a `photo` slot wired.
    To add a real photo: save the file at  public/faculty/<file>.jpg
    (square, e.g. 400×400). Different extension? Just edit the path.
    Want to force initials for someone? Set their photo to null.
@@ -198,7 +198,7 @@ function Avatar({ name, photo, size = "h-16 w-16", text = "text-lg", ring = "rin
 const management = [
   { name: "Dr. Sri Ganesh", role: "Chairman & Managing Director", org: "Nethradhama Hospitals Pvt Ltd.", qual: "MBBS, MS, DNB", photo: "/faculty/sri-ganesh.jpg" },
   { name: "Dr. Suman Shree R", role: "Director & CEO", org: "Nethradhama Hospitals Pvt Ltd.", qual: "MBBS, MD, DNB (Anaesthesiology), PGDHHM, PGDMLS", photo: "/faculty/suman-shree.jpg" },
-  { name: "Dr. Savitha Arun", role: "Principal / Professor", org: "Subject — Squint & BV", qual: "MBBS, DOMS, DNB", photo: "/faculty/savitha-arun.jpg" },
+  { name: "Dr. Savitha Arun", role: "Principal / Professor", org: "Subject Squint & BV", qual: "MBBS, DOMS, DNB", photo: "/faculty/savitha-arun.jpg" },
 ];
 
 const optometryFaculty = [
@@ -230,7 +230,7 @@ function FacultyCard({ p }) {
     <div className="group flex h-full gap-4 rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#0D8DD7]/30 hover:shadow-xl hover:shadow-slate-900/5">
       <Avatar name={p.name} photo={p.photo} />
       <div className="min-w-0">
-        <h3 className="font-serif text-lg font-semibold leading-tight text-slate-900">{p.name}</h3>
+        <h3 className=" text-lg font-semibold leading-tight text-slate-900">{p.name}</h3>
         <p className="mt-0.5 text-sm font-medium text-[#0D8DD7]">{p.role}</p>
         {p.subject && <p className="mt-2 text-sm leading-relaxed text-slate-600">{p.subject}</p>}
         <p className="mt-2 text-xs uppercase tracking-wide text-slate-400">{p.qual}</p>
@@ -246,7 +246,7 @@ export default function Page() {
   const [visLens, visLensY] = useParallax(0.16);
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans text-slate-700 antialiased selection:bg-[#0D8DD7]">
+    <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
       <ScrollProgress />
 
       {/* Hero */}
@@ -261,13 +261,13 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
           <Reveal className="max-w-3xl">
             <Eyebrow>Management &amp; Faculty</Eyebrow>
-            <h1 className="mt-5 font-serif text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
               The people behind
               <br />
               <span className="text-[#0D8DD7]">every clear diagnosis.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-              From hospital leadership to optometry educators and visiting specialists — a team that brings clinical depth and academic rigour to every classroom at NSO.
+              From hospital leadership to optometry educators and visiting specialists a team that brings clinical depth and academic rigour to every classroom at NSO.
             </p>
           </Reveal>
 
@@ -286,7 +286,7 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
             <Eyebrow>Management Team</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               Guided by experienced clinicians.
             </h2>
           </Reveal>
@@ -297,7 +297,7 @@ export default function Page() {
                   <div className="flex justify-center">
                     <Avatar name={m.name} photo={m.photo} size="h-24 w-24" text="text-2xl" />
                   </div>
-                  <h3 className="mt-5 font-serif text-xl font-semibold text-slate-900">{m.name}</h3>
+                  <h3 className="mt-5  text-xl font-semibold text-slate-900">{m.name}</h3>
                   <p className="mt-1 text-sm font-medium text-[#0D8DD7]">{m.role}</p>
                   <p className="mt-1 text-sm text-slate-500">{m.org}</p>
                   <div className="mx-auto mt-4 w-12 border-t border-stone-200" />
@@ -317,7 +317,7 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
             <Eyebrow>Optometry Faculty</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               Educators who practise what they teach.
             </h2>
           </Reveal>
@@ -339,7 +339,7 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
             <Eyebrow>Visiting Faculty</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               Specialists across the sciences.
             </h2>
           </Reveal>
@@ -358,7 +358,7 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-20 pb-24">
           <Reveal className="max-w-2xl">
             <Eyebrow>Administrative Department</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               Keeping everything in order.
             </h2>
           </Reveal>

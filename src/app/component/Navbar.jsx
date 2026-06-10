@@ -67,7 +67,7 @@ export default function Navbar() {
                   <>
                     <Lens className="h-9 w-9" style={{ color: ACCENT }} />
                     <span className="leading-tight">
-                      <span className="block font-serif text-base font-semibold text-gray-900">Nethradhama</span>
+                      <span className="block  text-base font-semibold text-gray-900">Nethradhama</span>
                       <span className="block text-[10px] uppercase tracking-[0.18em]" style={{ color: ACCENT }}>
                         School of Optometry
                       </span>
@@ -107,7 +107,7 @@ export default function Navbar() {
             
               <div className="hidden shrink-0 md:flex">
                 <a
-                  href="/admission"
+                  href="/contact"
                   className="rounded-full bg-[#0D8DD7] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
                 >
                   Admission Application
@@ -147,7 +147,7 @@ export default function Navbar() {
                 );
               })}
               <a
-                href="/admission"
+                href="/contact"
                 className="mt-3 block rounded-full bg-[#0D8DD7] px-4 py-3 text-center font-semibold text-white shadow-sm transition-colors hover:bg-[#0b7cbe]"
               >
                 Admission Application

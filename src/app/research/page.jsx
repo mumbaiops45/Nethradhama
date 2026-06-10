@@ -138,7 +138,7 @@ function Stat({ to, suffix = "", prefix = "", label }) {
   const val = useCountUp(to, shown);
   return (
     <div ref={ref}>
-      <div className="font-serif text-3xl font-semibold text-slate-900">
+      <div className=" text-3xl font-semibold text-slate-900">
         {prefix}
         {val}
         {suffix}
@@ -202,7 +202,7 @@ const Icon = {
 
 
 const areas = [
-  { icon: Icon.eye, title: "Refractive Error & Myopia", desc: "Understanding how the eye focuses — and how to correct and manage it." },
+  { icon: Icon.eye, title: "Refractive Error & Myopia", desc: "Understanding how the eye focuses and how to correct and manage it." },
   { icon: Icon.lens, title: "Contact Lens & Anterior Segment", desc: "Fitting, ocular surface health and the science of the front of the eye." },
   { icon: Icon.scope, title: "Ocular Diagnostics", desc: "Early detection and measurement of conditions across the visual system." },
   { icon: Icon.balance, title: "Binocular Vision & Squint", desc: "How the two eyes work together, and non-surgical intervention." },
@@ -234,7 +234,7 @@ export default function Page() {
   const [grantLens, grantLensY] = useParallax(0.14, 60);
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans text-slate-700 antialiased selection:bg-[#0D8DD7]">
+    <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
       <ScrollProgress />
 
      
@@ -249,13 +249,13 @@ export default function Page() {
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 md:grid-cols-2 md:py-28">
           <Reveal>
             <Eyebrow>Research at NSO</Eyebrow>
-            <h1 className="mt-5 font-serif text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
               Curiosity, brought
               <br />
               <span className="text-[#0D8DD7]">into focus.</span>
             </h1>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-slate-600">
-              NSO is committed to continually strengthening its academic activities and research programs — backed by high standards of education, training and clinical experience, and a comprehensive curriculum built for inquiry.
+              NSO is committed to continually strengthening its academic activities and research programs backed by high standards of education, training and clinical experience, and a comprehensive curriculum built for inquiry.
             </p>
             <div className="mt-10 flex flex-wrap gap-8 border-t border-stone-200 pt-6 sm:gap-12">
               <Stat to={2022} label="RGUHS grant year" />
@@ -283,11 +283,11 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
             <Eyebrow>Areas of Inquiry</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               Where optometry research looks next.
             </h2>
             <p className="mt-4 leading-relaxed text-slate-600">
-              Our curriculum and clinical setting open doors to study across the breadth of vision science — the same domains our students train in every day.
+              Our curriculum and clinical setting open doors to study across the breadth of vision science the same domains our students train in every day.
             </p>
           </Reveal>
 
@@ -298,7 +298,7 @@ export default function Page() {
                   <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#0D8DD7]/10 text-[#0D8DD7] transition-colors group-hover:bg-[#0D8DD7] group-hover:text-white">
                     {a.icon("h-6 w-6")}
                   </div>
-                  <h3 className="mt-5 font-serif text-xl font-semibold text-slate-900">{a.title}</h3>
+                  <h3 className="mt-5  text-xl font-semibold text-slate-900">{a.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">{a.desc}</p>
                 </div>
               </Reveal>
@@ -317,17 +317,17 @@ export default function Page() {
               </div>
               <div className="relative">
                 <Eyebrow light>Funded Research · 2021–22</Eyebrow>
-                <h2 className="mt-4 max-w-3xl font-serif text-2xl font-semibold leading-snug sm:text-3xl">
+                <h2 className="mt-4 max-w-3xl  text-2xl font-semibold leading-snug sm:text-3xl">
                   Three of our students were selected for the RGUHS UG-AHS research grant.
                 </h2>
                 <p className="mt-3 max-w-2xl text-sky-50/90">
-                  Recognised by Rajiv Gandhi University of Health Sciences under its Undergraduate — Allied Health Sciences research grant for the year 2021–22.
+                  Recognised by Rajiv Gandhi University of Health Sciences under its Undergraduate Allied Health Sciences research grant for the year 2021–22.
                 </p>
 
                 <div className="mt-8 grid gap-4 sm:grid-cols-3">
                   {students.map((s) => (
                     <div key={s} className="flex items-center gap-3 rounded-2xl bg-white/10 p-4 ring-1 ring-white/15 backdrop-blur-sm">
-                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white font-serif text-sm font-semibold text-[#0D8DD7]">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white  text-sm font-semibold text-[#0D8DD7]">
                         {initials(s)}
                       </span>
                       <span className="text-sm font-medium text-white">{s}</span>
@@ -348,12 +348,12 @@ export default function Page() {
           </Reveal>
           <Reveal className="md:order-1">
             <Eyebrow>The NSO Advantage</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
               Research grows where practice lives.
             </h2>
             <div className="mt-5 space-y-4 leading-relaxed text-slate-600">
               <p>
-                Run by Nethradhama Super Speciality Eye Hospital, NSO places students inside a real centre of excellence — where questions worth researching surface in the clinic, every single day.
+                Run by Nethradhama Super Speciality Eye Hospital, NSO places students inside a real centre of excellence where questions worth researching surface in the clinic, every single day.
               </p>
               <p>
                 A comprehensive curriculum, hands-on clinical exposure and continually upgraded technology give students the foundation to ask sharper questions, design honest studies and contribute to the science of sight.
@@ -370,7 +370,7 @@ export default function Page() {
             <div className="flex flex-col items-start justify-between gap-6 rounded-3xl border border-[#0D8DD7]/20 bg-[#0D8DD7]/5 p-8 sm:flex-row sm:items-center sm:p-10">
               <div className="max-w-xl">
                 <Eyebrow>Get in touch</Eyebrow>
-                <h2 className="mt-3 font-serif text-2xl font-semibold text-slate-900 sm:text-3xl">
+                <h2 className="mt-3  text-2xl font-semibold text-slate-900 sm:text-3xl">
                   Curious about research at NSO?
                 </h2>
                 <p className="mt-2 text-slate-600">

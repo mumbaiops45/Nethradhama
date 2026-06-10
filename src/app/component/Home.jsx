@@ -151,7 +151,7 @@ function Stat({ to, suffix, label }) {
     const val = useCountUp(to, shown);
     return (
         <div ref={ref}>
-            <div className="font-serif text-2xl font-semibold text-slate-900">
+            <div className=" text-2xl font-semibold text-slate-900">
                 {val}
                 {suffix}
             </div>
@@ -221,10 +221,10 @@ const gallery = [
 ];
 
 const academics = [
-    { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka — three academic years followed by one year of compulsory internship." },
+    { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka three academic years followed by one year of compulsory internship." },
     { k: "Eligibility", v: "50% aggregate in English, Physics, Chemistry and Biology/Mathematics at 10+2. Diploma holders may join directly in the second year." },
     { k: "Selection", v: "Based on 10+2 marks, a written test and performance in a personal interview." },
-    { k: "Academic Session", v: "The course begins every August — a full-time program of theory, practical and clinical sessions." },
+    { k: "Academic Session", v: "The course begins every August a full-time program of theory, practical and clinical sessions." },
     { k: "Evaluation", v: "Three internal assessments plus a term-end exam each year, with equal weightage. A minimum of 50% in the term-end exam is required." },
     { k: "Medium of Instruction", v: "All theory and practical instruction and examinations are conducted in English." },
 ];
@@ -234,7 +234,7 @@ const faqs = [
     { q: "Can diploma holders get direct admission?", a: "Yes. Candidates who have completed a 2–3 year diploma in optometry can take lateral-entry admission directly into the second year of the B.Sc. Optometry program." },
     { q: "How is selection done?", a: "Selection is based on your 10+2 marks, a written test, and your performance in a personal interview." },
     { q: "When does the course begin?", a: "The course commences in August every year. It is a full-time program combining theory, practical and clinical sessions." },
-    { q: "What is the total course duration?", a: "Four years in total — three academic years followed by one year of compulsory internship, after which you are awarded the B.Sc. degree in Optometry." },
+    { q: "What is the total course duration?", a: "Four years in total three academic years followed by one year of compulsory internship, after which you are awarded the B.Sc. degree in Optometry." },
     { q: "What is the medium of instruction?", a: "English. Both theory and practical instruction are in English, and examinations must be written in English." },
     { q: "Is the college recognised?", a: "Yes, the program is affiliated with Rajiv Gandhi University of Health Sciences (RGUHS), Karnataka. Students have secured university ranks in RGUHS examinations." },
 ];
@@ -304,7 +304,7 @@ export default function Home() {
     const [faqLens, faqLensY] = useParallax(0.16);
 
     return (
-        <div className="min-h-screen bg-stone-50 font-sans text-slate-700 antialiased selection:bg-[#0D8DD7]">
+        <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
             <ScrollProgress />
 
             <section className="relative overflow-hidden">
@@ -327,13 +327,13 @@ export default function Home() {
                 <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-2 md:py-16">
                     <Reveal>
                         <Eyebrow>Bengaluru · Affiliated to RGUHS</Eyebrow>
-                        <h1 className="mt-5 font-serif text-4xl font-semibold leading-[1.1] text-slate-900 sm:text-5xl lg:text-6xl">
+                        <h1 className="mt-5  text-4xl font-semibold leading-[1.1] text-slate-900 sm:text-5xl lg:text-6xl">
                             Bring the world
                             <br />
                             <span className="text-[#0D8DD7]">into focus.</span>
                         </h1>
                         <p className="mt-6 max-w-md text-lg leading-relaxed text-slate-600">
-                            A four-year B.Sc. in Optometry built on rigorous academics, real clinical exposure and research — shaping the eye-care professionals of tomorrow.
+                            A four-year B.Sc. in Optometry built on rigorous academics, real clinical exposure and research shaping the eye-care professionals of tomorrow.
                         </p>
                         <div className="mt-8 flex flex-wrap items-center gap-4">
                             <a href="#contact" className="rounded-full bg-[#0D8DD7] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg">
@@ -390,7 +390,7 @@ export default function Home() {
                             <div className="max-w-xl">
                                 <Eyebrow>About Us</Eyebrow>
 
-                                <h2 className="mt-5 font-serif text-4xl font-semibold leading-tight text-slate-900 lg:text-5xl">
+                                <h2 className="mt-5  text-4xl font-semibold leading-tight text-slate-900 lg:text-5xl">
                                     A commitment to
                                     <span className="block text-[#0D8DD7]">
                                         clear vision and clearer minds.
@@ -407,7 +407,7 @@ export default function Home() {
                                 <p className="mt-5 text-lg leading-relaxed text-slate-600">
                                     With a comprehensive curriculum and a teaching hospital at its
                                     core, NSO prepares students to become confident, ethical, and
-                                    skilled optometrists — ready to serve patients from their very
+                                    skilled optometrists ready to serve patients from their very
                                     first clinical posting.
                                 </p>
 
@@ -555,7 +555,7 @@ export default function Home() {
                 <div className="relative mx-auto max-w-6xl px-4 py-20">
                     <Reveal className="max-w-2xl">
                         <Eyebrow>What we offer</Eyebrow>
-                        <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+                        <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
                             Training that spans the whole of eye care.
                         </h2>
                     </Reveal>
@@ -566,7 +566,7 @@ export default function Home() {
                                     <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#0D8DD7]/10 text-[#0D8DD7] transition-colors group-hover:bg-[#0D8DD7] group-hover:text-white">
                                         {s.icon("h-6 w-6")}
                                     </div>
-                                    <h3 className="mt-5 font-serif text-xl font-semibold text-slate-900">{s.title}</h3>
+                                    <h3 className="mt-5  text-xl font-semibold text-slate-900">{s.title}</h3>
                                     <p className="mt-2 text-sm leading-relaxed text-slate-600">{s.desc}</p>
                                 </div>
                             </Reveal>
@@ -596,7 +596,7 @@ export default function Home() {
                         <div className="text-start px-14 max-w-3xl text-center">
                             <Eyebrow>Academics</Eyebrow>
 
-                            <h2 className="mt-5 font-serif text-4xl font-semibold text-slate-900 sm:text-5xl">
+                            <h2 className="mt-5  text-4xl font-semibold text-slate-900 sm:text-5xl">
                                 The B.Sc. Optometry Program
                             </h2>
 
@@ -631,7 +631,7 @@ export default function Home() {
 
                                     <div className="mb-6 h-1 w-14 rounded-full bg-[#0D8DD7]" />
 
-                                    <h3 className="font-serif text-xl font-semibold text-slate-900">
+                                    <h3 className=" text-xl font-semibold text-slate-900">
                                         {a.k}
                                     </h3>
 
@@ -670,7 +670,7 @@ export default function Home() {
                             <div className="relative z-10">
                                 <Eyebrow light>Research Achievement</Eyebrow>
 
-                                <h3 className="mt-4 font-serif text-3xl font-semibold text-white">
+                                <h3 className="mt-4  text-3xl font-semibold text-white">
                                     Recognized Research Excellence
                                 </h3>
 
@@ -721,7 +721,7 @@ export default function Home() {
                 <div className="relative mx-auto max-w-6xl px-4 py-20">
                     <Reveal className="max-w-2xl">
                         <Eyebrow>Gallery</Eyebrow>
-                        <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+                        <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
                             Life and learning at NSO.
                         </h2>
                     </Reveal>
@@ -745,7 +745,7 @@ export default function Home() {
                 <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-20 md:grid-cols-12">
                     <Reveal className="md:col-span-4">
                         <Eyebrow>FAQ</Eyebrow>
-                        <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+                        <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
                             Questions, answered.
                         </h2>
                         <p className="mt-4 text-slate-600">
@@ -788,7 +788,7 @@ export default function Home() {
           <div className="max-w-md">
             <Eyebrow>Frequently Asked Questions</Eyebrow>
 
-            <h2 className="mt-5 font-serif text-5xl font-semibold leading-tight text-slate-900">
+            <h2 className="mt-5  text-5xl font-semibold leading-tight text-slate-900">
               Questions,
               <span className="block text-[#0D8DD7]">
                 Answered.
@@ -882,22 +882,22 @@ export default function Home() {
                     <Reveal>
                         <div className="rounded-3xl border border-amber-200 bg-amber-50 p-8 sm:p-10">
                             <Eyebrow>Anti-Ragging Cell</Eyebrow>
-                            <h2 className="mt-4 font-serif text-2xl font-semibold text-slate-900 sm:text-3xl">
+                            <h2 className="mt-4  text-2xl font-semibold text-slate-900 sm:text-3xl">
                                 A campus that is safe, by commitment.
                             </h2>
                             <p className="mt-4 max-w-3xl text-slate-700">
-                                Ragging in all its forms is strictly prohibited at Nethradhama School of Optometry, in line with the directives of the Hon'ble Supreme Court of India, UGC guidelines and the Ragging Prohibition Act, 1999. We maintain an Anti-Ragging Committee, a monitoring cell, a squad panel and a student mentoring cell, and collect affidavits from students and parents at admission. Anyone found guilty of ragging — or of abetting it — is referred to the committee for action.
+                                Ragging in all its forms is strictly prohibited at Nethradhama School of Optometry, in line with the directives of the Hon'ble Supreme Court of India, UGC guidelines and the Ragging Prohibition Act, 1999. We maintain an Anti-Ragging Committee, a monitoring cell, a squad panel and a student mentoring cell, and collect affidavits from students and parents at admission. Anyone found guilty of ragging or of abetting it is referred to the committee for action.
                             </p>
                             <div className="mt-8 grid gap-4 sm:grid-cols-2">
                                 <div className="rounded-2xl bg-white p-6">
                                     <div className="text-xs font-semibold uppercase tracking-wider text-amber-700">National Anti-Ragging Helpline (24×7)</div>
-                                    <a href="tel:18001805522" className="mt-1 block font-serif text-2xl font-semibold text-slate-900">1800-180-5522</a>
+                                    <a href="tel:18001805522" className="mt-1 block  text-2xl font-semibold text-slate-900">1800-180-5522</a>
                                     <a href="mailto:helpline@antiragging.in" className="text-sm text-[#0D8DD7] hover:underline">helpline@antiragging.in</a>
                                 </div>
                                 <div className="rounded-2xl bg-white p-6">
                                     <div className="text-xs font-semibold uppercase tracking-wider text-amber-700">Chairperson, Anti-Ragging Cell</div>
-                                    <div className="mt-1 font-serif text-lg font-semibold text-slate-900">Dr. Savitha Arun</div>
-                                    <div className="text-sm text-slate-600">Principal — NSO · 080-26716152</div>
+                                    <div className="mt-1  text-lg font-semibold text-slate-900">Dr. Savitha Arun</div>
+                                    <div className="text-sm text-slate-600">Principal NSO · 080-26716152</div>
                                     <a href="mailto:optoschool@nethradhama.org" className="text-sm text-[#0D8DD7] hover:underline">optoschool@nethradhama.org</a>
                                 </div>
                             </div>

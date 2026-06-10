@@ -138,7 +138,7 @@ function Stat({ to, suffix = "", label }) {
   const val = useCountUp(to, shown);
   return (
     <div ref={ref}>
-      <div className="font-serif text-3xl font-semibold text-slate-900">
+      <div className=" text-3xl font-semibold text-slate-900">
         {val}
         {suffix}
       </div>
@@ -246,7 +246,7 @@ export default function Page() {
   const [ctaLens, ctaLensY] = useParallax(0.14, 60);
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans text-slate-700 antialiased selection:bg-[#0D8DD7]">
+    <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
       <ScrollProgress />
 
       <section className="relative overflow-hidden">
@@ -260,7 +260,7 @@ export default function Page() {
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 md:grid-cols-2 md:py-28">
           <Reveal>
             <Eyebrow>Academics · B.Sc. Optometry</Eyebrow>
-            <h1 className="mt-5 font-serif text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
               Three years of study.
               <br />
               <span className="text-[#0D8DD7]">A lifetime of sight.</span>
@@ -292,7 +292,7 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
             <Eyebrow>Program Offered</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               How four years come together.
             </h2>
             <p className="mt-4 leading-relaxed text-slate-600">
@@ -305,14 +305,14 @@ export default function Page() {
               <Reveal key={j.tag} delay={i * 90}>
                 <div className="group relative h-full rounded-2xl border border-stone-200 bg-stone-50 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#0D8DD7]/30 hover:shadow-xl hover:shadow-slate-900/5">
                   <div className="flex items-baseline justify-between">
-                    <span className="font-serif text-5xl font-semibold text-[#0D8DD7]/15 transition-colors group-hover:text-[#0D8DD7]/30">
+                    <span className=" text-5xl font-semibold text-[#0D8DD7]/15 transition-colors group-hover:text-[#0D8DD7]/30">
                       0{i + 1}
                     </span>
                     <span className="rounded-full bg-[#0D8DD7]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0D8DD7]">
                       {j.tag}
                     </span>
                   </div>
-                  <h3 className="mt-4 font-serif text-xl font-semibold text-slate-900">{j.title}</h3>
+                  <h3 className="mt-4  text-xl font-semibold text-slate-900">{j.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">{j.desc}</p>
                 </div>
               </Reveal>
@@ -329,7 +329,7 @@ export default function Page() {
           </Reveal>
           <Reveal className="md:order-1">
             <Eyebrow>Eligibility Criteria</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
               Who can apply.
             </h2>
             <p className="mt-5 leading-relaxed text-slate-600">
@@ -358,7 +358,7 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
             <Eyebrow>Selection Criteria</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               Three steps to a seat.
             </h2>
           </Reveal>
@@ -370,9 +370,9 @@ export default function Page() {
                     <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[#0D8DD7]/10 text-[#0D8DD7]">
                       {s.icon("h-6 w-6")}
                     </div>
-                    <span className="font-serif text-2xl font-semibold text-slate-300">0{i + 1}</span>
+                    <span className=" text-2xl font-semibold text-slate-300">0{i + 1}</span>
                   </div>
-                  <h3 className="mt-5 font-serif text-xl font-semibold text-slate-900">{s.title}</h3>
+                  <h3 className="mt-5  text-xl font-semibold text-slate-900">{s.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">{s.desc}</p>
                 </div>
               </Reveal>
@@ -392,7 +392,7 @@ export default function Page() {
           <div className="grid items-start gap-12 md:grid-cols-2">
             <Reveal>
               <Eyebrow>Assessment</Eyebrow>
-              <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+              <h2 className="mt-4  text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
                 Measured, year after year.
               </h2>
               <p className="mt-4 leading-relaxed text-slate-600">
@@ -411,7 +411,7 @@ export default function Page() {
                   <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#0D8DD7]/10 text-[#0D8DD7]">
                     {h.icon("h-6 w-6")}
                   </div>
-                  <h3 className="mt-5 font-serif text-xl font-semibold text-slate-900">{h.title}</h3>
+                  <h3 className="mt-5  text-xl font-semibold text-slate-900">{h.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">{h.desc}</p>
                 </div>
               </Reveal>
@@ -431,7 +431,7 @@ export default function Page() {
               <div className="relative flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
                 <div className="max-w-xl">
                   <Eyebrow light>Admissions</Eyebrow>
-                  <h2 className="mt-3 font-serif text-2xl font-semibold leading-tight sm:text-3xl">
+                  <h2 className="mt-3  text-2xl font-semibold leading-tight sm:text-3xl">
                     Ready to begin your B.Sc. Optometry?
                   </h2>
                   <p className="mt-2 text-sky-50/90">

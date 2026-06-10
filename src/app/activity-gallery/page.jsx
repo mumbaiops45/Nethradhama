@@ -17,7 +17,7 @@ export default function Page() {
     return (
         <div className="min-h-screen bg-stone-50 px-4 py-20">
             <div className="max-w-7xl mx-auto text-center">
-<h1 className="font-serif text-4xl md:text-5xl font-semibold text-slate-900">Our Gallery</h1>
+<h1 className=" text-4xl md:text-5xl font-semibold text-slate-900">Our Gallery</h1>
 <p className="mt-4 text-slate-600 max-w-xl mx-auto">Explore our campus, labs, and student life through moments captured.</p>
             </div>
 

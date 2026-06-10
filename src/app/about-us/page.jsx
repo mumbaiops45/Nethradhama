@@ -157,7 +157,7 @@ function Stat({ to, suffix = "", label }) {
   const val = useCountUp(to, shown);
   return (
     <div ref={ref}>
-      <div className="font-serif text-3xl font-semibold text-slate-900">
+      <div className=" text-3xl font-semibold text-slate-900">
         {val}
         {suffix}
       </div>
@@ -273,10 +273,10 @@ const departments = [
 ];
 
 const academics = [
-  { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka — three academic years followed by one year of compulsory internship." },
+  { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka three academic years followed by one year of compulsory internship." },
   { k: "Eligibility", v: "50% aggregate in English, Physics, Chemistry and Biology/Mathematics at 10+2. Diploma holders may join directly in the second year." },
   { k: "Selection", v: "Based on 10+2 marks, a written test and performance in a personal interview." },
-  { k: "Academic Session", v: "The course begins every August — a full-time program of theory, practical and clinical sessions." },
+  { k: "Academic Session", v: "The course begins every August a full-time program of theory, practical and clinical sessions." },
   { k: "Evaluation", v: "Three internal assessments and a term-end exam each year with equal weightage; a minimum of 50% in the term-end exam is required." },
   { k: "Achievements", v: "Our students have secured ranks in university examinations conducted by RGUHS, Karnataka." },
   { k: "Medium of Instruction", v: "All theory and practical instruction and examinations are conducted in English." },
@@ -284,7 +284,7 @@ const academics = [
 
 const history = [
   { year: "2010", text: "NSO is established as Bangalore's first institute dedicated solely to optometry education." },
-  { year: "2013", text: "The college moves to a new building — exclusively for academics, with an optics lab, demonstration rooms, a conference hall and library." },
+  { year: "2013", text: "The college moves to a new building exclusively for academics, with an optics lab, demonstration rooms, a conference hall and library." },
 ];
 
 
@@ -305,7 +305,7 @@ export default function Page() {
   const [facLens, facLensY] = useParallax(0.18);
 
   return (
-    <div className="min-h-screen scroll-smooth bg-stone-50 font-sans text-slate-700 antialiased selection:bg-[#0D8DD7]">
+    <div className="min-h-screen scroll-smooth bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
       <ScrollProgress />
 
    
@@ -320,13 +320,13 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
           <Reveal className="max-w-3xl">
          
-            <h1 className="mt-5 font-serif text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
               A college built entirely
               <br />
               <span className="text-[#0D8DD7]">around the eye.</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-              Established in 2010 as Bangalore's first institute dedicated solely to optometry — a unit of the Nethradhama Education &amp; Research Foundation, affiliated to RGUHS and recognised by the Government of Karnataka.
+              Established in 2010 as Bangalore's first institute dedicated solely to optometry a unit of the Nethradhama Education &amp; Research Foundation, affiliated to RGUHS and recognised by the Government of Karnataka.
             </p>
           </Reveal>
 
@@ -362,7 +362,7 @@ export default function Page() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 md:grid-cols-2">
           <Reveal>
             <Eyebrow>Overview</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
               Welcome to Nethradhama School of Optometry.
             </h2>
             <div className="mt-5 space-y-4 leading-relaxed text-slate-600">
@@ -385,12 +385,12 @@ export default function Page() {
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 md:grid-cols-2">
           <Reveal className="md:order-2">
             <Eyebrow>About NSO</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
               Karnataka's leading optometry college.
             </h2>
             <div className="mt-5 space-y-4 leading-relaxed text-slate-600">
               <p>
-                Run by Nethradhama Super Speciality Eye Hospital, Bangalore — a centre of excellence in eye care — NSO offers a four-year professional B.Sc. Optometry degree with continual upgradation of technology.
+                Run by Nethradhama Super Speciality Eye Hospital, Bangalore a centre of excellence in eye care NSO offers a four-year professional B.Sc. Optometry degree with continual upgradation of technology.
               </p>
               <p>
                 Optometrists are primary eye-care practitioners: they measure refractive errors, prescribe glasses, contact lenses and low-vision aids, detect and manage conditions of the visual system, and provide non-surgical intervention for binocular vision problems such as squint.
@@ -409,14 +409,14 @@ export default function Page() {
           <div className="grid items-start gap-12 md:grid-cols-2">
             <Reveal>
               <Eyebrow>History</Eyebrow>
-              <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+              <h2 className="mt-4  text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
                 A decade of building eye-care talent.
               </h2>
               <div className="mt-8 space-y-6 border-l border-stone-200 pl-6">
                 {history.map((h) => (
                   <div key={h.year} className="relative">
                     <span className="absolute -left-[31px] top-1 grid h-4 w-4 place-items-center rounded-full bg-[#0D8DD7] ring-4 ring-white" />
-                    <div className="font-serif text-xl font-semibold text-slate-900">{h.year}</div>
+                    <div className=" text-xl font-semibold text-slate-900">{h.year}</div>
                     <p className="mt-1 text-sm leading-relaxed text-slate-600">{h.text}</p>
                   </div>
                 ))}
@@ -433,11 +433,11 @@ export default function Page() {
               <div className="mt-5 grid gap-4 sm:grid-cols-3">
                 {leadership.map((l) => (
                   <div key={l.name} className="flex items-center gap-4 rounded-2xl border border-stone-200 bg-stone-50 p-5">
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#0D8DD7]/10 font-serif text-lg font-semibold text-[#0D8DD7]">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#0D8DD7]/10  text-lg font-semibold text-[#0D8DD7]">
                       {l.name.split(" ").filter((w) => w !== "Dr.").map((w) => w[0]).join("")}
                     </span>
                     <div>
-                      <div className="font-serif font-semibold text-slate-900">{l.name}</div>
+                      <div className=" font-semibold text-slate-900">{l.name}</div>
                       <div className="text-xs text-slate-500">{l.role}</div>
                     </div>
                   </div>
@@ -456,7 +456,7 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
             <Eyebrow>Facilities</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               Everything a future optometrist needs.
             </h2>
           </Reveal>
@@ -478,7 +478,7 @@ export default function Page() {
                   <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#0D8DD7]/10 text-[#0D8DD7] transition-colors group-hover:bg-[#0D8DD7] group-hover:text-white">
                     {f.icon("h-6 w-6")}
                   </div>
-                  <h3 className="mt-5 font-serif text-xl font-semibold text-slate-900">{f.title}</h3>
+                  <h3 className="mt-5  text-xl font-semibold text-slate-900">{f.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-600">{f.desc}</p>
                 </div>
               </Reveal>
@@ -486,7 +486,7 @@ export default function Page() {
           </div>
           <Reveal delay={120}>
             <p className="mt-6 text-sm leading-relaxed text-slate-500">
-              Clinical postings throughout the academic year are conducted at Nethradhama Super Speciality Eye Hospital, Jayanagar — giving students real exposure across every branch of eye care.
+              Clinical postings throughout the academic year are conducted at Nethradhama Super Speciality Eye Hospital, Jayanagar giving students real exposure across every branch of eye care.
             </p>
           </Reveal>
         </div>
@@ -497,7 +497,7 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
             <Eyebrow>Supportive Departments</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               The teams that keep NSO running.
             </h2>
           </Reveal>
@@ -519,7 +519,7 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
             <Eyebrow>Academics</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               The B.Sc. Optometry program, in detail.
             </h2>
           </Reveal>
@@ -527,7 +527,7 @@ export default function Page() {
             {academics.map((a, i) => (
               <Reveal key={a.k} delay={i * 50} className="bg-white">
                 <div className="h-full p-7">
-                  <div className="font-serif text-sm font-semibold uppercase tracking-wider text-[#0D8DD7]">{a.k}</div>
+                  <div className=" text-sm font-semibold uppercase tracking-wider text-[#0D8DD7]">{a.k}</div>
                   <p className="mt-3 text-sm leading-relaxed text-slate-600">{a.v}</p>
                 </div>
               </Reveal>
@@ -549,7 +549,7 @@ export default function Page() {
                 <p className="mt-4 text-lg leading-relaxed text-sky-50/90">
                   NSO is committed to continually strengthening its academic activities and research programs, backed by a comprehensive curriculum and high standards of training and clinical experience.
                 </p>
-                <p className="mt-6 font-serif text-xl leading-relaxed sm:text-2xl">
+                <p className="mt-6  text-xl leading-relaxed sm:text-2xl">
                   Our students Ms. Nikhita R Bhat, Ms. Pooja Kumari Sah and Mr. Anvith M Agumbe were selected for the RGUHS UG-AHS research grant for 2021–22.
                 </p>
               </div>
@@ -572,7 +572,7 @@ export default function Page() {
                     </span>
                     Notice Board
                   </span>
-                  <h2 className="mt-4 font-serif text-2xl font-semibold leading-tight sm:text-3xl">
+                  <h2 className="mt-4  text-2xl font-semibold leading-tight sm:text-3xl">
                     Admissions open for B.Sc. Optometry 2025–26.
                   </h2>
                 </div>
@@ -604,11 +604,11 @@ export default function Page() {
             <div className="flex flex-col items-start justify-between gap-6 rounded-3xl border border-[#0D8DD7]/20 bg-[#0D8DD7]/5 p-8 sm:flex-row sm:items-center sm:p-10">
               <div className="max-w-xl">
                 <Eyebrow>Brochure</Eyebrow>
-                <h2 className="mt-3 font-serif text-2xl font-semibold text-slate-900 sm:text-3xl">
+                <h2 className="mt-3  text-2xl font-semibold text-slate-900 sm:text-3xl">
                   Take the prospectus with you.
                 </h2>
                 <p className="mt-2 text-slate-600">
-                  Course structure, eligibility, facilities and admission details — all in one PDF.
+                  Course structure, eligibility, facilities and admission details all in one PDF.
                 </p>
               </div>
               <a
@@ -629,22 +629,22 @@ export default function Page() {
           <Reveal>
             <div className="rounded-3xl border border-amber-200 bg-amber-50 p-8 sm:p-10">
               <Eyebrow>Anti-Ragging Cell</Eyebrow>
-              <h2 className="mt-4 font-serif text-2xl font-semibold text-slate-900 sm:text-3xl">
+              <h2 className="mt-4  text-2xl font-semibold text-slate-900 sm:text-3xl">
                 A campus that is safe, by commitment.
               </h2>
               <p className="mt-4 max-w-3xl text-slate-700">
-                Ragging in all its forms is strictly prohibited at Nethradhama School of Optometry — across every department, unit and premise — in line with the Hon'ble Supreme Court of India, UGC guidelines and the Ragging Prohibition Act, 1999. We maintain an Anti-Ragging Committee, a monitoring cell, a squad panel and a student mentoring cell; collect affidavits from students and parents at admission; and display committee members' names and contacts on the notice board. Anyone found guilty of ragging — or of abetting it, actively or passively — is referred to the committee for necessary action.
+                Ragging in all its forms is strictly prohibited at Nethradhama School of Optometry across every department, unit and premise in line with the Hon'ble Supreme Court of India, UGC guidelines and the Ragging Prohibition Act, 1999. We maintain an Anti-Ragging Committee, a monitoring cell, a squad panel and a student mentoring cell; collect affidavits from students and parents at admission; and display committee members' names and contacts on the notice board. Anyone found guilty of ragging or of abetting it, actively or passively is referred to the committee for necessary action.
               </p>
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl bg-white p-6">
                   <div className="text-xs font-semibold uppercase tracking-wider text-amber-700">National Anti-Ragging Helpline (24×7)</div>
-                  <a href="tel:18001805522" className="mt-1 block font-serif text-2xl font-semibold text-slate-900">1800-180-5522</a>
+                  <a href="tel:18001805522" className="mt-1 block  text-2xl font-semibold text-slate-900">1800-180-5522</a>
                   <a href="mailto:helpline@antiragging.in" className="text-sm text-[#0D8DD7] hover:underline">helpline@antiragging.in</a>
                 </div>
                 <div className="rounded-2xl bg-white p-6">
                   <div className="text-xs font-semibold uppercase tracking-wider text-amber-700">Chairperson, Anti-Ragging Cell</div>
-                  <div className="mt-1 font-serif text-lg font-semibold text-slate-900">Dr. Savitha Arun</div>
-                  <div className="text-sm text-slate-600">Principal — NSO · 080-26716152</div>
+                  <div className="mt-1  text-lg font-semibold text-slate-900">Dr. Savitha Arun</div>
+                  <div className="text-sm text-slate-600">Principal NSO · 080-26716152</div>
                   <a href="mailto:optoschool@nethradhama.org" className="text-sm text-[#0D8DD7] hover:underline">optoschool@nethradhama.org</a>
                 </div>
               </div>

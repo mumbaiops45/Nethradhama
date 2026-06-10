@@ -139,7 +139,7 @@ function Stat({ to, suffix = "", label }) {
   const val = useCountUp(to, shown);
   return (
     <div ref={ref}>
-      <div className="font-serif text-3xl font-semibold text-slate-900">
+      <div className=" text-3xl font-semibold text-slate-900">
         {val}
         {suffix}
       </div>
@@ -150,12 +150,12 @@ function Stat({ to, suffix = "", label }) {
 
 
 const events = [
-  { title: "Orientation Day", date: null, desc: "Every year we welcome our incoming students with a warm orientation — an introduction to the campus, the faculty and the journey ahead.", photo: "/events/orientation-day.jpg", fallbackImg: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1200&q=80" },
-  { title: "National Youth Day", date: "12 Jan", desc: "Students mark Youth Day with posters and talks on the life and philosophy of Swami Vivekananda — part of NSO's holistic development environment.", photo: "/events/national-youth-day.jpg", fallbackImg: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80" },
+  { title: "Orientation Day", date: null, desc: "Every year we welcome our incoming students with a warm orientation an introduction to the campus, the faculty and the journey ahead.", photo: "/events/orientation-day.jpg", fallbackImg: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1200&q=80" },
+  { title: "National Youth Day", date: "12 Jan", desc: "Students mark Youth Day with posters and talks on the life and philosophy of Swami Vivekananda part of NSO's holistic development environment.", photo: "/events/national-youth-day.jpg", fallbackImg: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80" },
   { title: "Annual Day", date: null, desc: "A day filled with entertainment and excitement that rocks the college and gives students a stage to unleash their talents.", photo: "/events/annual-day.jpg", fallbackImg: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80" },
-  { title: "Sports & Cultural Week", date: null, desc: "A wide range of sporting, recreational and cultural activities — with something for everyone.", photo: "/events/sports-cultural-week.jpg", fallbackImg: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1200&q=80" },
+  { title: "Sports & Cultural Week", date: null, desc: "A wide range of sporting, recreational and cultural activities with something for everyone.", photo: "/events/sports-cultural-week.jpg", fallbackImg: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?auto=format&fit=crop&w=1200&q=80" },
   { title: "Republic & Independence Day", date: "26 Jan · 15 Aug", desc: "We celebrate every national festival together, breaking barriers of community and glorifying the spirit of unity.", photo: "/events/republic-independence-day.jpg", fallbackImg: "https://images.unsplash.com/photo-1532375810709-75b1da00537c?auto=format&fit=crop&w=1200&q=80" },
-  { title: "World Optometry Day", date: "23 Mar", desc: "Marked with poster presentations, rangoli and essay competitions — plus public-awareness drives like road plays and talks in schools and colleges.", photo: "/events/world-optometry-day.jpg", fallbackImg: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=1200&q=80" },
+  { title: "World Optometry Day", date: "23 Mar", desc: "Marked with poster presentations, rangoli and essay competitions plus public-awareness drives like road plays and talks in schools and colleges.", photo: "/events/world-optometry-day.jpg", fallbackImg: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=1200&q=80" },
   { title: "Farewell Function", date: null, desc: "Each year a farewell function is held to bid a fond adieu to our graduating final-year students.", photo: "/events/farewell-function.jpg", fallbackImg: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80" },
   { title: "National Cleanliness Day", date: null, desc: "Students take part in cleanliness drives, championing tidy and healthy public spaces on and around the campus.", photo: "/events/national-cleanliness-day.jpg", fallbackImg: "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=1200&q=80" },
   { title: "Educational & Recreational Trips", date: null, desc: "Yearly trips that broaden students' knowledge and build bonds well beyond the classroom.", photo: "/events/educational-trips.jpg", fallbackImg: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80" },
@@ -196,7 +196,7 @@ function EventCard({ e, i }) {
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/15 to-transparent" />
         </div>
         <div className="p-6">
-          <h3 className="font-serif text-xl font-semibold text-slate-900">{e.title}</h3>
+          <h3 className=" text-xl font-semibold text-slate-900">{e.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-slate-600">{e.desc}</p>
         </div>
       </article>
@@ -210,7 +210,7 @@ export default function Page() {
   const [ctaLens, ctaLensY] = useParallax(0.14, 60);
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans text-slate-700 antialiased selection:bg-[#0D8DD7]">
+    <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
       <ScrollProgress />
 
     
@@ -225,8 +225,8 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
           <Reveal className="max-w-3xl">
             <Eyebrow>Student Life</Eyebrow>
-            <h1 className="mt-5 font-serif text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
-              More than a classroom —
+            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
+              More than a classroom 
               <br />
               <span className="text-[#0D8DD7]">a whole experience.</span>
             </h1>
@@ -250,7 +250,7 @@ export default function Page() {
         <div className="mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
             <Eyebrow>Events &amp; Activities</Eyebrow>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
               A year, in full colour.
             </h2>
           </Reveal>
@@ -273,7 +273,7 @@ export default function Page() {
               <div className="relative flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
                 <div className="max-w-xl">
                   <Eyebrow light>Join us</Eyebrow>
-                  <h2 className="mt-3 font-serif text-2xl font-semibold leading-tight sm:text-3xl">
+                  <h2 className="mt-3  text-2xl font-semibold leading-tight sm:text-3xl">
                     Be part of the NSO story.
                   </h2>
                   <p className="mt-2 text-sky-50/90">
