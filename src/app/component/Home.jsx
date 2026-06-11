@@ -10,16 +10,10 @@ function useReveal() {
         const el = ref.current;
         if (!el) return;
         const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-        if (reduce) {
-            setShown(true);
-            return;
-        }
+        if (reduce) { setShown(true); return; }
         const io = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
-                    setShown(true);
-                    io.unobserve(el);
-                }
+                if (entry.isIntersecting) { setShown(true); io.unobserve(el); }
             },
             { threshold: 0.15 }
         );
@@ -38,19 +32,21 @@ function useParallax(speed = 0.2, max = Infinity) {
         if (!el) return;
         const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
         if (reduce) return;
-        let raf = 0;
-        const update = () => {
+        let raf = 0, current = 0, target = 0;
+        const measure = () => {
             const rect = el.getBoundingClientRect();
             const viewH = window.innerHeight || 1;
             const centerDelta = rect.top + rect.height / 2 - viewH / 2;
-            const raw = -centerDelta * speed;
-            setOffset(Math.max(-max, Math.min(max, raw)));
+            target = Math.max(-max, Math.min(max, -centerDelta * speed));
         };
-        const onScroll = () => {
-            cancelAnimationFrame(raf);
-            raf = requestAnimationFrame(update);
+        const loop = () => {
+            current += (target - current) * 0.08;
+            setOffset(current);
+            if (Math.abs(target - current) > 0.08) raf = requestAnimationFrame(loop);
+            else raf = 0;
         };
-        update();
+        const onScroll = () => { measure(); if (!raf) raf = requestAnimationFrame(loop); };
+        measure(); current = target; setOffset(current);
         window.addEventListener("scroll", onScroll, { passive: true });
         window.addEventListener("resize", onScroll);
         return () => {
@@ -62,16 +58,12 @@ function useParallax(speed = 0.2, max = Infinity) {
     return [ref, offset];
 }
 
-
 function useCountUp(to, run, duration = 1400) {
     const [val, setVal] = useState(0);
     useEffect(() => {
         if (!run) return;
         const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-        if (reduce) {
-            setVal(to);
-            return;
-        }
+        if (reduce) { setVal(to); return; }
         let raf, startTime;
         const tick = (t) => {
             if (!startTime) startTime = t;
@@ -85,6 +77,7 @@ function useCountUp(to, run, duration = 1400) {
     }, [run, to, duration]);
     return val;
 }
+
 
 
 function ScrollProgress() {
@@ -126,6 +119,26 @@ function Reveal({ children, className = "", delay = 0 }) {
     );
 }
 
+
+
+
+
+function MagneticLink({ href, children, className = "" }) {
+    const ref = useRef(null);
+    const move = (e) => {
+        const el = ref.current; if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.transform = `translate(${(e.clientX - (r.left + r.width / 2)) * 0.25}px, ${(e.clientY - (r.top + r.height / 2)) * 0.3}px)`;
+    };
+    const reset = () => { if (ref.current) ref.current.style.transform = "translate(0,0)"; };
+    return (
+        <a ref={ref} href={href} onMouseMove={move} onMouseLeave={reset}
+            className={`transition-transform duration-300 ease-out ${className}`}>
+            {children}
+        </a>
+    );
+}
+
 function Lens({ className = "" }) {
     return (
         <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
@@ -138,22 +151,20 @@ function Lens({ className = "" }) {
 
 function Eyebrow({ children, light = false }) {
     return (
-        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em]">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-            <span className={light ? "text-emerald-200" : "text-emerald-700"}>{children}</span>
+        <span className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em]">
+            <span className={`h-px w-8 ${light ? "bg-sky-200" : "bg-[#0D8DD7]"}`} />
+            <span className={light ? "text-sky-100" : "text-[#0D8DD7]"}>{children}</span>
         </span>
     );
 }
-
 
 function Stat({ to, suffix, label }) {
     const [ref, shown] = useReveal();
     const val = useCountUp(to, shown);
     return (
         <div ref={ref}>
-            <div className=" text-2xl font-semibold text-slate-900">
-                {val}
-                {suffix}
+            <div className="text-2xl font-semibold text-slate-900">
+                {val}{suffix}
             </div>
             <div className="text-xs uppercase tracking-wider text-slate-500">{label}</div>
         </div>
@@ -200,6 +211,8 @@ const Icon = {
     ),
 };
 
+
+
 const services = [
     { icon: Icon.eye, title: "Comprehensive Eye Care", desc: "Hands-on training in refraction, ocular diagnostics and primary vision care across all age groups." },
     { icon: Icon.clinic, title: "Clinical Internship", desc: "A compulsory one-year internship at Nethradhama Super Speciality Eye Hospital." },
@@ -211,13 +224,13 @@ const services = [
 
 const gallery = [
     { src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80", label: "Clinical Skills" },
-    { src: "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?auto=format&fit=crop&w=800&q=80", label: "Refraction Lab" },
+    { src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80", label: "Refraction Lab" },
     { src: "https://images.unsplash.com/photo-1581595219315-a187dd40c322?auto=format&fit=crop&w=800&q=80", label: "Diagnostics" },
     { src: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=800&q=80", label: "Eye Examination" },
     { src: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80", label: "Research" },
-    { src: "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?auto=format&fit=crop&w=800&q=80", label: "Campus Life" },
-    { src: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=800&q=80", label: "Eye Examination" },
-    { src: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80", label: "Research" },
+    { src: "/collegelife.jpg", label: "Campus Life" },
+    { src: "https://images.unsplash.com/photo-1579165466949-3180a3d056d5?auto=format&fit=crop&w=800&q=80", label: "Optical Lab" },
+    { src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80", label: "Lecture Hall" },
 ];
 
 const academics = [
@@ -242,13 +255,13 @@ const faqs = [
 function FaqItem({ q, a }) {
     const [open, setOpen] = useState(false);
     return (
-        <div className="border-b border-stone-200">
+        <div>
             <button
                 onClick={() => setOpen((o) => !o)}
-                className="flex w-full items-center justify-between gap-6  px-5 py-5 text-left group"
+                className="flex w-full items-center justify-between gap-6 px-5 py-5 text-left group"
                 aria-expanded={open}
             >
-                <span className="text-base  font-medium text-slate-900 group-hover:text-[#0D8DD7] transition-colors">
+                <span className="text-base font-medium text-slate-900 group-hover:text-[#0D8DD7] transition-colors">
                     {q}
                 </span>
                 <span
@@ -267,7 +280,6 @@ function FaqItem({ q, a }) {
         </div>
     );
 }
-
 
 function GalleryCard({ item, index, featured }) {
     const [pref, py] = useParallax(0.08, 12);
@@ -292,11 +304,10 @@ function GalleryCard({ item, index, featured }) {
     );
 }
 
+
+
 export default function Home() {
 
-    const [heroLens1, heroLens1Y] = useParallax(0.25);
-    const [heroLens2, heroLens2Y] = useParallax(0.16);
-    const [heroCard, heroCardY] = useParallax(0.06, 26);
     const [servicesLens, servicesLensY] = useParallax(0.2);
     const [academicsLens, academicsLensY] = useParallax(0.18);
     const [researchLens, researchLensY] = useParallax(0.14, 60);
@@ -304,238 +315,129 @@ export default function Home() {
     const [faqLens, faqLensY] = useParallax(0.16);
 
     return (
-        <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
+        <div className=" text-slate-700 antialiased selection:bg-[#0D8DD7] ">
+
             <ScrollProgress />
 
-            <section className="relative overflow-hidden">
-
-                <div
-                    ref={heroLens1}
-                    style={{ transform: `translateY(${heroLens1Y}px)` }}
-                    className="pointer-events-none absolute -right-16 -top-10 will-change-transform"
-                >
-                    <Lens className="h-72 w-72 text-[#0D8DD7]/60" />
+            <section className="relative  h-screen w-full overflow-hidden">
+                <div className="absolute inset-0 -z-10">
+                    <img
+                        src="/hero.png"
+                        alt="background"
+                        className="h-full w-full object-cover animate-zoomVideo"
+                    />
+                    <div className="absolute inset-0 bg-black/40" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
                 </div>
-                <div
-                    ref={heroLens2}
-                    style={{ transform: `translateY(${heroLens2Y}px)` }}
-                    className="pointer-events-none absolute -bottom-24 -left-20 will-change-transform"
-                >
-                    <Lens className="h-80 w-80 text-amber-200/50" />
-                </div>
+                <div className="relative z-10 flex h-full items-center">
+                    <div className="mx-auto flex w-full max-w-6xl px-4 justify-end">
 
-                <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-2 md:py-16">
-                    <Reveal>
-                        <Eyebrow>Bengaluru · Affiliated to RGUHS</Eyebrow>
-                        <h1 className="mt-5  text-4xl font-semibold leading-[1.1] text-slate-900 sm:text-5xl lg:text-6xl">
-                            Bring the world
-                            <br />
-                            <span className="text-[#0D8DD7]">into focus.</span>
-                        </h1>
-                        <p className="mt-6 max-w-md text-lg leading-relaxed text-slate-600">
-                            A four-year B.Sc. in Optometry built on rigorous academics, real clinical exposure and research shaping the eye-care professionals of tomorrow.
-                        </p>
-                        <div className="mt-8 flex flex-wrap items-center gap-4">
-                            <a href="/contact" className="rounded-full bg-[#0D8DD7] px-7 py-3 text-sm font-semibold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg">
-                                Apply for 2025–26
-                            </a>
-                            <a href="#academics" className="rounded-full border border-stone-300 px-7 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-[#0D8DD7] hover:text-[#0D8DD7]">
-                                Explore the program
-                            </a>
-                        </div>
-                        <div className="mt-10 flex gap-8 border-t border-stone-200 pt-6">
-                            <Stat to={4} suffix=" yrs" label="Full program" />
-                            <Stat to={1} suffix=" yr" label="Internship" />
-                            <Stat to={100} suffix="%" label="English medium" />
-                        </div>
-                    </Reveal>
+                        <div className="max-w-2xl text-white text-start mr-auto">
 
-                    <Reveal delay={150}>
-                        <div className="relative mx-auto w-full max-w-[620px]  " >
-                            <div className="absolute -right-6 -top-6 h-40 w-40 rounded-full bg-[#0D8DD7]/20 blur-3xl" />
-                            <div className="absolute -bottom-8 -left-8 h-48 w-48 rounded-full bg-sky-200/40 blur-3xl" />
-                            <div className="relative overflow-hidden rounded-[32px] border border-white/40 bg-white/20 shadow-[0_25px_80px_rgba(0,0,0,0.12)] backdrop-blur-sm">
-                                <img src="/hero.png"
-                                    alt="Optometry Student"
-                                    className="h-[420px] w-full object-cover object-center sm:h-[500px] lg:h-[620px]"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/25 via-transparent to-white/10" />
+                            <p className="uppercase tracking-widest text-sm text-white/70">
+                                Bengaluru · Affiliated to RGUHS
+                            </p>
 
-                                <div className="absolute bottom-6 left-6 rounded-2xl border border-white/30 bg-white/90 px-5 py-3 shadow-xl backdrop-blur">
-                                    <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Clinical Excellence</p>
-                                    <p className="mt-1 text-lg font-semibold text-slate-900">Hands-on Training</p>
+                            <h1 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+                                Bring the world <br />
+                                <span className="text-[#38bdf8]">into focus.</span>
+                            </h1>
 
-                                </div>
+                            <p className="mt-6 text-lg text-white/80">
+                                A four-year B.Sc. in Optometry built on rigorous academics,
+                                real clinical exposure and research shaping the eye-care
+                                professionals of tomorrow.
+                            </p>
+
+                            <div className="mt-8 flex gap-4 justify-start">
+                                <a
+                                    href="/contact"
+                                    className="rounded-full bg-[#0D8DD7] px-7 py-3 text-sm font-semibold text-white shadow-lg hover:bg-[#0b7cc1]"
+                                >
+                                    Apply for 2025–26
+                                </a>
+
+                                <a
+                                    href="#academics"
+                                    className="rounded-full border border-white/40 px-7 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                                >
+                                    Explore Program
+                                </a>
                             </div>
 
                         </div>
-                    </Reveal>
+
+                    </div>
                 </div>
+
             </section>
 
-           
-            <section
-                id="about"
-                className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50"
-            >
-               
+            <section id="about" className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50">
                 <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-sky-100/50 blur-3xl" />
                 <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-blue-100/40 blur-3xl" />
 
                 <div className="mx-auto max-w-7xl px-4 py-24 lg:px-8">
                     <div className="grid items-center gap-16 lg:grid-cols-2">
-
-                       
                         <Reveal>
                             <div className="max-w-xl">
                                 <Eyebrow>About Us</Eyebrow>
-
-                                <h2 className="mt-5  text-4xl font-semibold leading-tight text-slate-900 lg:text-5xl">
+                                <h2 className="font-display mt-5 text-4xl font-semibold leading-tight text-slate-900 lg:text-5xl">
                                     A commitment to
-                                    <span className="block text-[#0D8DD7]">
-                                        clear vision and clearer minds.
-                                    </span>
+                                    <span className="block text-[#0D8DD7]">clear vision and clearer minds.</span>
                                 </h2>
-
                                 <p className="mt-8 text-lg leading-relaxed text-slate-600">
-                                    Nethradhama School of Optometry is committed to continually
-                                    strengthening its academic and research programs. We take pride
-                                    in providing high standards of education, training, and
-                                    clinical experience.
+                                    Nethradhama School of Optometry is committed to continually strengthening its academic and research programs. We take pride in providing high standards of education, training, and clinical experience.
                                 </p>
-
                                 <p className="mt-5 text-lg leading-relaxed text-slate-600">
-                                    With a comprehensive curriculum and a teaching hospital at its
-                                    core, NSO prepares students to become confident, ethical, and
-                                    skilled optometrists ready to serve patients from their very
-                                    first clinical posting.
+                                    With a comprehensive curriculum and a teaching hospital at its core, NSO prepares students to become confident, ethical, and skilled optometrists ready to serve patients from their very first clinical posting.
                                 </p>
 
-                               
                                 <div className="mt-10 grid grid-cols-3 gap-6 border-t border-slate-200 pt-8">
                                     <div>
                                         <h3 className="text-3xl font-bold text-[#0D8DD7]">20+</h3>
-                                        <p className="mt-1 text-sm text-slate-500">
-                                            Years of Excellence
-                                        </p>
+                                        <p className="mt-1 text-sm text-slate-500">Years of Excellence</p>
                                     </div>
-
                                     <div>
                                         <h3 className="text-3xl font-bold text-[#0D8DD7]">100%</h3>
-                                        <p className="mt-1 text-sm text-slate-500">
-                                            Clinical Exposure
-                                        </p>
+                                        <p className="mt-1 text-sm text-slate-500">Clinical Exposure</p>
                                     </div>
-
                                     <div>
                                         <h3 className="text-3xl font-bold text-[#0D8DD7]">4+1</h3>
-                                        <p className="mt-1 text-sm text-slate-500">
-                                            Program Structure
-                                        </p>
+                                        <p className="mt-1 text-sm text-slate-500">Program Structure</p>
                                     </div>
                                 </div>
 
-                               
                                 <div className="mt-10">
-                                    <a
+                                    <MagneticLink
                                         href="/contact"
-                                        className="inline-flex items-center rounded-full bg-[#0D8DD7] px-8 py-3 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                                        className="inline-flex items-center rounded-full bg-[#0D8DD7] px-8 py-3 text-sm font-semibold text-white hover:shadow-xl"
                                     >
                                         Learn More
-                                    </a>
+                                    </MagneticLink>
                                 </div>
                             </div>
                         </Reveal>
 
-                        {/* RIGHT IMAGE */}
                         <Reveal delay={150}>
                             <div className="relative mx-auto w-full max-w-[600px]">
-
-                                {/* Decorative Shape */}
                                 <div className="absolute -top-6 -right-6 h-32 w-32 rounded-full bg-[#0D8DD7]/20 blur-2xl" />
-
-                                {/* Main Image */}
-                                <div
-                                    className="
-              group
-              relative
-              overflow-hidden
-              rounded-[32px]
-              border border-white/50
-              bg-white
-              shadow-[0_30px_100px_rgba(15,23,42,0.12)]
-              transition-all
-              duration-700
-              hover:-translate-y-2
-              hover:shadow-[0_40px_120px_rgba(15,23,42,0.18)]
-            "
-                                >
+                                <div className="group relative overflow-hidden rounded-[32px] border border-white/50 bg-white shadow-[0_30px_100px_rgba(15,23,42,0.12)] transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_40px_120px_rgba(15,23,42,0.18)]">
                                     <img
                                         src="/about.jpeg"
                                         alt="Students learning optometry"
-                                        className="
-                h-[420px]
-                w-full
-                object-cover
-                transition-transform
-                duration-700
-                group-hover:scale-105
-                sm:h-[500px]
-                lg:h-[620px]
-              "
+                                        className="h-[420px] w-full object-cover transition-transform duration-700 group-hover:scale-105 sm:h-[500px] lg:h-[620px]"
                                     />
-
-                                    {/* Gradient Overlay */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-white/10" />
-
-                                    {/* Floating Card */}
-                                    <div
-                                        className="
-                absolute
-                bottom-6
-                left-6
-                rounded-2xl
-                bg-white/90
-                px-5
-                py-4
-                shadow-xl
-                backdrop-blur
-                transition-all
-                duration-500
-                group-hover:-translate-y-1
-              "
-                                    >
-                                        <p className="text-xs font-medium uppercase tracking-wider text-slate-500">
-                                            Excellence in Education
-                                        </p>
-
-                                        <p className="mt-1 text-lg font-semibold text-slate-900">
-                                            Future Optometrists
-                                        </p>
+                                    <div className="absolute bottom-6 left-6 rounded-2xl bg-white/90 px-5 py-4 shadow-xl backdrop-blur transition-all duration-500 group-hover:-translate-y-1">
+                                        <p className="text-xs font-medium uppercase tracking-wider text-slate-500">Excellence in Education</p>
+                                        <p className="mt-1 text-lg font-semibold text-slate-900">Future Optometrists</p>
                                     </div>
                                 </div>
 
-                                {/* Floating Experience Badge */}
-                                <div
-                                    className="
-              absolute
-              -left-8
-              top-10
-              hidden
-              rounded-2xl
-              bg-white
-              p-5
-              shadow-xl
-              lg:block
-              animate-bounce
-            "
-                                >
-                                    <h3 className="text-2xl font-bold text-[#0D8DD7]">
-                                        20+
-                                    </h3>
-                                    <p className="text-sm text-slate-600">
-                                        Years Experience
-                                    </p>
+
+                                <div className="absolute -left-8 top-10 hidden rounded-2xl bg-white p-5 shadow-xl lg:block animate-[float_5s_ease-in-out_infinite]">
+                                    <h3 className="text-2xl font-bold text-[#0D8DD7]">20+</h3>
+                                    <p className="text-sm text-slate-600">Years Experience</p>
                                 </div>
                             </div>
                         </Reveal>
@@ -543,44 +445,99 @@ export default function Home() {
                 </div>
             </section>
 
+            <section className="relative overflow-hidden bg-white py-24">
+                <div className="mx-auto max-w-6xl px-4 text-center">
+                    <Eyebrow>What we offer</Eyebrow>
+                    <h2 className="mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
+                        Training that spans the whole of eye care.
+                    </h2>
 
-            <section id="services" className="relative overflow-hidden bg-stone-50">
-                <div
-                    ref={servicesLens}
-                    style={{ transform: `translateY(${servicesLensY}px)` }}
-                    className="pointer-events-none absolute -right-24 top-10 will-change-transform"
-                >
-                    <Lens className="h-72 w-72 text-[#0D8DD7]/10" />
-                </div>
-                <div className="relative mx-auto max-w-6xl px-4 py-20">
-                    <Reveal className="max-w-2xl">
-                        <Eyebrow>What we offer</Eyebrow>
-                        <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
-                            Training that spans the whole of eye care.
-                        </h2>
-                    </Reveal>
-                    <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        {services.map((s, i) => (
-                            <Reveal key={s.title} delay={i * 80}>
-                                <div className="group h-full rounded-2xl border border-stone-200 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#0D8DD7]/30 hover:shadow-xl hover:shadow-emerald-900/5">
-                                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-[#0D8DD7]/10 text-[#0D8DD7] transition-colors group-hover:bg-[#0D8DD7] group-hover:text-white">
-                                        {s.icon("h-6 w-6")}
-                                    </div>
-                                    <h3 className="mt-5  text-xl font-semibold text-slate-900">{s.title}</h3>
-                                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{s.desc}</p>
-                                </div>
-                            </Reveal>
-                        ))}
+
+                    <div className="relative mx-auto mt-20 flex h-[520px] w-[520px] items-center justify-center">
+
+                        <div className="absolute h-full w-full rounded-full border border-slate-200" />
+
+
+                        <div className="absolute h-[320px] w-[320px] rounded-full bg-slate-50 shadow-inner" />
+
+
+                        <div className="relative z-10 flex h-28 w-28 items-center justify-center rounded-full bg-white shadow-xl">
+                            <span className="text-4xl">👁️</span>
+                        </div>
+
+
+                        <div className="group absolute top-0 flex flex-col items-center text-center">
+
+                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D8DD7] text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_10px_30px_rgba(13,141,215,0.4)]">
+                                {services[0]?.icon("h-6 w-6")}
+                            </div>
+
+                            <p className="mt-3 text-sm font-medium text-slate-700">
+                                {services[0]?.title}
+                            </p>
+
+
+                            <p className="mt-2 max-w-[160px] text-xs text-slate-500 opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                                {services[0]?.desc}
+                            </p>
+                        </div>
+
+
+                        <div className="group absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-center text-center">
+
+                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D8DD7] text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_10px_30px_rgba(13,141,215,0.4)]">
+                                {services[1]?.icon("h-6 w-6")}
+                            </div>
+
+                            <p className="mt-3 text-sm font-medium text-slate-700">
+                                {services[1]?.title}
+                            </p>
+
+                            <p className="mt-2 max-w-[160px] text-xs text-slate-500 opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                                {services[1]?.desc}
+                            </p>
+                        </div>
+
+
+                        <div className="group absolute bottom-0 flex flex-col items-center text-center">
+
+                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D8DD7] text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_10px_30px_rgba(13,141,215,0.4)]">
+                                {services[2]?.icon("h-6 w-6")}
+                            </div>
+
+                            <p className="mt-3 text-sm font-medium text-slate-700">
+                                {services[2]?.title}
+                            </p>
+
+                            <p className="mt-2 max-w-[160px] text-xs text-slate-500 opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                                {services[2]?.desc}
+                            </p>
+                        </div>
+
+
+                        <div className="group absolute left-0 top-1/2 -translate-y-1/2 flex flex-col items-center text-center">
+
+                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D8DD7] text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_10px_30px_rgba(13,141,215,0.4)]">
+                                {services[3]?.icon("h-6 w-6")}
+                            </div>
+
+                            <p className="mt-3 text-sm font-medium text-slate-700">
+                                {services[3]?.title}
+                            </p>
+
+                            <p className="mt-2 max-w-[160px] text-xs text-slate-500 opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
+                                {services[3]?.desc}
+                            </p>
+                        </div>
+
                     </div>
+
                 </div>
+
             </section>
 
 
-            <section
-                id="academics"
-                className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50"
-            >
-
+            <section id="academics" className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50">
                 <div
                     ref={academicsLens}
                     style={{ transform: `translateY(${academicsLensY}px)` }}
@@ -589,66 +546,27 @@ export default function Home() {
                     <Lens className="h-72 w-72 text-[#0D8DD7]/10" />
                 </div>
 
-                <div className="relative  max-w-7xl  py-24 lg:px-8">
-
-
+                <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8">
                     <Reveal>
-                        <div className="text-start px-14 max-w-3xl text-center">
+                        <div className="mx-auto max-w-3xl text-center">
                             <Eyebrow>Academics</Eyebrow>
-
-                            <h2 className="mt-5  text-4xl font-semibold text-slate-900 sm:text-5xl">
+                            <h2 className="font-display mt-5 text-4xl font-semibold text-slate-900 sm:text-5xl">
                                 The B.Sc. Optometry Program
                             </h2>
-
                             <p className="mt-6 text-lg leading-relaxed text-slate-600">
-                                A carefully structured curriculum combining classroom learning,
-                                clinical exposure, research opportunities, and professional
-                                development to prepare future optometrists.
+                                A carefully structured curriculum combining classroom learning, clinical exposure, research opportunities, and professional development to prepare future optometrists.
                             </p>
                         </div>
                     </Reveal>
 
-                    <div className="mt-16 grid gap-6 px-14 md:grid-cols-2 xl:grid-cols-3">
+                    <div className="mt-16 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                         {academics.map((a, i) => (
                             <Reveal key={a.k} delay={i * 80}>
-                                <div
-                                    className="
-              group
-              h-full
-              rounded-3xl
-              border
-              border-slate-200
-              bg-white
-              p-8
-              shadow-sm
-              transition-all
-              duration-500
-              hover:-translate-y-2
-              hover:border-[#0D8DD7]/30
-              hover:shadow-2xl
-            "
-                                >
-
+                                <div className="group h-full rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-[#0D8DD7]/30 hover:shadow-2xl">
                                     <div className="mb-6 h-1 w-14 rounded-full bg-[#0D8DD7]" />
-
-                                    <h3 className=" text-xl font-semibold text-slate-900">
-                                        {a.k}
-                                    </h3>
-
-                                    <p className="mt-4 leading-relaxed text-slate-600">
-                                        {a.v}
-                                    </p>
-
-                                    <div
-                                        className="
-                mt-6
-                h-px
-                bg-slate-100
-                transition-all
-                duration-500
-                group-hover:bg-[#0D8DD7]/30
-              "
-                                    />
+                                    <h3 className="text-xl font-semibold text-slate-900">{a.k}</h3>
+                                    <p className="mt-4 leading-relaxed text-slate-600">{a.v}</p>
+                                    <div className="mt-6 h-[3px] w-0 bg-[#0D8DD7]/40 rounded-full transition-all duration-500 group-hover:w-full group-hover:bg-[#0D8DD7]" />
                                 </div>
                             </Reveal>
                         ))}
@@ -663,45 +581,24 @@ export default function Home() {
                             >
                                 <Lens className="h-60 w-60 text-white/20" />
                             </div>
-
-
                             <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
 
                             <div className="relative z-10">
                                 <Eyebrow light>Research Achievement</Eyebrow>
-
-                                <h3 className="mt-4  text-3xl font-semibold text-white">
+                                <h3 className="font-display mt-4 text-3xl font-semibold text-white">
                                     Recognized Research Excellence
                                 </h3>
-
                                 <p className="mt-6 max-w-4xl text-lg leading-relaxed text-blue-50">
                                     Our students
-                                    <span className="font-semibold text-white">
-                                        {" "}Ms. Nikhita R Bhat,
-                                        Ms. Pooja Kumari Sah,
-                                        and Mr. Anvith M Agumbe
-                                    </span>
+                                    <span className="font-semibold text-white"> Ms. Nikhita R Bhat, Ms. Pooja Kumari Sah, and Mr. Anvith M Agumbe</span>
                                     {" "}were selected for the prestigious
-                                    <span className="font-semibold text-white">
-                                        {" "}RGUHS UG-AHS Research Grant
-                                    </span>
-                                    {" "}for the academic year 2021–22, highlighting the
-                                    institution's strong emphasis on innovation,
-                                    scientific inquiry, and evidence-based practice.
+                                    <span className="font-semibold text-white"> RGUHS UG-AHS Research Grant</span>
+                                    {" "}for the academic year 2021–22, highlighting the institution's strong emphasis on innovation, scientific inquiry, and evidence-based practice.
                                 </p>
-
                                 <div className="mt-8 flex flex-wrap gap-4">
-                                    <div className="rounded-full bg-white/15 px-5 py-2 text-sm font-medium text-white backdrop-blur">
-                                        Research Driven
-                                    </div>
-
-                                    <div className="rounded-full bg-white/15 px-5 py-2 text-sm font-medium text-white backdrop-blur">
-                                        RGUHS Recognition
-                                    </div>
-
-                                    <div className="rounded-full bg-white/15 px-5 py-2 text-sm font-medium text-white backdrop-blur">
-                                        Student Innovation
-                                    </div>
+                                    <div className="rounded-full bg-white/15 px-5 py-2 text-sm font-medium text-white backdrop-blur">Research Driven</div>
+                                    <div className="rounded-full bg-white/15 px-5 py-2 text-sm font-medium text-white backdrop-blur">RGUHS Recognition</div>
+                                    <div className="rounded-full bg-white/15 px-5 py-2 text-sm font-medium text-white backdrop-blur">Student Innovation</div>
                                 </div>
                             </div>
                         </div>
@@ -709,7 +606,7 @@ export default function Home() {
                 </div>
             </section>
 
-
+            {/* ----------------------------- GALLERY ----------------------------- */}
             <section id="gallery" className="relative overflow-hidden bg-stone-50">
                 <div
                     ref={galleryLens}
@@ -718,10 +615,10 @@ export default function Home() {
                 >
                     <Lens className="h-72 w-72 text-[#0D8DD7]/10" />
                 </div>
-                <div className="relative mx-auto max-w-6xl px-4 py-20">
+                <div className="relative mx-auto max-w-6xl px-4 py-24">
                     <Reveal className="max-w-2xl">
                         <Eyebrow>Gallery</Eyebrow>
-                        <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
+                        <h2 className="font-display mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
                             Life and learning at NSO.
                         </h2>
                     </Reveal>
@@ -733,156 +630,78 @@ export default function Home() {
                 </div>
             </section>
 
-
-            {/* <section id="faq" className="relative overflow-hidden bg-white">
+            {/* ----------------------------- FAQ ----------------------------- */}
+            <section id="faq" className="relative bg-gradient-to-b from-white via-slate-50/40 to-white">
                 <div
                     ref={faqLens}
                     style={{ transform: `translateY(${faqLensY}px)` }}
-                    className="pointer-events-none absolute -left-24 top-16 will-change-transform"
+                    className="pointer-events-none absolute left-0 top-20 opacity-50"
                 >
-                    <Lens className="h-72 w-72 text-amber-300/10" />
+                    <Lens className="h-80 w-80 text-[#0D8DD7]/10" />
                 </div>
-                <div className="relative mx-auto grid max-w-6xl gap-12 px-4 py-20 md:grid-cols-12">
-                    <Reveal className="md:col-span-4">
-                        <Eyebrow>FAQ</Eyebrow>
-                        <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
-                            Questions, answered.
-                        </h2>
-                        <p className="mt-4 text-slate-600">
-                            Couldn't find what you're looking for? Reach the administrator at{" "}
-                            <a href="tel:+917760744990" className="font-medium text-[#0D8DD7] hover:underline">+91 77607 44990</a>.
-                        </p>
-                    </Reveal>
-                    <Reveal delay={120} className="md:col-span-8">
-                        <div className="rounded-2xl border border-stone-200 bg-stone-50 px-6">
-                            {faqs.map((f) => (
-                                <FaqItem key={f.q} q={f.q} a={f.a} />
-                            ))}
+                <div className="absolute right-0 top-32 h-72 w-72 rounded-full bg-sky-100/50 blur-3xl" />
+
+                <div className="relative mx-auto max-w-7xl px-6 py-24">
+                    <div className="grid items-start gap-20 lg:grid-cols-[0.9fr_1.1fr]">
+                        <div className="lg:sticky lg:top-28">
+                            <Reveal>
+                                <div className="max-w-md">
+                                    <Eyebrow>Frequently Asked Questions</Eyebrow>
+                                    <h2 className="font-display mt-5 text-5xl font-semibold leading-tight text-slate-900">
+                                        Questions,
+                                        <span className="block text-[#0D8DD7]">Answered.</span>
+                                    </h2>
+                                    <p className="mt-6 text-lg leading-relaxed text-slate-600">
+                                        Everything you need to know about admissions, academics, internships, eligibility, fees and student life at Nethradhama School of Optometry.
+                                    </p>
+
+                                    <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-7 shadow-lg shadow-slate-100">
+                                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Need Assistance?</p>
+                                        <a href="tel:+917760744990" className="mt-3 block text-3xl font-bold text-[#0D8DD7] transition-all duration-300 hover:text-sky-600">
+                                            +91 77607 44990
+                                        </a>
+                                        <p className="mt-3 text-slate-500">Speak directly with our admissions team.</p>
+                                    </div>
+
+                                    <div className="mt-10 grid grid-cols-2 gap-6">
+                                        <div className="rounded-2xl bg-white p-5 shadow-md shadow-slate-100">
+                                            <h3 className="text-3xl font-bold text-[#0D8DD7]">4+1</h3>
+                                            <p className="mt-1 text-sm text-slate-500">Program Structure</p>
+                                        </div>
+                                        <div className="rounded-2xl bg-white p-5 shadow-md shadow-slate-100">
+                                            <h3 className="text-3xl font-bold text-[#0D8DD7]">100%</h3>
+                                            <p className="mt-1 text-sm text-slate-500">Clinical Exposure</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </Reveal>
                         </div>
-                    </Reveal>
+
+                        <div className="relative">
+                            <Reveal delay={150}>
+                                <div className="space-y-6">
+                                    {faqs.map((f) => (
+                                        <div
+                                            key={f.q}
+                                            className="group overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-[#0D8DD7]/30 hover:shadow-xl hover:shadow-sky-100"
+                                        >
+                                            <FaqItem q={f.q} a={f.a} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </Reveal>
+                        </div>
+                    </div>
                 </div>
-            </section> */}
+            </section>
 
-           <section
-  id="faq"
-  className="relative bg-gradient-to-b from-white via-slate-50/40 to-white"
->
- 
-  <div
-    ref={faqLens}
-    style={{ transform: `translateY(${faqLensY}px)` }}
-    className="pointer-events-none absolute left-0 top-20 opacity-50"
-  >
-    <Lens className="h-80 w-80 text-[#0D8DD7]/10" />
-  </div>
-
- 
-  <div className="absolute right-0 top-32 h-72 w-72 rounded-full bg-sky-100/50 blur-3xl" />
-
-  <div className="relative mx-auto max-w-7xl px-6 py-28">
-    <div className="grid items-start gap-20 lg:grid-cols-[0.9fr_1.1fr]">
-
-      {/* LEFT CONTENT */}
-      <div className="lg:sticky lg:top-28">
-        <Reveal>
-          <div className="max-w-md">
-            <Eyebrow>Frequently Asked Questions</Eyebrow>
-
-            <h2 className="mt-5  text-5xl font-semibold leading-tight text-slate-900">
-              Questions,
-              <span className="block text-[#0D8DD7]">
-                Answered.
-              </span>
-            </h2>
-
-            <p className="mt-6 text-lg leading-relaxed text-slate-600">
-              Everything you need to know about admissions,
-              academics, internships, eligibility, fees and
-              student life at Nethradhama School of Optometry.
-            </p>
-
-            {/* Contact Card */}
-            <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-7 shadow-lg shadow-slate-100">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">
-                Need Assistance?
-              </p>
-
-              <a
-                href="tel:+917760744990"
-                className="mt-3 block text-3xl font-bold text-[#0D8DD7] transition-all duration-300 hover:text-sky-600"
-              >
-                +91 77607 44990
-              </a>
-
-              <p className="mt-3 text-slate-500">
-                Speak directly with our admissions team.
-              </p>
-            </div>
-
-            {/* Stats */}
-            <div className="mt-10 grid grid-cols-2 gap-6">
-              <div className="rounded-2xl bg-white p-5 shadow-md shadow-slate-100">
-                <h3 className="text-3xl font-bold text-[#0D8DD7]">
-                  4+1
-                </h3>
-                <p className="mt-1 text-sm text-slate-500">
-                  Program Structure
-                </p>
-              </div>
-
-              <div className="rounded-2xl bg-white p-5 shadow-md shadow-slate-100">
-                <h3 className="text-3xl font-bold text-[#0D8DD7]">
-                  100%
-                </h3>
-                <p className="mt-1 text-sm text-slate-500">
-                  Clinical Exposure
-                </p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-
-      {/* RIGHT FAQS */}
-      <div className="relative">
-        <Reveal delay={150}>
-          <div className="space-y-6">
-            {faqs.map((f, index) => (
-              <div
-                key={f.q}
-                className="
-                  group
-                  overflow-hidden
-                  rounded-[28px]
-                  border
-                  border-slate-200
-                  bg-white
-                  shadow-sm
-                  transition-all
-                  duration-500
-                  hover:-translate-y-1
-                  hover:border-[#0D8DD7]/30
-                  hover:shadow-xl
-                  hover:shadow-sky-100
-                "
-              >
-                <FaqItem q={f.q} a={f.a} />
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-    </div>
-  </div>
-</section>
-
-
+            {/* ----------------------------- ANTI-RAGGING ----------------------------- */}
             <section className="bg-stone-50">
-                <div className="mx-auto max-w-6xl px-4 pb-20">
+                <div className="mx-auto max-w-6xl px-4 pb-24">
                     <Reveal>
                         <div className="rounded-3xl border border-amber-200 bg-amber-50 p-8 sm:p-10">
                             <Eyebrow>Anti-Ragging Cell</Eyebrow>
-                            <h2 className="mt-4  text-2xl font-semibold text-slate-900 sm:text-3xl">
+                            <h2 className="font-display mt-4 text-2xl font-semibold text-slate-900 sm:text-3xl">
                                 A campus that is safe, by commitment.
                             </h2>
                             <p className="mt-4 max-w-3xl text-slate-700">
@@ -891,12 +710,12 @@ export default function Home() {
                             <div className="mt-8 grid gap-4 sm:grid-cols-2">
                                 <div className="rounded-2xl bg-white p-6">
                                     <div className="text-xs font-semibold uppercase tracking-wider text-amber-700">National Anti-Ragging Helpline (24×7)</div>
-                                    <a href="tel:18001805522" className="mt-1 block  text-2xl font-semibold text-slate-900">1800-180-5522</a>
+                                    <a href="tel:18001805522" className="mt-1 block text-2xl font-semibold text-slate-900">1800-180-5522</a>
                                     <a href="mailto:helpline@antiragging.in" className="text-sm text-[#0D8DD7] hover:underline">helpline@antiragging.in</a>
                                 </div>
                                 <div className="rounded-2xl bg-white p-6">
                                     <div className="text-xs font-semibold uppercase tracking-wider text-amber-700">Chairperson, Anti-Ragging Cell</div>
-                                    <div className="mt-1  text-lg font-semibold text-slate-900">Dr. Savitha Arun</div>
+                                    <div className="mt-1 text-lg font-semibold text-slate-900">Dr. Savitha Arun</div>
                                     <div className="text-sm text-slate-600">Principal NSO · 080-26716152</div>
                                     <a href="mailto:optoschool@nethradhama.org" className="text-sm text-[#0D8DD7] hover:underline">optoschool@nethradhama.org</a>
                                 </div>

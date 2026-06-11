@@ -1,13 +1,8 @@
+
+
 "use client"
 import React, { useState, useEffect, useRef } from "react";
 
-/* ──────────────────────────────────────────────────────────────
-   NSO Faculty & Team
-   PHOTOS: every person has a `photo` path wired below. Drop the matching
-   image into  public/faculty/<file>.jpg  and it appears automatically.
-   No file yet (or wrong path)? The Avatar falls back to monogram initials
-   via onError the page never shows a broken image.
-   ────────────────────────────────────────────────────────────── */
 
 function useReveal() {
   const ref = useRef(null);
@@ -16,16 +11,10 @@ function useReveal() {
     const el = ref.current;
     if (!el) return;
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-    if (reduce) {
-      setShown(true);
-      return;
-    }
+    if (reduce) { setShown(true); return; }
     const io = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) {
-          setShown(true);
-          io.unobserve(el);
-        }
+        if (e.isIntersecting) { setShown(true); io.unobserve(el); }
       },
       { threshold: 0.12 }
     );
@@ -35,6 +24,7 @@ function useReveal() {
   return [ref, shown];
 }
 
+
 function useParallax(speed = 0.2, max = Infinity) {
   const ref = useRef(null);
   const [offset, setOffset] = useState(0);
@@ -43,18 +33,21 @@ function useParallax(speed = 0.2, max = Infinity) {
     if (!el) return;
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
     if (reduce) return;
-    let raf = 0;
-    const update = () => {
+    let raf = 0, current = 0, target = 0;
+    const measure = () => {
       const rect = el.getBoundingClientRect();
       const viewH = window.innerHeight || 1;
       const centerDelta = rect.top + rect.height / 2 - viewH / 2;
-      setOffset(Math.max(-max, Math.min(max, -centerDelta * speed)));
+      target = Math.max(-max, Math.min(max, -centerDelta * speed));
     };
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
+    const loop = () => {
+      current += (target - current) * 0.08;
+      setOffset(current);
+      if (Math.abs(target - current) > 0.08) raf = requestAnimationFrame(loop);
+      else raf = 0;
     };
-    update();
+    const onScroll = () => { measure(); if (!raf) raf = requestAnimationFrame(loop); };
+    measure(); current = target; setOffset(current);
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
@@ -71,10 +64,7 @@ function useCountUp(to, run, duration = 1400) {
   useEffect(() => {
     if (!run) return;
     const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-    if (reduce) {
-      setVal(to);
-      return;
-    }
+    if (reduce) { setVal(to); return; }
     let raf, start;
     const tick = (t) => {
       if (!start) start = t;
@@ -87,6 +77,8 @@ function useCountUp(to, run, duration = 1400) {
   }, [run, to, duration]);
   return val;
 }
+
+
 
 function ScrollProgress() {
   const [p, setP] = useState(0);
@@ -121,6 +113,41 @@ function Reveal({ children, className = "", delay = 0 }) {
   );
 }
 
+
+function LineReveal({ children, delay = 0, className = "" }) {
+  const [ref, shown] = useReveal();
+  return (
+    <span ref={ref} className="block overflow-hidden pb-[0.12em]">
+      <span
+        style={{ transitionDelay: `${delay}ms` }}
+        className={`block transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+          shown ? "translate-y-0" : "translate-y-[120%]"
+        } ${className}`}
+      >
+        {children}
+      </span>
+    </span>
+  );
+}
+
+
+function FlyInCard({ children, index = 0, className = "" }) {
+  const [ref, shown] = useReveal();
+  return (
+    <div
+      ref={ref}
+      style={{ transitionDelay: `${index * 90}ms` }}
+      className={`h-full transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+        shown
+          ? "opacity-100 translate-y-0 scale-100 blur-0"
+          : "opacity-0 translate-y-14 scale-95 blur-[5px]"
+      } ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
 function Lens({ className = "" }) {
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
@@ -133,8 +160,8 @@ function Lens({ className = "" }) {
 
 function Eyebrow({ children, light = false }) {
   return (
-    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em]">
-      <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
+    <span className="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em]">
+      <span className={`h-px w-8 ${light ? "bg-sky-200" : "bg-[#0D8DD7]"}`} />
       <span className={light ? "text-sky-100" : "text-[#0D8DD7]"}>{children}</span>
     </span>
   );
@@ -145,9 +172,8 @@ function Stat({ to, suffix = "", label }) {
   const val = useCountUp(to, shown);
   return (
     <div ref={ref}>
-      <div className=" text-3xl font-semibold text-slate-900">
-        {val}
-        {suffix}
+      <div className="text-3xl font-semibold text-slate-900">
+        {val}{suffix}
       </div>
       <div className="mt-1 text-xs uppercase tracking-wider text-slate-500">{label}</div>
     </div>
@@ -165,7 +191,6 @@ const initials = (name) =>
     .join("")
     .toUpperCase();
 
-
 function Avatar({ name, photo, size = "h-16 w-16", text = "text-lg", ring = "ring-[#0D8DD7]/15" }) {
   const [failed, setFailed] = useState(false);
   const showImg = photo && !failed;
@@ -177,10 +202,10 @@ function Avatar({ name, photo, size = "h-16 w-16", text = "text-lg", ring = "rin
           alt={name}
           loading="lazy"
           onError={() => setFailed(true)}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       ) : (
-        <span className={`grid h-full w-full place-items-center  font-semibold text-[#0D8DD7] ${text}`}>
+        <span className={`grid h-full w-full place-items-center font-semibold text-[#0D8DD7] ${text}`}>
           {initials(name)}
         </span>
       )}
@@ -189,10 +214,11 @@ function Avatar({ name, photo, size = "h-16 w-16", text = "text-lg", ring = "rin
 }
 
 
+
 const management = [
   { name: "Dr. Sri Ganesh", role: "Chairman & Managing Director", org: "Nethradhama Hospitals Pvt Ltd.", qual: "MBBS, MS, DNB", photo: "/ganesh.jpg" },
   { name: "Dr. Suman Shree R", role: "Director & CEO", org: "Nethradhama Hospitals Pvt Ltd.", qual: "MBBS, MD, DNB (Anaesthesiology), PGDHHM, PGDMLS", photo: "/suman.jpg" },
-  { name: "Dr. Savitha Arun", role: "Principal / Professor", org: "Subject Squint & BV", qual: "MBBS, DOMS, DNB", photo: "/savitha.jpg" },
+  { name: "Dr. Savitha Arun", role: "Principal / Professor", org: "Subject — Squint & BV", qual: "MBBS, DOMS, DNB", photo: "/savitha.jpg" },
 ];
 
 const optometryFaculty = [
@@ -221,10 +247,13 @@ const administration = [
 
 function FacultyCard({ p }) {
   return (
-    <div className="group flex h-full gap-4 rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#0D8DD7]/30 hover:shadow-xl hover:shadow-slate-900/5">
-      <Avatar name={p.name} photo={p.photo} />
-      <div className="min-w-0">
-        <h3 className=" text-lg font-semibold leading-tight text-slate-900">{p.name}</h3>
+    <div className="group relative flex h-full gap-4 overflow-hidden rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1.5 hover:border-[#0D8DD7]/40 hover:shadow-[0_24px_60px_-15px_rgba(13,141,215,0.28)]">
+      <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-[#0D8DD7]/0 blur-3xl transition-all duration-700 group-hover:bg-[#0D8DD7]/12" />
+      <div className="relative">
+        <Avatar name={p.name} photo={p.photo} />
+      </div>
+      <div className="relative min-w-0">
+        <h3 className="text-lg font-semibold leading-tight text-slate-900 transition-colors duration-300 group-hover:text-[#0D8DD7]">{p.name}</h3>
         <p className="mt-0.5 text-sm font-medium text-[#0D8DD7]">{p.role}</p>
         {p.subject && <p className="mt-2 text-sm leading-relaxed text-slate-600">{p.subject}</p>}
         <p className="mt-2 text-xs uppercase tracking-wide text-slate-400">{p.qual}</p>
@@ -233,35 +262,43 @@ function FacultyCard({ p }) {
   );
 }
 
+
+
 export default function Page() {
   const [heroL1, heroL1Y] = useParallax(0.24);
   const [heroL2, heroL2Y] = useParallax(0.15);
   const [optLens, optLensY] = useParallax(0.16);
   const [visLens, visLensY] = useParallax(0.16);
+  const [mgmtLens, mgmtLensY] = useParallax(0.14);
 
   return (
-    <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
+    <div className="min-h-screen bg-stone-50 text-slate-700 antialiased selection:bg-[#0D8DD7] selection:text-white">
+     
+      <style>{`
+        :root { --font-display: 'Fraunces', 'Playfair Display', Georgia, 'Times New Roman', serif; }
+        .font-display {  letter-spacing: -0.01em; }
+      `}</style>
+
       <ScrollProgress />
 
-      {/* Hero */}
+      
       <section className="relative overflow-hidden">
         <div ref={heroL1} style={{ transform: `translateY(${heroL1Y}px)` }} className="pointer-events-none absolute -right-16 -top-12 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/50" />
         </div>
         <div ref={heroL2} style={{ transform: `translateY(${heroL2Y}px)` }} className="pointer-events-none absolute -bottom-28 -left-24 will-change-transform">
-          <Lens className="h-80 w-80 text-amber-200/50" />
+          <Lens className="h-80 w-80 text-sky-200/50" />
         </div>
 
-        <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
+        <div className="relative mx-auto max-w-6xl px-4 py-24 md:py-28">
           <Reveal className="max-w-3xl">
             <Eyebrow>Management &amp; Faculty</Eyebrow>
-            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
-              The people behind
-              <br />
-              <span className="text-[#0D8DD7]">every clear diagnosis.</span>
+            <h1 className="font-display mt-5 text-4xl font-semibold leading-[1.05] text-slate-900 sm:text-5xl lg:text-6xl">
+              <LineReveal delay={100}>The people behind</LineReveal>
+              <LineReveal delay={220} className="text-[#0D8DD7]">every clear diagnosis.</LineReveal>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-              From hospital leadership to optometry educators and visiting specialists a team that brings clinical depth and academic rigour to every classroom at NSO.
+              From hospital leadership to optometry educators and visiting specialists — a team that brings clinical depth and academic rigour to every classroom at NSO.
             </p>
           </Reveal>
 
@@ -275,92 +312,96 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Management Team */}
-      <section className="bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-20">
+     
+      <section className="relative overflow-hidden bg-white">
+        <div ref={mgmtLens} style={{ transform: `translateY(${mgmtLensY}px)` }} className="pointer-events-none absolute -left-24 top-16 will-change-transform">
+          <Lens className="h-72 w-72 text-[#0D8DD7]/8" />
+        </div>
+        <div className="relative mx-auto max-w-6xl px-4 py-24">
           <Reveal className="max-w-2xl">
             <Eyebrow>Management Team</Eyebrow>
-            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="font-display mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
               Guided by experienced clinicians.
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
             {management.map((m, i) => (
-              <Reveal key={m.name} delay={i * 90}>
-                <div className="group h-full overflow-hidden rounded-3xl border border-stone-200 bg-stone-50 p-8 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/5">
-                  <div className="flex justify-center">
+              <FlyInCard key={m.name} index={i}>
+                <div className="group relative h-full overflow-hidden rounded-3xl border border-stone-200 bg-stone-50 p-8 text-center transition-all duration-500 hover:-translate-y-2 hover:border-[#0D8DD7]/40 hover:bg-white hover:shadow-[0_24px_60px_-15px_rgba(13,141,215,0.28)]">
+                  <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[#0D8DD7]/0 blur-3xl transition-all duration-700 group-hover:bg-[#0D8DD7]/15" />
+                  <div className="relative flex justify-center">
                     <Avatar name={m.name} photo={m.photo} size="h-24 w-24" text="text-2xl" />
                   </div>
-                  <h3 className="mt-5  text-xl font-semibold text-slate-900">{m.name}</h3>
-                  <p className="mt-1 text-sm font-medium text-[#0D8DD7]">{m.role}</p>
-                  <p className="mt-1 text-sm text-slate-500">{m.org}</p>
-                  <div className="mx-auto mt-4 w-12 border-t border-stone-200" />
-                  <p className="mt-4 text-xs uppercase tracking-wide text-slate-400">{m.qual}</p>
+                  <h3 className="relative mt-5 text-xl font-semibold text-slate-900">{m.name}</h3>
+                  <p className="relative mt-1 text-sm font-medium text-[#0D8DD7]">{m.role}</p>
+                  <p className="relative mt-1 text-sm text-slate-500">{m.org}</p>
+                  <div className="relative mx-auto mt-4 w-12 border-t border-stone-200" />
+                  <p className="relative mt-4 text-xs uppercase tracking-wide text-slate-400">{m.qual}</p>
                 </div>
-              </Reveal>
+              </FlyInCard>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Optometry Faculty */}
+  
       <section className="relative overflow-hidden bg-stone-50">
         <div ref={optLens} style={{ transform: `translateY(${optLensY}px)` }} className="pointer-events-none absolute -right-24 top-16 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/10" />
         </div>
-        <div className="relative mx-auto max-w-6xl px-4 py-20">
+        <div className="relative mx-auto max-w-6xl px-4 py-24">
           <Reveal className="max-w-2xl">
             <Eyebrow>Optometry Faculty</Eyebrow>
-            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="font-display mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
               Educators who practise what they teach.
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
             {optometryFaculty.map((p, i) => (
-              <Reveal key={p.name} delay={(i % 2) * 90}>
+              <FlyInCard key={p.name} index={i % 2}>
                 <FacultyCard p={p} />
-              </Reveal>
+              </FlyInCard>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Visiting Faculty */}
+    
       <section className="relative overflow-hidden bg-white">
         <div ref={visLens} style={{ transform: `translateY(${visLensY}px)` }} className="pointer-events-none absolute -left-24 top-16 will-change-transform">
-          <Lens className="h-72 w-72 text-amber-300/10" />
+          <Lens className="h-72 w-72 text-[#0D8DD7]/10" />
         </div>
-        <div className="relative mx-auto max-w-6xl px-4 py-20">
+        <div className="relative mx-auto max-w-6xl px-4 py-24">
           <Reveal className="max-w-2xl">
             <Eyebrow>Visiting Faculty</Eyebrow>
-            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="font-display mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
               Specialists across the sciences.
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {visitingFaculty.map((p, i) => (
-              <Reveal key={p.name} delay={(i % 3) * 80}>
+              <FlyInCard key={p.name} index={i % 3}>
                 <FacultyCard p={p} />
-              </Reveal>
+              </FlyInCard>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Administration */}
+      
       <section className="bg-stone-50">
-        <div className="mx-auto max-w-6xl px-4 py-20 pb-24">
+        <div className="mx-auto max-w-6xl px-4 py-24">
           <Reveal className="max-w-2xl">
             <Eyebrow>Administrative Department</Eyebrow>
-            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <h2 className="font-display mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
               Keeping everything in order.
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {administration.map((p, i) => (
-              <Reveal key={p.name} delay={i * 80}>
+              <FlyInCard key={p.name} index={i}>
                 <FacultyCard p={p} />
-              </Reveal>
+              </FlyInCard>
             ))}
           </div>
         </div>
