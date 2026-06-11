@@ -304,7 +304,7 @@ const history = [
 ];
 
 const IMG = {
-  overview: "/Nethradhama.png",
+  overview: "/NethradhamaSchool.png",
   about: "/optometry.png",
   history: "/college.avif",
   facilities: "https://images.unsplash.com/photo-1581595219315-a187dd40c322?auto=format&fit=crop&w=1000&q=80",
