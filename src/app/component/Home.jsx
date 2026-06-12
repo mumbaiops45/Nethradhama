@@ -2,6 +2,7 @@
 "use client"
 import React, { useState, useEffect, useRef } from "react";
 import Whatwe from "./Whatwe";
+import Link from "next/link";
 
 
 function useReveal() {
@@ -59,25 +60,6 @@ function useParallax(speed = 0.2, max = Infinity) {
     return [ref, offset];
 }
 
-function useCountUp(to, run, duration = 1400) {
-    const [val, setVal] = useState(0);
-    useEffect(() => {
-        if (!run) return;
-        const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-        if (reduce) { setVal(to); return; }
-        let raf, startTime;
-        const tick = (t) => {
-            if (!startTime) startTime = t;
-            const p = Math.min((t - startTime) / duration, 1);
-            const eased = 1 - Math.pow(1 - p, 3);
-            setVal(Math.round(eased * to));
-            if (p < 1) raf = requestAnimationFrame(tick);
-        };
-        raf = requestAnimationFrame(tick);
-        return () => cancelAnimationFrame(raf);
-    }, [run, to, duration]);
-    return val;
-}
 
 
 
@@ -121,9 +103,6 @@ function Reveal({ children, className = "", delay = 0 }) {
 }
 
 
-
-
-
 function MagneticLink({ href, children, className = "" }) {
     const ref = useRef(null);
     const move = (e) => {
@@ -159,69 +138,7 @@ function Eyebrow({ children, light = false }) {
     );
 }
 
-function Stat({ to, suffix, label }) {
-    const [ref, shown] = useReveal();
-    const val = useCountUp(to, shown);
-    return (
-        <div ref={ref}>
-            <div className="text-2xl font-semibold text-slate-900">
-                {val}{suffix}
-            </div>
-            <div className="text-xs uppercase tracking-wider text-slate-500">{label}</div>
-        </div>
-    );
-}
 
-const Icon = {
-    eye: (c) => (
-        <svg viewBox="0 0 24 24" fill="none" className={c} stroke="currentColor" strokeWidth="1.6">
-            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" strokeLinejoin="round" />
-            <circle cx="12" cy="12" r="3" />
-        </svg>
-    ),
-    clinic: (c) => (
-        <svg viewBox="0 0 24 24" fill="none" className={c} stroke="currentColor" strokeWidth="1.6">
-            <path d="M3 21h18M5 21V7l7-4 7 4v14" strokeLinejoin="round" />
-            <path d="M12 9v6M9 12h6" strokeLinecap="round" />
-        </svg>
-    ),
-    flask: (c) => (
-        <svg viewBox="0 0 24 24" fill="none" className={c} stroke="currentColor" strokeWidth="1.6">
-            <path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3" strokeLinejoin="round" />
-            <path d="M7.5 15h9" strokeLinecap="round" />
-        </svg>
-    ),
-    lens: (c) => (
-        <svg viewBox="0 0 24 24" fill="none" className={c} stroke="currentColor" strokeWidth="1.6">
-            <circle cx="11" cy="11" r="7" />
-            <path d="m16 16 5 5" strokeLinecap="round" />
-        </svg>
-    ),
-    child: (c) => (
-        <svg viewBox="0 0 24 24" fill="none" className={c} stroke="currentColor" strokeWidth="1.6">
-            <circle cx="12" cy="7" r="4" />
-            <path d="M5 21a7 7 0 0 1 14 0" strokeLinecap="round" />
-        </svg>
-    ),
-    community: (c) => (
-        <svg viewBox="0 0 24 24" fill="none" className={c} stroke="currentColor" strokeWidth="1.6">
-            <circle cx="8" cy="9" r="3" />
-            <circle cx="17" cy="10" r="2.5" />
-            <path d="M2 20a6 6 0 0 1 12 0M14.5 20a5 5 0 0 1 7.5-4.3" strokeLinecap="round" />
-        </svg>
-    ),
-};
-
-
-
-const services = [
-    { icon: Icon.eye, title: "Comprehensive Eye Care", desc: "Hands-on training in refraction, ocular diagnostics and primary vision care across all age groups." },
-    { icon: Icon.clinic, title: "Clinical Internship", desc: "A compulsory one-year internship at Nethradhama Super Speciality Eye Hospital." },
-    { icon: Icon.flask, title: "Research Programs", desc: "UG research projects supported by RGUHS grants, building a strong evidence-based foundation." },
-    { icon: Icon.lens, title: "Contact Lens & Low Vision", desc: "Specialty clinics in contact lens fitting, low-vision aids and visual rehabilitation." },
-    { icon: Icon.child, title: "Pediatric & Binocular Vision", desc: "Focused modules on children's vision, squint evaluation and binocular vision therapy." },
-    { icon: Icon.community, title: "Community Outreach", desc: "Vision-screening camps that take eye care to schools and underserved communities." },
-];
 
 const gallery = [
     { src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80", label: "Clinical Skills" },
@@ -309,7 +226,7 @@ function GalleryCard({ item, index, featured }) {
 
 export default function Home() {
 
-    const [servicesLens, servicesLensY] = useParallax(0.2);
+   
     const [academicsLens, academicsLensY] = useParallax(0.18);
     const [researchLens, researchLensY] = useParallax(0.14, 60);
     const [galleryLens, galleryLensY] = useParallax(0.18);
@@ -325,7 +242,7 @@ export default function Home() {
                     <img
                         src="/hero.png"
                         alt="background"
-                        className="h-full w-full object-cover animate-zoomVideo"
+                        className="h-full w-full object-cover animate-heroMove"
                     />
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
@@ -409,12 +326,12 @@ export default function Home() {
                                 </div>
 
                                 <div className="mt-10">
-                                    <MagneticLink
+                                    <Link
                                         href="/contact"
                                         className="inline-flex items-center rounded-full bg-[#0D8DD7] px-8 py-3 text-sm font-semibold text-white hover:shadow-xl"
                                     >
                                         Learn More
-                                    </MagneticLink>
+                                    </Link>
                                 </div>
                             </div>
                         </Reveal>
@@ -530,7 +447,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ----------------------------- GALLERY ----------------------------- */}
+           
             <section id="gallery" className="relative overflow-hidden bg-stone-50">
                 <div
                     ref={galleryLens}

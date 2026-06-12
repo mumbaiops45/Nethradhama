@@ -245,8 +245,9 @@ function ServiceCard({ service, index, block = false }) {
                     <span className="font-mono text-sm font-semibold text-slate-300">0{index + 1}</span>
                 </div>
                 <h3 className="relative mt-4 text-lg font-semibold text-slate-900">{service.title}</h3>
-                <div className="relative grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-out
-                group-hover:grid-rows-[1fr] group-hover:opacity-100 group-hover:mt-2">
+                {/* <div className="relative grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-out
+                group-hover:grid-rows-[1fr] group-hover:opacity-100 group-hover:mt-2"> */}
+                <div className={` relative grid grid-rows-[0fr] opacity-0 transition-all duration-300 ease-out`}>
                     <p className="overflow-hidden text-sm leading-relaxed text-black">{service.desc}</p>
                 </div>
             </div>

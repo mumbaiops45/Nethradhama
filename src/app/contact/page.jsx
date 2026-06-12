@@ -84,9 +84,8 @@ function Reveal({ children, className = "", delay = 0 }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out motion-reduce:transition-none ${
-        shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      } ${className}`}
+      className={`transition-all duration-700 ease-out motion-reduce:transition-none ${shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        } ${className}`}
     >
       {children}
     </div>
@@ -228,19 +227,40 @@ export default function Page() {
     return er;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const er = validate();
     setErrors(er);
     if (Object.keys(er).length) return;
-    setSent(true);
-    setForm(empty);
+
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/info@optoschool@nethradhama.org", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSent(true);
+        setForm(empty);
+        // console.log("Form submitted successfully:", data);
+      } else {
+        // console.log("Error submitting form:", data);
+      }
+    } catch (error) {
+      console.log("Network error:", error)
+    }
+
   };
 
   return (
     <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
       <ScrollProgress />
 
-      
+
       <section className="relative overflow-hidden">
         <div ref={heroL1} style={{ transform: `translateY(${heroL1Y}px)` }} className="pointer-events-none absolute -right-16 -top-12 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/50" />
@@ -263,10 +283,10 @@ export default function Page() {
         </div>
       </section>
 
-     
+
       <section className="bg-white">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 lg:grid-cols-5">
-          
+
           <Reveal className="lg:col-span-3">
             <div className="rounded-3xl border border-stone-200 bg-stone-50 p-6 sm:p-8">
               <Eyebrow>Send us a message</Eyebrow>
@@ -308,7 +328,7 @@ export default function Page() {
             </div>
           </Reveal>
 
-         
+
           <Reveal delay={120} className="lg:col-span-2">
             <div className="h-full rounded-3xl bg-slate-900 p-6 text-stone-300 sm:p-8">
               <h2 className=" text-2xl font-semibold text-white">Get in touch</h2>
@@ -341,7 +361,7 @@ export default function Page() {
         </div>
       </section>
 
-   
+
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-4 pb-24">
           <Reveal>
@@ -355,7 +375,7 @@ export default function Page() {
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
               />
-           
+
               <div className="pointer-events-none absolute bottom-5 left-5 max-w-xs rounded-2xl bg-white/95 p-5 shadow-lg backdrop-blur-sm">
                 <div className="flex items-center gap-2 text-[#0D8DD7]">
                   {Icon.pin("h-5 w-5")}

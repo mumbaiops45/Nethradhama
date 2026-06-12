@@ -290,7 +290,6 @@ const departments = [
 
 const academics = [
   { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka — three academic years followed by one year of compulsory internship.", img: "/Program.jpeg" },
-  // { k: "Eligibility", v: "50% aggregate in English, Physics, Chemistry and Biology/Mathematics at 10+2. Diploma holders may join directly in the second year.", img: "/hero.png" },
   { k: "Selection", v: "Based on 10+2 marks, a written test and performance in a personal interview.", img: "/Selection.jpg" },
   { k: "Academic Session", v: "The course begins every August — a full-time program of theory, practical and clinical sessions.", img: "/AcademicSession.jpg" },
   { k: "Evaluation", v: "Three internal assessments and a term-end exam each year with equal weightage; a minimum of 50% in the term-end exam is required.", img: "/exam.jpg" },
@@ -341,20 +340,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen scroll-smooth bg-stone-50 text-slate-700 antialiased selection:bg-[#0D8DD7] selection:text-white">
-
-      <style>{`
-        :root { --font-display: 'Fraunces', 'Playfair Display', Georgia, 'Times New Roman', serif; }
-        .font-display {  letter-spacing: -0.01em; }
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50%      { transform: translateY(-14px); }
-        }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-      `}</style>
-
       <ScrollProgress />
-
-
       <section className="relative overflow-hidden">
         <div ref={heroL1} style={{ transform: `translateY(${heroL1Y}px)` }} className="pointer-events-none absolute -right-16 -top-12 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/50" />
@@ -645,13 +631,7 @@ export default function Page() {
                     {a.k}
                   </div>
                   <div className="absolute inset-0 flex items-end">
-                    <div className="
-          w-full translate-y-full transform
-          bg-gradient-to-t from-black/80 via-black/50 to-transparent
-          p-5 text-white
-          transition-all duration-500
-          group-hover:translate-y-0
-        ">
+                    <div className="w-full translate-y-full transform bg-gradient-to-t from-black/80 via-black/50 to-transparent p-5 text-white transition-all duration-500 group-hover:translate-y-0">
                       <p className="text-sm leading-relaxed opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                         {a.v}
                       </p>
