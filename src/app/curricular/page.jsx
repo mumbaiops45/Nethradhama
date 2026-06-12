@@ -106,9 +106,8 @@ function Reveal({ children, className = "", delay = 0 }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out motion-reduce:transition-none ${
-        shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      } ${className}`}
+      className={`transition-all duration-700 ease-out motion-reduce:transition-none ${shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        } ${className}`}
     >
       {children}
     </div>
@@ -162,47 +161,79 @@ const events = [
 ];
 
 
+
 function EventCard({ e, i }) {
   const [step, setStep] = useState(0);
   const [pref, py] = useParallax(0.06, 14);
   const candidates = [e.photo, e.fallbackImg].filter(Boolean);
   const src = candidates[step];
   const showImg = !!src;
+
   return (
     <Reveal delay={(i % 3) * 80}>
-      <article className="group h-full overflow-hidden rounded-3xl border border-stone-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/5">
-        <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          {showImg ? (
-            <div ref={pref} className="absolute inset-0 will-change-transform" style={{ transform: `translateY(${py}px)` }}>
-              <img
-                key={src}
-                src={src}
-                alt={e.title}
-                loading="lazy"
-                onError={() => setStep((s) => s + 1)}
-                className="h-full w-full scale-110 object-cover transition-transform duration-700 ease-out group-hover:scale-125"
-              />
-            </div>
-          ) : (
-            <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-[#0D8DD7]/15 via-sky-50 to-amber-100">
-              <Lens className="h-20 w-20 text-[#0D8DD7]/40 transition-transform duration-500 group-hover:scale-110" />
-            </div>
-          )}
-          {e.date && (
-            <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[#0D8DD7] backdrop-blur-sm">
-              {e.date}
-            </span>
-          )}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/15 to-transparent" />
+      <div className="group relative h-full rounded-3xl">
+
+
+        <div className="pointer-events-none absolute -inset-[2px] rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+
+
+          <div className="absolute inset-0 rounded-3xl bg-[conic-gradient(from_0deg,#0D8DD7,transparent_40%,#0D8DD7)] animate-spin-slow blur-0" />
+
+
+          <div className="absolute inset-[2px] rounded-3xl bg-white" />
         </div>
-        <div className="p-6">
-          <h3 className=" text-xl font-semibold text-slate-900">{e.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-slate-600">{e.desc}</p>
-        </div>
-      </article>
+
+
+        <article className="relative h-full overflow-hidden rounded-3xl bg-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/5">
+
+
+          <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+            {showImg ? (
+              <div
+                ref={pref}
+                className="absolute inset-0 will-change-transform"
+                style={{ transform: `translateY(${py}px)` }}
+              >
+                <img
+                  key={src}
+                  src={src}
+                  alt={e.title}
+                  loading="lazy"
+                  onError={() => setStep((s) => s + 1)}
+                  className="h-full w-full scale-110 object-cover transition-transform duration-700 ease-out group-hover:scale-125"
+                />
+              </div>
+            ) : (
+              <div className="absolute inset-0 grid place-items-center bg-gradient-to-br from-[#0D8DD7]/15 via-sky-50 to-amber-100">
+                <Lens className="h-20 w-20 text-[#0D8DD7]/40 transition-transform duration-500 group-hover:scale-110" />
+              </div>
+            )}
+
+            {e.date && (
+              <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[#0D8DD7] backdrop-blur-sm">
+                {e.date}
+              </span>
+            )}
+
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/15 to-transparent" />
+          </div>
+
+          <div className="p-6">
+            <h3 className="text-xl font-semibold text-slate-900">
+              {e.title}
+            </h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              {e.desc}
+            </p>
+          </div>
+
+        </article>
+      </div>
     </Reveal>
   );
 }
+
+
 
 export default function Page() {
   const [heroL1, heroL1Y] = useParallax(0.24);
@@ -213,7 +244,7 @@ export default function Page() {
     <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
       <ScrollProgress />
 
-    
+
       <section className="relative overflow-hidden">
         <div ref={heroL1} style={{ transform: `translateY(${heroL1Y}px)` }} className="pointer-events-none absolute -right-16 -top-12 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/50" />
@@ -226,7 +257,7 @@ export default function Page() {
           <Reveal className="max-w-3xl">
             <Eyebrow>Student Life</Eyebrow>
             <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
-              More than a classroom 
+              More than a classroom
               <br />
               <span className="text-[#0D8DD7]">a whole experience.</span>
             </h1>
@@ -245,7 +276,7 @@ export default function Page() {
         </div>
       </section>
 
-    
+
       <section className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
@@ -262,7 +293,7 @@ export default function Page() {
         </div>
       </section>
 
-    
+
       <section className="bg-stone-50">
         <div className="mx-auto max-w-6xl px-4 pb-24">
           <Reveal>

@@ -289,12 +289,12 @@ const departments = [
 ];
 
 const academics = [
-  { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka — three academic years followed by one year of compulsory internship." , img: "/Program.jpeg" },
-  { k: "Eligibility", v: "50% aggregate in English, Physics, Chemistry and Biology/Mathematics at 10+2. Diploma holders may join directly in the second year." , img: "/hero.png" },
-  { k: "Selection", v: "Based on 10+2 marks, a written test and performance in a personal interview." , img: "/Selection.jpg" },
-  { k: "Academic Session", v: "The course begins every August — a full-time program of theory, practical and clinical sessions." , img: "/AcademicSession.jpg" },
-  { k: "Evaluation", v: "Three internal assessments and a term-end exam each year with equal weightage; a minimum of 50% in the term-end exam is required." , img: "/exam.jpg" },
-  { k: "Achievements", v: "Our students have secured ranks in university examinations conducted by RGUHS, Karnataka."  , img: "/achivement.jpg"},
+  { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka — three academic years followed by one year of compulsory internship.", img: "/Program.jpeg" },
+  // { k: "Eligibility", v: "50% aggregate in English, Physics, Chemistry and Biology/Mathematics at 10+2. Diploma holders may join directly in the second year.", img: "/hero.png" },
+  { k: "Selection", v: "Based on 10+2 marks, a written test and performance in a personal interview.", img: "/Selection.jpg" },
+  { k: "Academic Session", v: "The course begins every August — a full-time program of theory, practical and clinical sessions.", img: "/AcademicSession.jpg" },
+  { k: "Evaluation", v: "Three internal assessments and a term-end exam each year with equal weightage; a minimum of 50% in the term-end exam is required.", img: "/exam.jpg" },
+  { k: "Achievements", v: "Our students have secured ranks in university examinations conducted by RGUHS, Karnataka.", img: "/achivement.jpg" },
   { k: "Medium of Instruction", v: "All theory and practical instruction and examinations are conducted in English.", img: "/instruction.png" },
 ];
 
@@ -630,45 +630,37 @@ export default function Page() {
           </Reveal>
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-           
+
             {academics.map((a, i) => (
-  <Reveal key={a.k} delay={i * 60}>
-    <div className="group relative h-72 overflow-hidden rounded-2xl border border-stone-200 shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-[#0D8DD7]/30 hover:shadow-xl">
-
-    
-      <img
-        src={a.img}
-        alt={a.k}
-        className="absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
-      />
-
-   
-      <div className="absolute inset-0 bg-black/20" />
-
-     
-      <div className="absolute top-4 left-4 z-10 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white">
-        <span className="h-2 w-2 rounded-full bg-[#0D8DD7]" />
-        {a.k}
-      </div>
-
-      
-      <div className="absolute inset-0 flex items-end">
-        <div className="
+              <Reveal key={a.k} delay={i * 60}>
+                <div className="group relative h-72 overflow-hidden rounded-2xl border border-stone-200 shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-[#0D8DD7]/30 hover:shadow-xl">
+                  <img
+                    src={a.img}
+                    alt={a.k}
+                    className="absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/20" />
+                  <div className="absolute top-4 left-4 z-10 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white">
+                    <span className="h-2 w-2 rounded-full bg-[#0D8DD7]" />
+                    {a.k}
+                  </div>
+                  <div className="absolute inset-0 flex items-end">
+                    <div className="
           w-full translate-y-full transform
           bg-gradient-to-t from-black/80 via-black/50 to-transparent
           p-5 text-white
           transition-all duration-500
           group-hover:translate-y-0
         ">
-          <p className="text-sm leading-relaxed opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            {a.v}
-          </p>
-        </div>
-      </div>
+                      <p className="text-sm leading-relaxed opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        {a.v}
+                      </p>
+                    </div>
+                  </div>
 
-    </div>
-  </Reveal>
-))}
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

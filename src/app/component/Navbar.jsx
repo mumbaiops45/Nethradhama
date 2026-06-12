@@ -13,7 +13,6 @@ import { usePathname } from "next/navigation";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about-us" },
-  { name: "Academics", href: "/academics" },
   { name: "Research", href: "/research" },
   { name: "Activity Gallery", href: "/activity-gallery" },
   { name: "Faculty", href: "/faculty" },

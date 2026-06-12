@@ -104,9 +104,8 @@ function Reveal({ children, className = "", delay = 0 }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out motion-reduce:transition-none ${
-        shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      } ${className}`}
+      className={`transition-all duration-700 ease-out motion-reduce:transition-none ${shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        } ${className}`}
     >
       {children}
     </div>
@@ -120,9 +119,8 @@ function LineReveal({ children, delay = 0, className = "" }) {
     <span ref={ref} className="block overflow-hidden pb-[0.12em]">
       <span
         style={{ transitionDelay: `${delay}ms` }}
-        className={`block transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-          shown ? "translate-y-0" : "translate-y-[120%]"
-        } ${className}`}
+        className={`block transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${shown ? "translate-y-0" : "translate-y-[120%]"
+          } ${className}`}
       >
         {children}
       </span>
@@ -137,11 +135,10 @@ function FlyInCard({ children, index = 0, className = "" }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${index * 90}ms` }}
-      className={`h-full transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-        shown
+      className={`h-full transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${shown
           ? "opacity-100 translate-y-0 scale-100 blur-0"
           : "opacity-0 translate-y-14 scale-95 blur-[5px]"
-      } ${className}`}
+        } ${className}`}
     >
       {children}
     </div>
@@ -247,7 +244,7 @@ const administration = [
 
 function FacultyCard({ p }) {
   return (
-    <div className="group relative flex h-full gap-4 overflow-hidden rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-500 hover:-translate-y-1.5 hover:border-[#0D8DD7]/40 hover:shadow-[0_24px_60px_-15px_rgba(13,141,215,0.28)]">
+    <div className="group relative flex h-full gap-4 overflow-hidden rounded-2xl border border-stone-200 bg-white p-6 transition-all duration-500  hover:border-[#0D8DD7]/40 hover:shadow-[0_24px_60px_-15px_rgba(13,141,215,0.28)]">
       <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-[#0D8DD7]/0 blur-3xl transition-all duration-700 group-hover:bg-[#0D8DD7]/12" />
       <div className="relative">
         <Avatar name={p.name} photo={p.photo} />
@@ -273,7 +270,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-stone-50 text-slate-700 antialiased selection:bg-[#0D8DD7] selection:text-white">
-     
+
       <style>{`
         :root { --font-display: 'Fraunces', 'Playfair Display', Georgia, 'Times New Roman', serif; }
         .font-display {  letter-spacing: -0.01em; }
@@ -281,7 +278,7 @@ export default function Page() {
 
       <ScrollProgress />
 
-      
+
       <section className="relative overflow-hidden">
         <div ref={heroL1} style={{ transform: `translateY(${heroL1Y}px)` }} className="pointer-events-none absolute -right-16 -top-12 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/50" />
@@ -312,7 +309,7 @@ export default function Page() {
         </div>
       </section>
 
-     
+
       <section className="relative overflow-hidden bg-white">
         <div ref={mgmtLens} style={{ transform: `translateY(${mgmtLensY}px)` }} className="pointer-events-none absolute -left-24 top-16 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/8" />
@@ -327,10 +324,19 @@ export default function Page() {
           <div className="mt-14 grid gap-6 md:grid-cols-3">
             {management.map((m, i) => (
               <FlyInCard key={m.name} index={i}>
-                <div className="group relative h-full overflow-hidden rounded-3xl border border-stone-200 bg-stone-50 p-8 text-center transition-all duration-500 hover:-translate-y-2 hover:border-[#0D8DD7]/40 hover:bg-white hover:shadow-[0_24px_60px_-15px_rgba(13,141,215,0.28)]">
+                <div className="group relative h-full overflow-hidden rounded-3xl border border-stone-200 bg-stone-50 p-8 text-center transition-all duration-500  hover:border-[#0D8DD7]/40 hover:bg-white hover:shadow-[0_24px_60px_-15px_rgba(13,141,215,0.28)]">
                   <div className="pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[#0D8DD7]/0 blur-3xl transition-all duration-700 group-hover:bg-[#0D8DD7]/15" />
                   <div className="relative flex justify-center">
-                    <Avatar name={m.name} photo={m.photo} size="h-24 w-24" text="text-2xl" />
+                    <div className="relative">
+                      <Avatar
+                        name={m.name}
+                        photo={m.photo}
+                        size="h-24 w-24"
+                        text="text-2xl"
+                      />
+
+                      <div className="absolute inset-0 rounded-full bg-gray-400/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    </div>
                   </div>
                   <h3 className="relative mt-5 text-xl font-semibold text-slate-900">{m.name}</h3>
                   <p className="relative mt-1 text-sm font-medium text-[#0D8DD7]">{m.role}</p>
@@ -344,7 +350,7 @@ export default function Page() {
         </div>
       </section>
 
-  
+
       <section className="relative overflow-hidden bg-stone-50">
         <div ref={optLens} style={{ transform: `translateY(${optLensY}px)` }} className="pointer-events-none absolute -right-24 top-16 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/10" />
@@ -366,7 +372,7 @@ export default function Page() {
         </div>
       </section>
 
-    
+
       <section className="relative overflow-hidden bg-white">
         <div ref={visLens} style={{ transform: `translateY(${visLensY}px)` }} className="pointer-events-none absolute -left-24 top-16 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/10" />
@@ -388,7 +394,7 @@ export default function Page() {
         </div>
       </section>
 
-      
+
       <section className="bg-stone-50">
         <div className="mx-auto max-w-6xl px-4 py-24">
           <Reveal className="max-w-2xl">

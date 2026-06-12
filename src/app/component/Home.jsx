@@ -1,6 +1,7 @@
 
 "use client"
 import React, { useState, useEffect, useRef } from "react";
+import Whatwe from "./Whatwe";
 
 
 function useReveal() {
@@ -445,96 +446,20 @@ export default function Home() {
                 </div>
             </section>
 
+           
+
             <section className="relative overflow-hidden bg-white py-24">
                 <div className="mx-auto max-w-6xl px-4 text-center">
                     <Eyebrow>What we offer</Eyebrow>
                     <h2 className="mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
                         Training that spans the whole of eye care.
                     </h2>
-
-
-                    <div className="relative mx-auto mt-20 flex h-[520px] w-[520px] items-center justify-center">
-
-                        <div className="absolute h-full w-full rounded-full border border-slate-200" />
-
-
-                        <div className="absolute h-[320px] w-[320px] rounded-full bg-slate-50 shadow-inner" />
-
-
-                        <div className="relative z-10 flex h-28 w-28 items-center justify-center rounded-full bg-white shadow-xl">
-                            <span className="text-4xl">👁️</span>
-                        </div>
-
-
-                        <div className="group absolute top-0 flex flex-col items-center text-center">
-
-                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D8DD7] text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_10px_30px_rgba(13,141,215,0.4)]">
-                                {services[0]?.icon("h-6 w-6")}
-                            </div>
-
-                            <p className="mt-3 text-sm font-medium text-slate-700">
-                                {services[0]?.title}
-                            </p>
-
-
-                            <p className="mt-2 max-w-[160px] text-xs text-slate-500 opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
-                                {services[0]?.desc}
-                            </p>
-                        </div>
-
-
-                        <div className="group absolute right-0 top-1/2 -translate-y-1/2 flex flex-col items-center text-center">
-
-                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D8DD7] text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_10px_30px_rgba(13,141,215,0.4)]">
-                                {services[1]?.icon("h-6 w-6")}
-                            </div>
-
-                            <p className="mt-3 text-sm font-medium text-slate-700">
-                                {services[1]?.title}
-                            </p>
-
-                            <p className="mt-2 max-w-[160px] text-xs text-slate-500 opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
-                                {services[1]?.desc}
-                            </p>
-                        </div>
-
-
-                        <div className="group absolute bottom-0 flex flex-col items-center text-center">
-
-                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D8DD7] text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_10px_30px_rgba(13,141,215,0.4)]">
-                                {services[2]?.icon("h-6 w-6")}
-                            </div>
-
-                            <p className="mt-3 text-sm font-medium text-slate-700">
-                                {services[2]?.title}
-                            </p>
-
-                            <p className="mt-2 max-w-[160px] text-xs text-slate-500 opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
-                                {services[2]?.desc}
-                            </p>
-                        </div>
-
-
-                        <div className="group absolute left-0 top-1/2 -translate-y-1/2 flex flex-col items-center text-center">
-
-                            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#0D8DD7] text-white shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_10px_30px_rgba(13,141,215,0.4)]">
-                                {services[3]?.icon("h-6 w-6")}
-                            </div>
-
-                            <p className="mt-3 text-sm font-medium text-slate-700">
-                                {services[3]?.title}
-                            </p>
-
-                            <p className="mt-2 max-w-[160px] text-xs text-slate-500 opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
-                                {services[3]?.desc}
-                            </p>
-                        </div>
-
                     </div>
-
-                </div>
-
             </section>
+          
+                   <Whatwe/>
+           
+           
 
 
             <section id="academics" className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50">
@@ -562,8 +487,7 @@ export default function Home() {
                     <div className="mt-16 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                         {academics.map((a, i) => (
                             <Reveal key={a.k} delay={i * 80}>
-                                <div className="group h-full rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:border-[#0D8DD7]/30 hover:shadow-2xl">
-                                    <div className="mb-6 h-1 w-14 rounded-full bg-[#0D8DD7]" />
+                                <div className="group h-full rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-500  hover:border-[#0D8DD7]/30 hover:shadow-2xl">
                                     <h3 className="text-xl font-semibold text-slate-900">{a.k}</h3>
                                     <p className="mt-4 leading-relaxed text-slate-600">{a.v}</p>
                                     <div className="mt-6 h-[3px] w-0 bg-[#0D8DD7]/40 rounded-full transition-all duration-500 group-hover:w-full group-hover:bg-[#0D8DD7]" />

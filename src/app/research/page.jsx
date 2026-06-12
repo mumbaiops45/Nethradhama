@@ -101,9 +101,8 @@ function Reveal({ children, className = "", delay = 0 }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ease-out motion-reduce:transition-none ${
-        shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      } ${className}`}
+      className={`transition-all duration-700 ease-out motion-reduce:transition-none ${shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        } ${className}`}
     >
       {children}
     </div>
@@ -117,9 +116,8 @@ function LineReveal({ children, delay = 0, className = "" }) {
     <span ref={ref} className="block overflow-hidden pb-[0.12em]">
       <span
         style={{ transitionDelay: `${delay}ms` }}
-        className={`block transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-          shown ? "translate-y-0" : "translate-y-[120%]"
-        } ${className}`}
+        className={`block transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${shown ? "translate-y-0" : "translate-y-[120%]"
+          } ${className}`}
       >
         {children}
       </span>
@@ -134,11 +132,10 @@ function FlyInCard({ children, index = 0, className = "" }) {
     <div
       ref={ref}
       style={{ transitionDelay: `${index * 110}ms` }}
-      className={`transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-        shown
+      className={`transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${shown
           ? "opacity-100 translate-y-0 scale-100 blur-0"
           : "opacity-0 translate-y-16 scale-95 blur-[6px]"
-      } ${className}`}
+        } ${className}`}
     >
       {children}
     </div>
@@ -237,12 +234,12 @@ const Icon = {
 
 
 const areas = [
-  { icon: Icon.eye, title: "Refractive Error & Myopia", desc: "Understanding how the eye focuses and how to correct and manage it." },
-  { icon: Icon.lens, title: "Contact Lens & Anterior Segment", desc: "Fitting, ocular surface health and the science of the front of the eye." },
-  { icon: Icon.scope, title: "Ocular Diagnostics", desc: "Early detection and measurement of conditions across the visual system." },
-  { icon: Icon.balance, title: "Binocular Vision & Squint", desc: "How the two eyes work together, and non-surgical intervention." },
-  { icon: Icon.child, title: "Low Vision & Rehabilitation", desc: "Aids and strategies that restore independence and quality of life." },
-  { icon: Icon.community, title: "Community & Public Health", desc: "Vision screening and outreach that take eye care beyond the clinic." },
+  { icon: Icon.eye, title: "Refractive Error & Myopia", desc: "Understanding how the eye focuses and how to correct and manage it.", img: "/Refractive.png" },
+  { icon: Icon.lens, title: "Contact Lens & Anterior Segment", desc: "Fitting, ocular surface health and the science of the front of the eye.", img: "/Contact Lens.png" },
+  { icon: Icon.scope, title: "Ocular Diagnostics", desc: "Early detection and measurement of conditions across the visual system.", img: "/OcularDiagnostics.png" },
+  { icon: Icon.balance, title: "Binocular Vision & Squint", desc: "How the two eyes work together, and non-surgical intervention.", img: "/Binocular.png" },
+  { icon: Icon.child, title: "Low Vision & Rehabilitation", desc: "Aids and strategies that restore independence and quality of life.", img: "/LowVision.png" },
+  { icon: Icon.community, title: "Community & Public Health", desc: "Vision screening and outreach that take eye care beyond the clinic.", img: "/Community.png" },
 ];
 
 const students = ["Ms. Nikhita R Bhat", "Ms. Pooja Kumari Sah", "Mr. Anvith M Agumbe"];
@@ -270,7 +267,7 @@ export default function Page() {
 
   return (
     <div className="min-h-screen bg-stone-50 text-slate-700 antialiased selection:bg-[#0D8DD7] selection:text-white">
-     
+
       <style>{`
         :root { --font-display: 'Fraunces', 'Playfair Display', Georgia, 'Times New Roman', serif; }
         .font-display {  letter-spacing: -0.01em; }
@@ -278,7 +275,7 @@ export default function Page() {
 
       <ScrollProgress />
 
-      
+
       <section className="relative overflow-hidden">
         <div ref={heroL1} style={{ transform: `translateY(${heroL1Y}px)` }} className="pointer-events-none absolute -right-16 -top-12 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/50" />
@@ -329,26 +326,40 @@ export default function Page() {
               Our curriculum and clinical setting open doors to study across the breadth of vision science — the same domains our students train in every day.
             </p>
           </Reveal>
+          <div className="mt-14 grid gap-6 sm:grid-cols-1 lg:grid-cols-3">
+            {areas.map((a, i) => {
+              return (
+                <Reveal key={a.title} delay={i * 60}>
+                  <div className="group relative h-72 overflow-hidden rounded-2xl border border-stone-200 shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:border-[#0D8DD7]/30 hover:shadow-xl">
 
-          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {areas.map((a, i) => (
-              <FlyInCard key={a.title} index={i} className="h-full">
-                <div className="group relative h-full overflow-hidden rounded-2xl border border-stone-200 bg-stone-50 p-7 transition-all duration-500 hover:-translate-y-2 hover:border-[#0D8DD7]/40 hover:bg-white hover:shadow-[0_24px_60px_-15px_rgba(13,141,215,0.28)]">
-                  <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-[#0D8DD7]/0 blur-3xl transition-all duration-700 group-hover:bg-[#0D8DD7]/15" />
-                  <div className="relative grid h-12 w-12 place-items-center rounded-xl bg-[#0D8DD7]/10 text-[#0D8DD7] transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:bg-[#0D8DD7] group-hover:text-white">
-                    {a.icon("h-6 w-6")}
+                    <img
+                      src={a.img}
+                      alt={a.title}
+                      className="absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+                    />
+
+                    <div className="absolute inset-0 bg-black/20" />
+                    <div className="absolute top-4 left-4 z-10 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-white">
+                      {a.title}
+                    </div>
+
+                    <div className="absolute inset-0 flex items-end">
+                      <div className="w-full translate-y-full bg-gradient-to-t from-black/80 via-black/50 to-transparent p-5 text-white transition-all duration-500 group-hover:translate-y-0">
+                        <p className="text-sm leading-relaxed opacity-0 transition-opacity duration-300 group-hover:opacity-100">{a.desc}</p>
+                      </div>
+
+                    </div>
                   </div>
-                  <h3 className="relative mt-5 text-xl font-semibold text-slate-900 transition-colors duration-300 group-hover:text-[#0D8DD7]">{a.title}</h3>
-                  <p className="relative mt-2 text-sm leading-relaxed text-slate-600">{a.desc}</p>
-                  <div className="mt-6 h-px w-0 bg-gradient-to-r from-[#0D8DD7] to-transparent transition-all duration-500 group-hover:w-full" />
-                </div>
-              </FlyInCard>
-            ))}
+
+                </Reveal>
+              )
+            })}
+
           </div>
         </div>
       </section>
 
-     
+
       <section className="bg-stone-50">
         <div className="mx-auto max-w-6xl px-4 py-24">
           <Reveal>
@@ -384,7 +395,7 @@ export default function Page() {
         </div>
       </section>
 
-     
+
       <section className="bg-white">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-24 md:grid-cols-2">
           <Reveal delay={150} className="md:order-2">
