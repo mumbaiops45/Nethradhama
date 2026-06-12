@@ -267,7 +267,7 @@ export default function Home() {
                                 professionals of tomorrow.
                             </p>
 
-                            <div className="mt-8 flex gap-4 justify-start">
+                            <div className="mt-8 flex flex-col  sm:flex-row gap-4 justify-start">
                                 <a
                                     href="/contact"
                                     className="rounded-full bg-[#0D8DD7] px-7 py-3 text-sm font-semibold text-white shadow-lg hover:bg-[#0b7cc1]"
@@ -277,7 +277,7 @@ export default function Home() {
 
                                 <a
                                     href="#academics"
-                                    className="rounded-full border border-white/40 px-7 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                                    className="rounded-full border bg-[#0D8DD7] px-7 py-3 text-sm font-semibold text-white hover:bg-[#0b7cc1]"
                                 >
                                     Explore Program
                                 </a>
