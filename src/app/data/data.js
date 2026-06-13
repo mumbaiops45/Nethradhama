@@ -1,4 +1,6 @@
-import { Eye, Stethoscope, FlaskConical, Glasses , Baby , Users } from "lucide-react";
+import { Eye, Stethoscope, FlaskConical, Glasses , Baby , Users ,  GraduationCap, Microscope } from "lucide-react";
+
+
 
 export const services = [
     { icon: Eye, title: "Comprehensive Eye Care", desc: "Hands-on training in refraction, ocular diagnostics and primary vision care across all age groups." },
@@ -37,4 +39,27 @@ export const faqs = [
     { q: "What is the total course duration?", a: "Four years in total — three academic years followed by one year of compulsory internship, after which you are awarded the B.Sc. degree in Optometry." },
     { q: "What is the medium of instruction?", a: "English. Both theory and practical instruction are in English, and examinations must be written in English." },
     { q: "Is the college recognised?", a: "Yes, the program is affiliated with Rajiv Gandhi University of Health Sciences (RGUHS), Karnataka. Students have secured university ranks in RGUHS examinations." },
+];
+
+export const servicess = [
+    {
+        title: "Clinical Training",
+        desc: "Structured, hands-on clinical exposure from your very first year.",
+        icon: GraduationCap,
+    },
+    {
+        title: "Diagnostics & Imaging",
+        desc: "Master modern eye-examination and diagnostic technologies.",
+        icon: Microscope,
+    },
+    {
+        title: "Patient Care",
+        desc: "Build excellence in patient communication and management.",
+        icon: Stethoscope,
+    },
+    {
+        title: "Vision & Optics",
+        desc: "Refraction, contact lenses, low vision and binocular vision.",
+        icon: Eye,
+    },
 ];

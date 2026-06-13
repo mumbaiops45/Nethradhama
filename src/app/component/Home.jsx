@@ -3,7 +3,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import Whatwe from "./Whatwe";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
+const heroImages = [
+    "/hero.png",
+    "/hero1.jpg",
+    "/hero2.jpg",
+];
 
 function useReveal() {
     const ref = useRef(null);
@@ -25,6 +31,21 @@ function useReveal() {
     return [ref, shown];
 }
 
+
+export const FadeUp = ({ children, delay = 0 }) => (
+    <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{
+            duration: 0.8,
+            delay: delay / 1000,
+            ease: [0.22, 1, 0.36, 1]
+        }}
+    >
+        {children}
+    </motion.div>
+);
 
 function useParallax(speed = 0.2, max = Infinity) {
     const ref = useRef(null);
@@ -59,9 +80,6 @@ function useParallax(speed = 0.2, max = Infinity) {
     }, [speed, max]);
     return [ref, offset];
 }
-
-
-
 
 function ScrollProgress() {
     const [p, setP] = useState(0);
@@ -103,22 +121,6 @@ function Reveal({ children, className = "", delay = 0 }) {
 }
 
 
-function MagneticLink({ href, children, className = "" }) {
-    const ref = useRef(null);
-    const move = (e) => {
-        const el = ref.current; if (!el) return;
-        const r = el.getBoundingClientRect();
-        el.style.transform = `translate(${(e.clientX - (r.left + r.width / 2)) * 0.25}px, ${(e.clientY - (r.top + r.height / 2)) * 0.3}px)`;
-    };
-    const reset = () => { if (ref.current) ref.current.style.transform = "translate(0,0)"; };
-    return (
-        <a ref={ref} href={href} onMouseMove={move} onMouseLeave={reset}
-            className={`transition-transform duration-300 ease-out ${className}`}>
-            {children}
-        </a>
-    );
-}
-
 function Lens({ className = "" }) {
     return (
         <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
@@ -152,12 +154,12 @@ const gallery = [
 ];
 
 const academics = [
-    { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka three academic years followed by one year of compulsory internship." },
-    { k: "Eligibility", v: "50% aggregate in English, Physics, Chemistry and Biology/Mathematics at 10+2. Diploma holders may join directly in the second year." },
-    { k: "Selection", v: "Based on 10+2 marks, a written test and performance in a personal interview." },
-    { k: "Academic Session", v: "The course begins every August a full-time program of theory, practical and clinical sessions." },
-    { k: "Evaluation", v: "Three internal assessments plus a term-end exam each year, with equal weightage. A minimum of 50% in the term-end exam is required." },
-    { k: "Medium of Instruction", v: "All theory and practical instruction and examinations are conducted in English." },
+    { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka three academic years followed by one year of compulsory internship.", img: "/Program.jpeg" },
+    { k: "Eligibility", v: "50% aggregate in English, Physics, Chemistry and Biology/Mathematics at 10+2. Diploma holders may join directly in the second year.", img: "/Community.png" },
+    { k: "Selection", v: "Based on 10+2 marks, a written test and performance in a personal interview.", img: "/Selection.jpg" },
+    { k: "Academic Session", v: "The course begins every August a full-time program of theory, practical and clinical sessions.", img: "/AcademicSession.jpg" },
+    { k: "Evaluation", v: "Three internal assessments plus a term-end exam each year, with equal weightage. A minimum of 50% in the term-end exam is required.", img: "/Exam.jpg" },
+    { k: "Medium of Instruction", v: "All theory and practical instruction and examinations are conducted in English.", img: "/Instruction.png" },
 ];
 
 const faqs = [
@@ -202,7 +204,8 @@ function FaqItem({ q, a }) {
 function GalleryCard({ item, index, featured }) {
     const [pref, py] = useParallax(0.08, 12);
     return (
-        <Reveal delay={index * 70} className={featured ? "col-span-2 md:col-span-1 md:row-span-2" : ""}>
+
+        <Reveal delay={index * 70} className={featured ? "col-span-1 sm:col-span-2 md:col-span-1 md:row-span-2" : ""} >
             <div
                 className={`group relative h-full overflow-hidden rounded-2xl bg-slate-200 ${featured ? "min-h-[16rem] md:min-h-full" : "aspect-[4/3]"
                     }`}
@@ -223,74 +226,156 @@ function GalleryCard({ item, index, featured }) {
 }
 
 
-
 export default function Home() {
-
-   
     const [academicsLens, academicsLensY] = useParallax(0.18);
     const [researchLens, researchLensY] = useParallax(0.14, 60);
     const [galleryLens, galleryLensY] = useParallax(0.18);
     const [faqLens, faqLensY] = useParallax(0.16);
+    const [currentImage, setCurrentImage] = useState(0);
+    const [showContent, setShowContent] = useState(false);
+
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowContent(true);
+        }, 1500);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImage((prev) => (prev + 1) % heroImages.length);
+        }, 7000);
+
+        return () => clearInterval(interval);
+    }, [heroImages.length]);
 
     return (
         <div className=" text-slate-700 antialiased selection:bg-[#0D8DD7] ">
 
             <ScrollProgress />
 
-            <section className="relative  h-screen w-full overflow-hidden">
-                <div className="absolute inset-0 -z-10">
-                    <img
-                        src="/hero.png"
-                        alt="background"
-                        className="h-full w-full object-cover animate-heroMove"
-                    />
-                    <div className="absolute inset-0 bg-black/40" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+            <section className="relative min-h-screen bg-white md:h-screen overflow-hidden">
+
+
+                <div className="absolute inset-0 hidden md:block">
+                    {heroImages.map((image, index) => (
+                        <div
+                            key={index}
+                            className={`absolute inset-0 transition-opacity duration-[2500ms] ease-out ${currentImage === index ? "opacity-100" : "opacity-0"
+                                }`}
+                        >
+                            <img
+                                src={image}
+                                alt=""
+                                className="h-full w-full object-cover animate-kenburn"
+                            />
+                        </div>
+                    ))}
+
+                    <div className="absolute inset-0 bg-black/55" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                 </div>
-                <div className="relative z-10 flex h-full items-center">
-                    <div className="mx-auto flex w-full max-w-6xl px-4 justify-end">
 
-                        <div className="max-w-2xl text-white text-start mr-auto">
 
-                            <p className="uppercase tracking-widest text-sm text-white/70">
-                                Bengaluru · Affiliated to RGUHS
+                <div className="hidden md:block absolute left-[-150px] top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-sky-500/20 blur-[150px]" />
+
+
+                <div className="relative z-10 flex h-full items-start md:items-center pt-10 md:pt-0">
+                    <div className="mx-auto w-full max-w-7xl px-6 lg:px-10">
+
+                        <div className="max-w-2xl text-center md:text-left">
+
+                            <p
+                                className={`uppercase tracking-[5px] text-sm text-gray-600 md:text-white/70 transition-all duration-700 ${showContent
+                                        ? "opacity-100 translate-y-0"
+                                        : "opacity-0 translate-y-10"
+                                    }`}
+                            >
+                                Bengaluru Affiliated to RGUHS
                             </p>
 
-                            <h1 className="mt-4 text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
-                                Bring the world <br />
-                                <span className="text-[#38bdf8]">into focus.</span>
+
+                            <h1
+                                className={`mt-5 text-4xl sm:text-5xl md:text-7xl font-bold leading-tight text-gray-900 md:text-white transition-all duration-1000 delay-200 ${showContent
+                                        ? "opacity-100 translate-y-0"
+                                        : "opacity-0 translate-y-12"
+                                    }`}
+                            >
+                                Bring the world
+                                <br />
+                                <span className="text-sky-500 md:text-sky-400">
+                                    into focus.
+                                </span>
                             </h1>
 
-                            <p className="mt-6 text-lg text-white/80">
+
+                            <p
+                                className={`mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-gray-600 md:text-white/80 transition-all duration-1000 delay-500 ${showContent
+                                        ? "opacity-100 translate-y-0"
+                                        : "opacity-0 translate-y-12"
+                                    }`}
+                            >
                                 A four-year B.Sc. in Optometry built on rigorous academics,
-                                real clinical exposure and research shaping the eye-care
-                                professionals of tomorrow.
+                                clinical excellence, research innovation, and hands-on patient care shaping tomorrow's eye-care professionals.
                             </p>
 
-                            <div className="mt-8 flex flex-col  sm:flex-row gap-4 justify-start">
+                            <div
+                                className={`mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start transition-all duration-1000 delay-700 ${showContent
+                                        ? "opacity-100 translate-y-0"
+                                        : "opacity-0 translate-y-12"
+                                    }`}
+                            >
                                 <a
                                     href="/contact"
-                                    className="rounded-full bg-[#0D8DD7] px-7 py-3 text-sm font-semibold text-white shadow-lg hover:bg-[#0b7cc1]"
+                                    className="group rounded-full bg-sky-500 px-8 py-4 text-sm font-semibold text-white shadow-2xl shadow-sky-500/30 transition-all duration-300 hover:bg-sky-400 hover:scale-105"
                                 >
-                                    Apply for 2025–26
+                                    Apply for 2025-26
                                 </a>
 
                                 <a
                                     href="#academics"
-                                    className="rounded-full border bg-[#0D8DD7] px-7 py-3 text-sm font-semibold text-white hover:bg-[#0b7cc1]"
+                                    className="rounded-full border border-gray-300 md:border-white/20 bg-white md:bg-white/10 backdrop-blur-md px-8 py-4 text-sm font-semibold text-gray-900 md:text-white transition-all duration-300 hover:bg-gray-100 md:hover:bg-white/20"
                                 >
                                     Explore Program
                                 </a>
                             </div>
+                        </div>
 
+
+                        <div className="md:hidden px-6 mt-10 mb-16">
+                            <div className="rounded-2xl overflow-hidden shadow-xl">
+                                <img
+                                    src={heroImages[currentImage]}
+                                    alt="hero"
+                                    className="w-full h-64 object-cover"
+                                />
+                            </div>
                         </div>
 
                     </div>
                 </div>
 
+
+                <div className="absolute bottom-12 left-1/2 z-20 flex -translate-x-1/2 gap-3">
+                    {heroImages.map((_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => setCurrentImage(index)}
+                            className={`h-[4px] rounded-full transition-all duration-500 ${currentImage === index
+                                    ? "w-16 bg-sky-500 md:bg-sky-400"
+                                    : "w-6 bg-gray-300 md:bg-white/40"
+                                }`}
+                        />
+                    ))}
+                </div>
+
             </section>
 
-            <section id="about" className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50">
+            <section id="about" className="relative overflow-hidden px-10 bg-gradient-to-b from-white to-slate-50">
                 <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-sky-100/50 blur-3xl" />
                 <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-blue-100/40 blur-3xl" />
 
@@ -363,21 +448,7 @@ export default function Home() {
                 </div>
             </section>
 
-           
-
-            <section className="relative overflow-hidden bg-white py-24">
-                <div className="mx-auto max-w-6xl px-4 text-center">
-                    <Eyebrow>What we offer</Eyebrow>
-                    <h2 className="mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
-                        Training that spans the whole of eye care.
-                    </h2>
-                    </div>
-            </section>
-          
-                   <Whatwe/>
-           
-           
-
+            <Whatwe />
 
             <section id="academics" className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50">
                 <div
@@ -401,15 +472,37 @@ export default function Home() {
                         </div>
                     </Reveal>
 
-                    <div className="mt-16 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                    <div className="mt-16 grid gap-6 md:grid-cols-1 xl:grid-cols-2">
+
                         {academics.map((a, i) => (
-                            <Reveal key={a.k} delay={i * 80}>
-                                <div className="group h-full rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-500  hover:border-[#0D8DD7]/30 hover:shadow-2xl">
-                                    <h3 className="text-xl font-semibold text-slate-900">{a.k}</h3>
-                                    <p className="mt-4 leading-relaxed text-slate-600">{a.v}</p>
-                                    <div className="mt-6 h-[3px] w-0 bg-[#0D8DD7]/40 rounded-full transition-all duration-500 group-hover:w-full group-hover:bg-[#0D8DD7]" />
+                            <FadeUp key={a.k} delay={i * 80}>
+                                <div className="group overflow-hidden rounded-3xl border border-slate-200 bg-gray-100 shadow-sm transition-all duration-500 hover:border-[#0D8DD7]/30 hover:shadow-2xl">
+                                    <div className="flex flex-col md:flex-row h-full">
+                                        <div className="w-full  md:w-[60%] p-8 flex flex-col justify-center">
+                                            <h3 className="text-2xl font-semibold text-slate-900">
+                                                {a.k}
+                                            </h3>
+
+                                            <p className="mt-4 text-lg leading-relaxed text-slate-600">
+                                                {a.v}
+                                            </p>
+
+                                            <div className="mt-6 h-[3px] w-0 bg-[#0D8DD7]/40 rounded-full transition-all duration-500 group-hover:w-full group-hover:bg-[#0D8DD7]" />
+                                        </div>
+
+
+                                        {a.img && (
+                                            <div className="w-full p-10 md:w-[40%]">
+                                                <img
+                                                    src={a.img}
+                                                    alt={a.k}
+                                                    className="h-[370px] rounded-3xl w-full object-cover"
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                            </Reveal>
+                            </FadeUp >
                         ))}
                     </div>
 
@@ -447,7 +540,7 @@ export default function Home() {
                 </div>
             </section>
 
-           
+
             <section id="gallery" className="relative overflow-hidden bg-stone-50">
                 <div
                     ref={galleryLens}
@@ -463,7 +556,8 @@ export default function Home() {
                             Life and learning at NSO.
                         </h2>
                     </Reveal>
-                    <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3">
+
+                    <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3" >
                         {gallery.map((g, i) => (
                             <GalleryCard key={g.label} item={g} index={i} featured={i === 0} />
                         ))}
@@ -471,7 +565,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ----------------------------- FAQ ----------------------------- */}
+
             <section id="faq" className="relative bg-gradient-to-b from-white via-slate-50/40 to-white">
                 <div
                     ref={faqLens}
@@ -536,7 +630,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* ----------------------------- ANTI-RAGGING ----------------------------- */}
+
             <section className="bg-stone-50">
                 <div className="mx-auto max-w-6xl px-4 pb-24">
                     <Reveal>

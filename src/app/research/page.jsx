@@ -301,14 +301,15 @@ export default function Page() {
             </div>
           </Reveal>
 
-          <Reveal delay={150}>
+          {/* <Reveal delay={150}>
             <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl bg-slate-200 shadow-[0_25px_70px_-25px_rgba(15,23,42,0.4)]">
               <div ref={heroImg} style={{ transform: `translateY(${heroImgY}px)` }} className="absolute inset-0 will-change-transform">
                 <img src={IMG.hero} alt="Optometry research in progress" loading="lazy" className="h-full w-full scale-[1.18] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.25]" />
               </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
             </div>
-          </Reveal>
+          </Reveal> */}
+
         </div>
       </section>
 
