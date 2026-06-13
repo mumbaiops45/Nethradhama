@@ -472,7 +472,7 @@ export default function Home() {
                         </div>
                     </Reveal>
 
-                    <div className="mt-16 grid gap-6 md:grid-cols-1 xl:grid-cols-2">
+                    <div className="mt-16 grid gap-6 md:grid-cols-1 lg:grid-cols-1">
 
                         {academics.map((a, i) => (
                             <FadeUp key={a.k} delay={i * 80}>
