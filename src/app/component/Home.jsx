@@ -454,7 +454,7 @@ export default function Home() {
                     <Lens className="h-72 w-72 text-[#0D8DD7]/10" />
                 </div>
 
-                <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8">
+                <div className="relative mx-auto max-w-7xl px-6 py-4 lg:px-8">
                     <Reveal>
                         <div className="mx-auto max-w-3xl text-center">
                             <Eyebrow>Academics</Eyebrow>
