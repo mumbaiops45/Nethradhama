@@ -256,7 +256,7 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
           <Reveal className="max-w-3xl">
             <Eyebrow>Student Life</Eyebrow>
-            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-5xl">
               More than a classroom
               <br />
               <span className="text-[#0D8DD7]">a whole experience.</span>

@@ -70,15 +70,14 @@ export default function Whatwe() {
   return (
     <section
       ref={ref}
-      className="relative bg-gradient-to-b from-white via-sky-50/40 to-white px-16 lg:h-[340vh]"
+      className="relative bg-gradient-to-b from-white via-sky-50/40 to-white px-4 lg:px-16 lg:h-[340vh]"
     >
       <div className="flex min-h-screen items-center overflow-hidden py-20 lg:sticky lg:top-0 lg:h-screen lg:py-0">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(13,141,215,0.10),transparent_60%)]" />
 
         <div className="mx-auto w-full max-w-7xl px-4">
           <div className="lg:grid lg:grid-cols-[minmax(300px,420px)_1fr] lg:items-center lg:gap-12">
-            
-            <div className="mb-12 text-center lg:mb-0 lg:text-left">
+            <div className="mb-12 text-left lg:mb-0 lg:text-left">
               <span
                 className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em]"
                 style={{ background: "rgba(13,141,215,0.10)", color: ACCENT }}
@@ -98,7 +97,7 @@ export default function Whatwe() {
                   >
                     {active ? (
                       <>
-                        <div className="mb-4 flex items-center justify-center gap-3 lg:justify-start">
+                        <div className="mb-4 flex items-center justify-start gap-3">
                           <span
                             className="flex h-12 w-12 items-center justify-center rounded-2xl text-white shadow-lg"
                             style={{ background: `linear-gradient(135deg, ${ACCENT}, #38bdf8)` }}
@@ -112,13 +111,13 @@ export default function Whatwe() {
                         <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
                           {active.title}
                         </h2>
-                        <p className="mx-auto mt-4 max-w-md text-slate-600 lg:mx-0">
+                        <p className=" mt-5 max-w-md text-slate-600">
                           {active.desc}
                         </p>
                       </>
                     ) : (
                       <>
-                        <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
+                        <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl md:text-4xl">
                           Training that spans the whole of eye care.
                         </h2>
                         <p className="mx-auto mt-5 max-w-md text-slate-600 lg:mx-0">

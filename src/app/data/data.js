@@ -23,12 +23,12 @@ export const gallery = [
 ];
 
 export const academics = [
-    { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka — three academic years followed by one year of compulsory internship." },
-    { k: "Eligibility", v: "50% aggregate in English, Physics, Chemistry and Biology/Mathematics at 10+2. Diploma holders may join directly in the second year." },
-    { k: "Selection", v: "Based on 10+2 marks, a written test and performance in a personal interview." },
-    { k: "Academic Session", v: "The course begins every August — a full-time program of theory, practical and clinical sessions." },
-    { k: "Evaluation", v: "Three internal assessments plus a term-end exam each year, with equal weightage. A minimum of 50% in the term-end exam is required." },
-    { k: "Medium of Instruction", v: "All theory and practical instruction and examinations are conducted in English." },
+    { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka three academic years followed by one year of compulsory internship.", img: "/Program.jpeg" },
+    { k: "Eligibility", v: "50% aggregate in English, Physics, Chemistry and Biology/Mathematics at 10+2. Diploma holders may join directly in the second year.", img: "/Community.png" },
+    { k: "Selection", v: "Based on 10+2 marks, a written test and performance in a personal interview.", img: "/Selection.jpg" },
+    { k: "Academic Session", v: "The course begins every August a full-time program of theory, practical and clinical sessions.", img: "/AcademicSession.jpg" },
+    { k: "Evaluation", v: "Three internal assessments plus a term-end exam each year, with equal weightage. A minimum of 50% in the term-end exam is required.", img: "/Exam.jpg" },
+    { k: "Medium of Instruction", v: "All theory and practical instruction and examinations are conducted in English.", img: "/Instruction.png" },
 ];
 
 export const faqs = [

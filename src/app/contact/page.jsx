@@ -271,7 +271,7 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-24">
           <Reveal className="max-w-3xl">
             <Eyebrow>Contact · Jayanagar, Bengaluru</Eyebrow>
-            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5  text-4xl font-semibold leading-[1.08] text-slate-900 sm:text-5xl lg:text-5xl">
               Get in touch
               <br />
               <span className="text-[#0D8DD7]">with us.</span>

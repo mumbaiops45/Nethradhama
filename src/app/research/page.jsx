@@ -261,18 +261,11 @@ const initials = (name) =>
 export default function Page() {
   const [heroL1, heroL1Y] = useParallax(0.24);
   const [heroL2, heroL2Y] = useParallax(0.15);
-  const [heroImg, heroImgY] = useParallax(0.08, 30);
   const [areaLens, areaLensY] = useParallax(0.18);
   const [grantLens, grantLensY] = useParallax(0.14, 60);
 
   return (
     <div className="min-h-screen bg-stone-50 text-slate-700 antialiased selection:bg-[#0D8DD7] selection:text-white">
-
-      <style>{`
-        :root { --font-display: 'Fraunces', 'Playfair Display', Georgia, 'Times New Roman', serif; }
-        .font-display {  letter-spacing: -0.01em; }
-      `}</style>
-
       <ScrollProgress />
 
 
@@ -287,7 +280,7 @@ export default function Page() {
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 py-24 md:grid-cols-2 md:py-28">
           <Reveal>
             <Eyebrow>Research at NSO</Eyebrow>
-            <h1 className="font-display mt-5 text-4xl font-semibold leading-[1.05] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="font-display mt-5 text-4xl font-semibold leading-[1.05] text-slate-900 sm:text-5xl lg:text-5xl">
               <LineReveal delay={100}>Curiosity, brought</LineReveal>
               <LineReveal delay={220} className="text-[#0D8DD7]">into focus.</LineReveal>
             </h1>
@@ -301,14 +294,7 @@ export default function Page() {
             </div>
           </Reveal>
 
-          {/* <Reveal delay={150}>
-            <div className="group relative aspect-[4/3] overflow-hidden rounded-3xl bg-slate-200 shadow-[0_25px_70px_-25px_rgba(15,23,42,0.4)]">
-              <div ref={heroImg} style={{ transform: `translateY(${heroImgY}px)` }} className="absolute inset-0 will-change-transform">
-                <img src={IMG.hero} alt="Optometry research in progress" loading="lazy" className="h-full w-full scale-[1.18] object-cover transition-transform duration-700 ease-out group-hover:scale-[1.25]" />
-              </div>
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
-            </div>
-          </Reveal> */}
+          
 
         </div>
       </section>

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Whatwe from "./Whatwe";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import Academics from "./Academics";
 
 const heroImages = [
     "/hero.png",
@@ -153,14 +154,7 @@ const gallery = [
     { src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80", label: "Lecture Hall" },
 ];
 
-const academics = [
-    { k: "Program Offered", v: "4-year B.Sc. in Optometry affiliated with RGUHS, Karnataka three academic years followed by one year of compulsory internship.", img: "/Program.jpeg" },
-    { k: "Eligibility", v: "50% aggregate in English, Physics, Chemistry and Biology/Mathematics at 10+2. Diploma holders may join directly in the second year.", img: "/Community.png" },
-    { k: "Selection", v: "Based on 10+2 marks, a written test and performance in a personal interview.", img: "/Selection.jpg" },
-    { k: "Academic Session", v: "The course begins every August a full-time program of theory, practical and clinical sessions.", img: "/AcademicSession.jpg" },
-    { k: "Evaluation", v: "Three internal assessments plus a term-end exam each year, with equal weightage. A minimum of 50% in the term-end exam is required.", img: "/Exam.jpg" },
-    { k: "Medium of Instruction", v: "All theory and practical instruction and examinations are conducted in English.", img: "/Instruction.png" },
-];
+
 
 const faqs = [
     { q: "What is the eligibility for B.Sc. Optometry?", a: "Candidates must have scored at least 50% taken together in English, Physics, Chemistry and Biology/Mathematics in their 10+2 (higher secondary) examination." },
@@ -291,8 +285,8 @@ export default function Home() {
 
                             <p
                                 className={`uppercase tracking-[5px] text-sm text-gray-600 md:text-white/70 transition-all duration-700 ${showContent
-                                        ? "opacity-100 translate-y-0"
-                                        : "opacity-0 translate-y-10"
+                                    ? "opacity-100 translate-y-0"
+                                    : "opacity-0 translate-y-10"
                                     }`}
                             >
                                 Bengaluru Affiliated to RGUHS
@@ -300,9 +294,9 @@ export default function Home() {
 
 
                             <h1
-                                className={`mt-5 text-4xl sm:text-5xl md:text-7xl font-bold leading-tight text-gray-900 md:text-white transition-all duration-1000 delay-200 ${showContent
-                                        ? "opacity-100 translate-y-0"
-                                        : "opacity-0 translate-y-12"
+                                className={`mt-5 text-4xl sm:text-5xl md:text-5xl font-bold leading-tight text-gray-900 md:text-white transition-all duration-1000 delay-200 ${showContent
+                                    ? "opacity-100 translate-y-0"
+                                    : "opacity-0 translate-y-12"
                                     }`}
                             >
                                 Bring the world
@@ -315,8 +309,8 @@ export default function Home() {
 
                             <p
                                 className={`mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-gray-600 md:text-white/80 transition-all duration-1000 delay-500 ${showContent
-                                        ? "opacity-100 translate-y-0"
-                                        : "opacity-0 translate-y-12"
+                                    ? "opacity-100 translate-y-0"
+                                    : "opacity-0 translate-y-12"
                                     }`}
                             >
                                 A four-year B.Sc. in Optometry built on rigorous academics,
@@ -325,8 +319,8 @@ export default function Home() {
 
                             <div
                                 className={`mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start transition-all duration-1000 delay-700 ${showContent
-                                        ? "opacity-100 translate-y-0"
-                                        : "opacity-0 translate-y-12"
+                                    ? "opacity-100 translate-y-0"
+                                    : "opacity-0 translate-y-12"
                                     }`}
                             >
                                 <a
@@ -366,8 +360,8 @@ export default function Home() {
                             key={index}
                             onClick={() => setCurrentImage(index)}
                             className={`h-[4px] rounded-full transition-all duration-500 ${currentImage === index
-                                    ? "w-16 bg-sky-500 md:bg-sky-400"
-                                    : "w-6 bg-gray-300 md:bg-white/40"
+                                ? "w-16 bg-sky-500 md:bg-sky-400"
+                                : "w-6 bg-gray-300 md:bg-white/40"
                                 }`}
                         />
                     ))}
@@ -375,16 +369,17 @@ export default function Home() {
 
             </section>
 
-            <section id="about" className="relative overflow-hidden px-10 bg-gradient-to-b from-white to-slate-50">
+
+            <section id="about" className="relative overflow-hidden lg:px-10 sm:px-10 bg-gradient-to-b from-white to-slate-50">
                 <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-sky-100/50 blur-3xl" />
                 <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-blue-100/40 blur-3xl" />
 
-                <div className="mx-auto max-w-7xl px-4 py-24 lg:px-8">
+                <div className="mx-auto max-w-7xl px-8 py-24 lg:px-8">
                     <div className="grid items-center gap-16 lg:grid-cols-2">
                         <Reveal>
                             <div className="max-w-xl">
                                 <Eyebrow>About Us</Eyebrow>
-                                <h2 className="font-display mt-5 text-4xl font-semibold leading-tight text-slate-900 lg:text-5xl">
+                                <h2 className="font-display mt-5 text-4xl font-semibold leading-tight text-slate-900 lg:text-4xl">
                                     A commitment to
                                     <span className="block text-[#0D8DD7]">clear vision and clearer minds.</span>
                                 </h2>
@@ -463,7 +458,7 @@ export default function Home() {
                     <Reveal>
                         <div className="mx-auto max-w-3xl text-center">
                             <Eyebrow>Academics</Eyebrow>
-                            <h2 className="font-display mt-5 text-4xl font-semibold text-slate-900 sm:text-5xl">
+                            <h2 className="font-display mt-5 text-4xl font-semibold text-slate-900 sm:text-4xl">
                                 The B.Sc. Optometry Program
                             </h2>
                             <p className="mt-6 text-lg leading-relaxed text-slate-600">
@@ -471,75 +466,9 @@ export default function Home() {
                             </p>
                         </div>
                     </Reveal>
-
-                    <div className="mt-16 grid gap-6 md:grid-cols-1 lg:grid-cols-1">
-
-                        {academics.map((a, i) => (
-                            <FadeUp key={a.k} delay={i * 80}>
-                                <div className="group overflow-hidden rounded-3xl border border-slate-200 bg-gray-100 shadow-sm transition-all duration-500 hover:border-[#0D8DD7]/30 hover:shadow-2xl">
-                                    <div className="flex flex-col md:flex-row h-full">
-                                        <div className="w-full  md:w-[60%] p-8 flex flex-col justify-center">
-                                            <h3 className="text-2xl font-semibold text-slate-900">
-                                                {a.k}
-                                            </h3>
-
-                                            <p className="mt-4 text-lg leading-relaxed text-slate-600">
-                                                {a.v}
-                                            </p>
-
-                                            <div className="mt-6 h-[3px] w-0 bg-[#0D8DD7]/40 rounded-full transition-all duration-500 group-hover:w-full group-hover:bg-[#0D8DD7]" />
-                                        </div>
-
-
-                                        {a.img && (
-                                            <div className="w-full p-10 md:w-[40%]">
-                                                <img
-                                                    src={a.img}
-                                                    alt={a.k}
-                                                    className="h-[370px] rounded-3xl w-full object-cover"
-                                                />
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </FadeUp >
-                        ))}
-                    </div>
-
-                    <Reveal delay={150}>
-                        <div className="relative mt-20 overflow-hidden rounded-[32px] bg-[#0D8DD7] p-10 shadow-[0_25px_80px_rgba(13,141,215,0.25)] lg:p-14">
-                            <div
-                                ref={researchLens}
-                                style={{ transform: `translateY(${researchLensY}px)` }}
-                                className="absolute -right-10 -top-10 opacity-40"
-                            >
-                                <Lens className="h-60 w-60 text-white/20" />
-                            </div>
-                            <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
-
-                            <div className="relative z-10">
-                                <Eyebrow light>Research Achievement</Eyebrow>
-                                <h3 className="font-display mt-4 text-3xl font-semibold text-white">
-                                    Recognized Research Excellence
-                                </h3>
-                                <p className="mt-6 max-w-4xl text-lg leading-relaxed text-blue-50">
-                                    Our students
-                                    <span className="font-semibold text-white"> Ms. Nikhita R Bhat, Ms. Pooja Kumari Sah, and Mr. Anvith M Agumbe</span>
-                                    {" "}were selected for the prestigious
-                                    <span className="font-semibold text-white"> RGUHS UG-AHS Research Grant</span>
-                                    {" "}for the academic year 2021–22, highlighting the institution's strong emphasis on innovation, scientific inquiry, and evidence-based practice.
-                                </p>
-                                <div className="mt-8 flex flex-wrap gap-4">
-                                    <div className="rounded-full bg-white/15 px-5 py-2 text-sm font-medium text-white backdrop-blur">Research Driven</div>
-                                    <div className="rounded-full bg-white/15 px-5 py-2 text-sm font-medium text-white backdrop-blur">RGUHS Recognition</div>
-                                    <div className="rounded-full bg-white/15 px-5 py-2 text-sm font-medium text-white backdrop-blur">Student Innovation</div>
-                                </div>
-                            </div>
-                        </div>
-                    </Reveal>
                 </div>
             </section>
-
+            <Academics />
 
             <section id="gallery" className="relative overflow-hidden bg-stone-50">
                 <div
@@ -566,7 +495,7 @@ export default function Home() {
             </section>
 
 
-            <section id="faq" className="relative bg-gradient-to-b from-white via-slate-50/40 to-white">
+            <section id="faq" className="relative bg-gradient-to-b from-white via-slate-50/40 to-white lg:px-8">
                 <div
                     ref={faqLens}
                     style={{ transform: `translateY(${faqLensY}px)` }}

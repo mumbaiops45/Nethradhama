@@ -352,7 +352,7 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-24 md:py-28">
           <Reveal className="max-w-3xl">
             <Eyebrow>Bengaluru · Affiliated to RGUHS</Eyebrow>
-            <h1 className="font-display mt-5 text-4xl font-semibold leading-[1.05] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="font-display mt-5 text-4xl font-semibold leading-[1.05] text-slate-900 sm:text-5xl lg:text-5xl">
               <LineReveal delay={100}>A college built entirely</LineReveal>
               <LineReveal delay={220} className="text-[#0D8DD7]">around the eye.</LineReveal>
             </h1>
@@ -500,7 +500,7 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-24">
           <Reveal className="max-w-2xl">
             <Eyebrow>Facilities</Eyebrow>
-            <h2 className="font-display mt-4 text-4xl font-semibold text-slate-900 sm:text-5xl">
+            <h2 className="font-display mt-4 text-4xl font-semibold text-slate-900 sm:text-4xl">
               Everything a future optometrist needs.
             </h2>
             <p className="mt-3 leading-relaxed text-slate-600">

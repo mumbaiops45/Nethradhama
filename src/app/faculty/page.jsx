@@ -290,7 +290,7 @@ export default function Page() {
         <div className="relative mx-auto max-w-6xl px-4 py-24 md:py-28">
           <Reveal className="max-w-3xl">
             <Eyebrow>Management &amp; Faculty</Eyebrow>
-            <h1 className="font-display mt-5 text-4xl font-semibold leading-[1.05] text-slate-900 sm:text-5xl lg:text-6xl">
+            <h1 className="font-display mt-5 text-4xl font-semibold leading-[1.05] text-slate-900 sm:text-5xl lg:text-5xl">
               <LineReveal delay={100}>The people behind</LineReveal>
               <LineReveal delay={220} className="text-[#0D8DD7]">every clear diagnosis.</LineReveal>
             </h1>
