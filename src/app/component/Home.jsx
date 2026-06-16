@@ -370,10 +370,9 @@ export default function Home() {
             </section>
 
 
-            <section id="about" className="relative overflow-hidden lg:px-10 sm:px-10 bg-gradient-to-b from-white to-slate-50">
+            <section id="about" className="relative overflow-hidden lg:px-10 sm:px-10 bg-gray-100">
                 <div className="absolute top-20 left-0 h-72 w-72 rounded-full bg-sky-100/50 blur-3xl" />
                 <div className="absolute bottom-0 right-0 h-80 w-80 rounded-full bg-blue-100/40 blur-3xl" />
-
                 <div className="mx-auto max-w-7xl px-8 py-24 lg:px-8">
                     <div className="grid items-center gap-16 lg:grid-cols-2">
                         <Reveal>
@@ -470,7 +469,7 @@ export default function Home() {
             </section>
             <Academics />
 
-            <section id="gallery" className="relative overflow-hidden bg-stone-50">
+            <section id="gallery" className="relative overflow-hidden bg-gray-100">
                 <div
                     ref={galleryLens}
                     style={{ transform: `translateY(${galleryLensY}px)` }}
@@ -495,7 +494,7 @@ export default function Home() {
             </section>
 
 
-            <section id="faq" className="relative bg-gradient-to-b from-white via-slate-50/40 to-white lg:px-8">
+            <section id="faq" className="relative bg-gray-100 lg:px-8">
                 <div
                     ref={faqLens}
                     style={{ transform: `translateY(${faqLensY}px)` }}

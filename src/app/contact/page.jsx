@@ -165,6 +165,23 @@ const details = [
 ];
 
 
+
+function LineReveal({ children, delay = 0, className = "" }) {
+  const [ref, shown] = useReveal();
+  return (
+    <span ref={ref} className="block overflow-hidden pb-[0.12em]">
+      <span
+        style={{ transitionDelay: `${delay}ms` }}
+        className={`block transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${shown ? "translate-y-0" : "translate-y-[120%]"
+          } ${className}`}
+      >
+        {children}
+      </span>
+    </span>
+  );
+}
+
+
 function Field({ label, name, value, onChange, error, type = "text", required, placeholder, textarea }) {
   const base =
     "w-full rounded-xl border bg-white px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition-colors focus:border-[#0D8DD7] focus:ring-2 focus:ring-[#0D8DD7]/20";
@@ -257,11 +274,11 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50  text-slate-700 antialiased selection:bg-[#0D8DD7]">
+    <div className="min-h-screen bg-gray-100  text-slate-700 antialiased selection:bg-[#0D8DD7]">
       <ScrollProgress />
 
 
-      <section className="relative overflow-hidden">
+      {/* <section className="relative overflow-hidden">
         <div ref={heroL1} style={{ transform: `translateY(${heroL1Y}px)` }} className="pointer-events-none absolute -right-16 -top-12 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/50" />
         </div>
@@ -281,6 +298,55 @@ export default function Page() {
             </p>
           </Reveal>
         </div>
+      </section> */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src="/abouthero.jpg"
+            alt="About Hero"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/20" />
+        </div>
+
+        <div
+          ref={heroL1}
+          style={{ transform: `trnaslateY(${heroL1Y}px)` }}
+          className="pointer-events-none absolute -right-16 -top-12 z-10 will-change-transform"
+        >
+          <Lens className="h-72 w-72 text-white/10" />
+        </div>
+
+        <div
+          ref={heroL2}
+          style={{ transform: `translateY(${heroL2Y}px)` }}
+          className="pointer-events-none absolute -bottom-24 -left-24 z-10 will-change-transform"
+        >
+          <Lens className="h-80 w-80 text-sky-300/10" />
+        </div>
+
+        <div className="relative z-20 mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <Reveal className="max-w-3xl">
+            <Eyebrow className="text-sky-300">
+              Contact · Jayanagar, Bengaluru
+            </Eyebrow>
+
+            <h1 className="font-display mt-4 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-5xl">
+              <LineReveal delay={100}>
+                Get in touch
+              </LineReveal>
+              <LineReveal delay={220} className="text-[#4FC3F7]">
+                with us.
+              </LineReveal>
+
+            </h1>
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-200">
+              Questions about admissions, the program or a campus visit? Send us a message or reach us directly using the details below.
+            </p>
+          </Reveal>
+
+        </div>
+
       </section>
 
 

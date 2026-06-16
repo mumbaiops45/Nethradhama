@@ -138,11 +138,11 @@ function Stat({ to, suffix = "", label }) {
   const val = useCountUp(to, shown);
   return (
     <div ref={ref}>
-      <div className=" text-3xl font-semibold text-slate-900">
+      <div className=" text-3xl font-semibold text-slate-200">
         {val}
         {suffix}
       </div>
-      <div className="mt-1 text-xs uppercase tracking-wider text-slate-500">{label}</div>
+      <div className="mt-1 text-xs uppercase tracking-wider text-slate-200">{label}</div>
     </div>
   );
 }
@@ -161,6 +161,20 @@ const events = [
 ];
 
 
+function LineReveal({ children, delay = 0, className = "" }) {
+  const [ref, shown] = useReveal();
+  return (
+    <span ref={ref} className="block overflow-hidden pb-[0.12em]">
+      <span
+        style={{ transitionDelay: `${delay}ms` }}
+        className={`block transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${shown ? "translate-y-0" : "translate-y-[120%]"
+          } ${className}`}
+      >
+        {children}
+      </span>
+    </span>
+  );
+}
 
 function EventCard({ e, i }) {
   const [step, setStep] = useState(0);
@@ -245,7 +259,7 @@ export default function Page() {
       <ScrollProgress />
 
 
-      <section className="relative overflow-hidden">
+      {/* <section className="relative overflow-hidden">
         <div ref={heroL1} style={{ transform: `translateY(${heroL1Y}px)` }} className="pointer-events-none absolute -right-16 -top-12 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/50" />
         </div>
@@ -274,14 +288,72 @@ export default function Page() {
             </div>
           </Reveal>
         </div>
+      </section> */}
+
+      <section className="relative overflow-hidden">
+
+        <div className="absolute inset-0">
+          <img
+            src="/curricularhero.png"
+            alt="Curricular Hero"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/20" />
+        </div>
+
+        <div
+          ref={heroL1}
+          style={{ transform: `translateY(${heroL1Y}px)` }}
+          className="pointer-events-none absolute -right-16 -top-12 z-10 will-change-transform"
+        >
+          <Lens className="h-72 w-72 text-white/10" />
+        </div>
+
+        <div
+          ref={heroL2}
+          style={{ transform: `translateY(${heroL2Y}px)` }}
+          className="pointer-events-none absolute -bottom-24 -left-24 z-10 will-change-transform"
+        >
+          <Lens className="h-80 w-80 text-sky-300/10" />
+        </div>
+
+        <div className="relative z-20 mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <Reveal className="max-w-3xl">
+            <Eyebrow className="text-sky-300">
+              Student Life
+            </Eyebrow>
+
+            <h1 className="font-display mt-4 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-5xl">
+              <LineReveal delay={100}>
+                More than a classroom
+              </LineReveal>
+
+              <LineReveal delay={220} className="text-[#4FC3F7]">
+                a whole experience.
+              </LineReveal>
+            </h1>
+
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-200">
+              NSO offers a holistic environment where academics meet celebration, service and play. From national festivals to World Optometry Day, here's a year in the life of our students.
+            </p>
+          </Reveal>
+
+          <Reveal delay={150}>
+            <div className="mt-8 flex flex-wrap gap-10 border-t border-white/20 pt-6 sm:gap-16">
+              <Stat to={9} suffix="+" label="Signature events" />
+              <Stat to={23} label="World Optometry Dat(MAR)" />
+              <Stat to={1} suffix="yr" label="Supportive depts" />
+            </div>
+          </Reveal>
+        </div>
       </section>
 
 
-      <section className="bg-white">
+      <section className="bg-gray-100">
         <div className="mx-auto max-w-6xl px-4 py-20">
           <Reveal className="max-w-2xl">
-            <Eyebrow>Events &amp; Activities</Eyebrow>
-            <h2 className="mt-4  text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <p className="text-black">Events &amp; Activities</p>
+            <h2 className="mt-4  text-3xl font-semibold text-black sm:text-4xl">
               A year, in full colour.
             </h2>
           </Reveal>

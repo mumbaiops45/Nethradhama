@@ -168,10 +168,10 @@ function Stat({ to, suffix = "", label }) {
   const val = useCountUp(to, shown);
   return (
     <div ref={ref}>
-      <div className="text-3xl font-semibold text-slate-900">
+      <div className="text-3xl font-semibold text-slate-200">
         {val}{suffix}
       </div>
-      <div className="mt-1 text-xs uppercase tracking-wider text-slate-500">{label}</div>
+      <div className="mt-1 text-xs uppercase tracking-wider text-slate-200">{label}</div>
     </div>
   );
 }
@@ -341,28 +341,63 @@ export default function Page() {
   return (
     <div className="min-h-screen scroll-smooth bg-stone-50 text-slate-700 antialiased selection:bg-[#0D8DD7] selection:text-white">
       <ScrollProgress />
+
+
+
       <section className="relative overflow-hidden">
-        <div ref={heroL1} style={{ transform: `translateY(${heroL1Y}px)` }} className="pointer-events-none absolute -right-16 -top-12 will-change-transform">
-          <Lens className="h-72 w-72 text-[#0D8DD7]/50" />
-        </div>
-        <div ref={heroL2} style={{ transform: `translateY(${heroL2Y}px)` }} className="pointer-events-none absolute -bottom-24 -left-24 will-change-transform">
-          <Lens className="h-80 w-80 text-sky-200/50" />
+        <div className="absolute inset-0">
+          <img
+            src="/abouthero.jpg"
+            alt="About Hero"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/20" />
         </div>
 
-        <div className="relative mx-auto max-w-6xl px-4 py-24 md:py-28">
+
+        <div
+          ref={heroL1}
+          style={{ transform: `translateY(${heroL1Y}px)` }}
+          className="pointer-events-none absolute -right-16 -top-12 z-10 will-change-transform"
+        >
+          <Lens className="h-72 w-72 text-white/10" />
+        </div>
+
+        <div
+          ref={heroL2}
+          style={{ transform: `translateY(${heroL2Y}px)` }}
+          className="pointer-events-none absolute -bottom-24 -left-24 z-10 will-change-transform"
+        >
+          <Lens className="h-80 w-80 text-sky-300/10" />
+        </div>
+
+
+        <div className="relative z-20 mx-auto max-w-6xl px-4 py-16 md:py-20">
           <Reveal className="max-w-3xl">
-            <Eyebrow>Bengaluru · Affiliated to RGUHS</Eyebrow>
-            <h1 className="font-display mt-5 text-4xl font-semibold leading-[1.05] text-slate-900 sm:text-5xl lg:text-5xl">
-              <LineReveal delay={100}>A college built entirely</LineReveal>
-              <LineReveal delay={220} className="text-[#0D8DD7]">around the eye.</LineReveal>
+            <Eyebrow className="text-sky-300">
+              Bengaluru · Affiliated to RGUHS
+            </Eyebrow>
+
+            <h1 className="font-display mt-4 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-5xl">
+              <LineReveal delay={100}>
+                A college built entirely
+              </LineReveal>
+
+              <LineReveal delay={220} className="text-[#4FC3F7]">
+                around the eye.
+              </LineReveal>
             </h1>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-              Established in 2010 as Bangalore's first institute dedicated solely to optometry — a unit of the Nethradhama Education &amp; Research Foundation, affiliated to RGUHS and recognised by the Government of Karnataka.
+
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-200">
+              Established in 2010 as Bangalore's first institute dedicated solely
+              to optometry — a unit of the Nethradhama Education & Research
+              Foundation, affiliated to RGUHS and recognised by the Government
+              of Karnataka.
             </p>
           </Reveal>
 
           <Reveal delay={150}>
-            <div className="mt-12 flex flex-wrap gap-10 border-t border-stone-200 pt-8 sm:gap-16">
+            <div className="mt-8 flex flex-wrap gap-10  border-t border-white/20 pt-6 sm:gap-16">
               <Stat to={15} suffix="+" label="Years of journey" />
               <Stat to={4} suffix=" yr" label="B.Sc. Optometry" />
               <Stat to={8} label="Supportive depts" />
@@ -372,7 +407,7 @@ export default function Page() {
       </section>
 
 
-      <div className="sticky top-0 z-40 border-y border-stone-200 bg-stone-50/85 backdrop-blur-md">
+      <div className="sticky top-0 z-40 border-y border-stone-200 bg-gray-100 backdrop-blur-md">
         <nav className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-3">
           {SECTIONS.map((s) => (
             <a
@@ -387,7 +422,7 @@ export default function Page() {
         </nav>
       </div>
 
-      <section id="overview" className="scroll-mt-24 bg-white">
+      <section id="overview" className="scroll-mt-24 bg-gray-100">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-24 md:grid-cols-2">
           <Reveal>
             <Eyebrow>Overview</Eyebrow>
@@ -542,7 +577,7 @@ export default function Page() {
               ))}
             </div>
             <Reveal>
-              <div className="sticky top-24 rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
+              <div className="sticky top-24 rounded-2xl border border-stone-200 bg-black p-6 shadow-sm">
 
                 <div className="h-72 w-full overflow-hidden rounded-xl bg-stone-100">
                   <img
@@ -553,12 +588,12 @@ export default function Page() {
                 </div>
 
 
-                <h3 className="mt-5 text-2xl font-semibold text-slate-900">
+                <h3 className="mt-5 text-2xl font-semibold text-slate-200">
                   {selectedFacility.title}
                 </h3>
 
 
-                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                <p className="mt-2 text-sm leading-relaxed text-slate-200">
                   {selectedFacility.desc}
                 </p>
               </div>
@@ -606,11 +641,12 @@ export default function Page() {
       </section>
 
 
-      <section id="academics" className="scroll-mt-24 bg-gradient-to-b from-stone-50 to-white">
+      {/* <section id="academics" className="scroll-mt-24 bg-gradient-to-b from-stone-50 to-white"> */}
+       <section id="academics" className="scroll-mt-24 bg-[#0D8DD7]">
         <div className="mx-auto max-w-6xl px-4 py-24">
           <Reveal className="max-w-2xl">
-            <Eyebrow>Academics</Eyebrow>
-            <h2 className="font-display mt-4 text-3xl font-semibold leading-tight text-slate-900 sm:text-4xl">
+            <p className="text-white">Academics</p>
+            <h2 className="font-display mt-4 text-3xl font-semibold leading-tight text-white sm:text-4xl">
               The B.Sc. Optometry program, in detail.
             </h2>
           </Reveal>
@@ -695,8 +731,8 @@ export default function Page() {
                     ["Email", "optoschool@nethradhama.org"],
                     ["Apply", "Walk in or call to begin"],
                   ].map(([k, v]) => (
-                    <div key={k} className="bg-white p-6 transition-colors hover:bg-[#0D8DD7]/5">
-                      <div className="text-xs font-semibold uppercase tracking-wider text-[#0D8DD7]">{k}</div>
+                    <div key={k} className="bg-white p-6 transition-colors hover:bg-[#0D8DD7]">
+                      <div className="text-xs font-semibold uppercase tracking-wider hover:text-black text-[#0D8DD7]">{k}</div>
                       <div className="mt-1 text-sm font-medium text-slate-800">{v}</div>
                     </div>
                   ))}

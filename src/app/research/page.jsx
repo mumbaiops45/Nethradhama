@@ -166,10 +166,10 @@ function Stat({ to, suffix = "", prefix = "", label }) {
   const val = useCountUp(to, shown);
   return (
     <div ref={ref}>
-      <div className="text-3xl font-semibold text-slate-900">
+      <div className="text-3xl font-semibold text-slate-200">
         {prefix}{val}{suffix}
       </div>
-      <div className="mt-1 text-xs uppercase tracking-wider text-slate-500">{label}</div>
+      <div className="mt-1 text-xs uppercase tracking-wider text-slate-200">{label}</div>
     </div>
   );
 }
@@ -265,11 +265,11 @@ export default function Page() {
   const [grantLens, grantLensY] = useParallax(0.14, 60);
 
   return (
-    <div className="min-h-screen bg-stone-50 text-slate-700 antialiased selection:bg-[#0D8DD7] selection:text-white">
+    <div className="min-h-screen bg-gray-100 text-slate-700 antialiased selection:bg-[#0D8DD7] selection:text-white">
       <ScrollProgress />
 
 
-      <section className="relative overflow-hidden">
+      {/* <section className="relative overflow-hidden">
         <div ref={heroL1} style={{ transform: `translateY(${heroL1Y}px)` }} className="pointer-events-none absolute -right-16 -top-12 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/50" />
         </div>
@@ -297,19 +297,75 @@ export default function Page() {
           
 
         </div>
+      </section> */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img 
+          src="/trainghero.jpg"
+          alt="TrainHero "
+          className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/20" />
+
+        </div>
+
+        <div
+        ref={heroL1}
+        style={{ transform: `translateY(${heroL1Y}px)`}}
+        className="pointer-events-none absolute -right-16 -top-12 z-10 will-change-transform"
+        >
+          <Lens className="h-72 w-72 text-white/10" />
+        </div>
+
+        <div
+        ref={heroL2}
+        style={{ transform: `translateY(${heroL2Y}px)`}}
+        className="pointer-events-none absolute -bottom-24 z-10 will-change-transform"
+        >
+          <Lens className="h-80 w-80 text-sky-300/10" />
+
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <Reveal className="max-w-3xl">
+            <Eyebrow className="text-sky-300">
+              Research at NSO
+            </Eyebrow>
+
+            <h1 className="font-display mt-4 text-4xl font-semibold leading-[1.05] text-white sm:text-5xl lg:text-5xl">
+              <LineReveal delay={100}> Curiosity, brought</LineReveal>
+              <LineReveal delay={220} className="text-[#4FC3F7]">into focus.</LineReveal>
+            </h1>
+
+            <p className="mt-4 max-w-xl text-lg leading-relaxed text-slate-200">NSO is committed to continually strengthening its academic activities and research programs  backed by high standards of education, training and clinical experience, and a comprehensive curriculum built for inquiry.</p>
+
+          </Reveal>
+
+          <Reveal delay={150}>
+            <div className="mt-8 flex flex-wrap gap-10 border-t border-white/20 py-6 sm:gap-16">
+            <Stat to={15}   label="RGUHS grant year"/>
+            <Stat to={3}  label="Funded scholars" />
+            <Stat to={6} suffix="+" label= "Areas of inquiry" />
+
+            </div>
+
+          </Reveal>
+
+        </div>
+
       </section>
 
-      <section className="relative overflow-hidden bg-white">
+      <section className="relative overflow-hidden bg-[#0D8DD7]">
         <div ref={areaLens} style={{ transform: `translateY(${areaLensY}px)` }} className="pointer-events-none absolute -right-24 top-16 will-change-transform">
           <Lens className="h-72 w-72 text-[#0D8DD7]/10" />
         </div>
         <div className="relative mx-auto max-w-6xl px-4 py-24">
           <Reveal className="max-w-2xl">
-            <Eyebrow>Areas of Inquiry</Eyebrow>
-            <h2 className="font-display mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
+            <p className="text-white">Areas of Inquiry</p>
+            <h2 className="font-display mt-4 text-3xl font-semibold text-white sm:text-4xl">
               Where optometry research looks next.
             </h2>
-            <p className="mt-4 leading-relaxed text-slate-600">
+            <p className="mt-4 leading-relaxed text-white">
               Our curriculum and clinical setting open doors to study across the breadth of vision science — the same domains our students train in every day.
             </p>
           </Reveal>
