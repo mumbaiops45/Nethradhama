@@ -3,13 +3,14 @@ import fs from "fs";
 import path from "path";
 
 export default function Page() {
-    const dir = path.join(process.cwd(), "public/gallery");
+    const dir = path.join(process.cwd(), "public/Gallery");
 
     let images = [];
 
     try {
         const files = fs.readdirSync(dir);
-        images = files.map((file) => `/gallery/${file}`);
+        images = files.map((file) => `/Gallery/${file}`);
+        
     } catch (error) {
         console.log("Gallery folder missing");
     }
