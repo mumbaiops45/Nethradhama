@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import Academics from "./Academics";
 
 const heroImages = [
-    "/hero.png",
+    "/contacthero.jpg",
     "/hero1.jpg",
     "/hero2.jpg",
 ];

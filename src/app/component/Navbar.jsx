@@ -1,7 +1,6 @@
-
-
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import {
   Disclosure,
   DisclosureButton,
@@ -26,12 +25,32 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-
-function Lens({ className = "" }) {
+function Lens({ className = "", style }) {
   return (
-    <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
-      <circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.35" />
-      <circle cx="24" cy="24" r="14" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.6" />
+    <svg
+      viewBox="0 0 48 48"
+      className={className}
+      style={style}
+      aria-hidden="true"
+    >
+      <circle
+        cx="24"
+        cy="24"
+        r="22"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        opacity="0.35"
+      />
+      <circle
+        cx="24"
+        cy="24"
+        r="14"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        opacity="0.6"
+      />
       <circle cx="24" cy="24" r="6" fill="currentColor" />
     </svg>
   );
@@ -39,22 +58,46 @@ function Lens({ className = "" }) {
 
 export default function Navbar() {
   const pathname = usePathname();
+
   const [logoOk, setLogoOk] = useState(true);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const isActive = (href) =>
-    href === "/" ? pathname === "/" : pathname === href || pathname?.startsWith(href + "/");
+    href === "/"
+      ? pathname === "/"
+      : pathname === href || pathname?.startsWith(href + "/");
 
   return (
     <Disclosure
       as="nav"
-      className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 shadow-sm backdrop-blur-lg"
+      className={classNames(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
+        scrolled
+          ? "bg-white/95 shadow-lg backdrop-blur-md border-b border-gray-200"
+          : "bg-transparent"
+      )}
     >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-20 items-center justify-between gap-4">
-             
-              <a href="/" className="flex shrink-0 items-center gap-2.5">
+            <div className="flex h-20 items-center justify-between">
+              
+              
+              <a href="/" className="flex items-center gap-3">
                 {logoOk ? (
                   <img
                     src="/logo.png"
@@ -64,90 +107,128 @@ export default function Navbar() {
                   />
                 ) : (
                   <>
-                    <Lens className="h-9 w-9" style={{ color: ACCENT }} />
-                    <span className="leading-tight">
-                      <span className="block  text-base font-semibold text-gray-900">Nethradhama</span>
-                      <span className="block text-[10px] uppercase tracking-[0.18em]" style={{ color: ACCENT }}>
+                    <Lens
+                      className="h-9 w-9"
+                      style={{
+                        color: scrolled ? ACCENT : "#ffffff",
+                      }}
+                    />
+                    <div>
+                      <span
+                        className={classNames(
+                          "block text-base font-semibold",
+                          scrolled ? "text-gray-900" : "text-white"
+                        )}
+                      >
+                        Nethradhama
+                      </span>
+                      <span
+                        className="block text-[10px] uppercase tracking-[0.18em]"
+                        style={{
+                          color: scrolled ? ACCENT : "#ffffff",
+                        }}
+                      >
                         School of Optometry
                       </span>
-                    </span>
+                    </div>
                   </>
                 )}
               </a>
 
-             
-              <div className="hidden flex-1 items-center justify-center md:flex">
-                <div className="flex items-center gap-0.5">
-                  {navigation.map((item) => {
-                    const active = isActive(item.href);
-                    return (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        aria-current={active ? "page" : undefined}
+              
+              <div className="hidden md:flex items-center gap-1">
+                {navigation.map((item) => {
+                  const active = isActive(item.href);
+
+                  return (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className={classNames(
+                        "group relative px-4 py-2 text-sm font-medium transition-all duration-300",
+                        active
+                          ? "text-[#0D8DD7]"
+                          : scrolled
+                          ? "text-gray-700 hover:text-[#0D8DD7]"
+                          : "text-white hover:text-white"
+                      )}
+                    >
+                      {item.name}
+
+                      <span
                         className={classNames(
-                          "group relative whitespace-nowrap px-3.5 py-2 text-sm font-medium transition-colors duration-300",
-                          active ? "text-[#0D8DD7]" : "text-gray-700 hover:text-[#0D8DD7]"
+                          "absolute left-3 right-3 -bottom-0.5 h-0.5 rounded-full bg-[#0D8DD7] transition-transform duration-300",
+                          active
+                            ? "scale-x-100"
+                            : "scale-x-0 group-hover:scale-x-100"
                         )}
-                      >
-                        {item.name}
-                        <span
-                          className={classNames(
-                            "absolute inset-x-3.5 -bottom-0.5 h-0.5 origin-center rounded-full bg-[#0D8DD7] transition-transform duration-300",
-                            active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                          )}
-                        />
-                      </a>
-                    );
-                  })}
-                </div>
+                      />
+                    </a>
+                  );
+                })}
               </div>
 
-            
-              <div className="hidden shrink-0 md:flex">
+             
+              <div className="hidden md:block">
                 <a
                   href="/contact"
-                  className="rounded-full bg-[#0D8DD7] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+                  className={classNames(
+                    "rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300",
+                    scrolled
+                      ? "bg-[#0D8DD7] text-white shadow-lg hover:-translate-y-0.5"
+                      : "bg-white text-[#0D8DD7] hover:bg-gray-100"
+                  )}
                 >
                   Admission Application
                 </a>
               </div>
 
-              
-              <div className="flex md:hidden">
-                <DisclosureButton className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 transition-colors hover:bg-gray-100">
-                  <span className="sr-only">Toggle menu</span>
-                  {open ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
+             
+              <div className="md:hidden">
+                <DisclosureButton
+                  className={classNames(
+                    "rounded-md p-2 transition-colors",
+                    scrolled
+                      ? "text-gray-700 hover:bg-gray-100"
+                      : "text-white hover:bg-white/10"
+                  )}
+                >
+                  {open ? (
+                    <XMarkIcon className="h-6 w-6" />
+                  ) : (
+                    <Bars3Icon className="h-6 w-6" />
+                  )}
                 </DisclosureButton>
               </div>
             </div>
           </div>
 
-        
-          <DisclosurePanel className="border-t border-gray-200 bg-white xl:hidden">
+         
+          <DisclosurePanel className="md:hidden bg-white border-t border-gray-200 shadow-lg">
             <div className="space-y-1 px-4 py-4">
               {navigation.map((item) => {
                 const active = isActive(item.href);
+
                 return (
                   <DisclosureButton
                     key={item.name}
                     as="a"
                     href={item.href}
-                    aria-current={active ? "page" : undefined}
                     className={classNames(
-                      "block rounded-lg px-4 py-3 text-base font-medium transition-colors",
+                      "block rounded-lg px-4 py-3 text-base font-medium",
                       active
                         ? "bg-[#0D8DD7]/10 text-[#0D8DD7]"
-                        : "text-gray-700 hover:bg-[#0D8DD7]/5 hover:text-[#0D8DD7]"
+                        : "text-gray-700 hover:bg-[#0D8DD7]/5"
                     )}
                   >
                     {item.name}
                   </DisclosureButton>
                 );
               })}
+
               <a
                 href="/contact"
-                className="mt-3 block rounded-full bg-[#0D8DD7] px-4 py-3 text-center font-semibold text-white shadow-sm transition-colors hover:bg-[#0b7cbe]"
+                className="mt-3 block rounded-full bg-[#0D8DD7] px-4 py-3 text-center font-semibold text-white"
               >
                 Admission Application
               </a>

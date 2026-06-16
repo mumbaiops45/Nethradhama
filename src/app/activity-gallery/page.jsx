@@ -41,7 +41,7 @@ export default function Page() {
             </div>
             {images.length === 0 && (
                 <div className="text-center mt-20 text-slate-500">
-                    No images found in <span className="font-medium">/public/gallery</span>
+                    No images found in <span className="font-medium">/public/Gallery</span>
                 </div>
             )}
 
