@@ -14,7 +14,7 @@ export default function Page() {
     } catch (error) {
         console.log("Gallery folder missing");
     }
-// 88c6ea
+
     return (
         <div className="min-h-screen bg-[#8dbcd7] px-4 py-20">   
             <div className="max-w-7xl mx-auto text-center">
