@@ -577,7 +577,7 @@ export default function Page() {
               ))}
             </div>
             <Reveal>
-              <div className="sticky top-24 rounded-2xl border border-stone-200 bg-black p-6 shadow-sm">
+              <div className="sticky top-24 rounded-2xl border border-stone-200 bg-[#70b5de] p-6 shadow-sm">
 
                 <div className="h-72 w-full overflow-hidden rounded-xl bg-stone-100">
                   <img
@@ -588,12 +588,12 @@ export default function Page() {
                 </div>
 
 
-                <h3 className="mt-5 text-2xl font-semibold text-slate-200">
+                <h3 className="mt-5 text-2xl font-semibold text-white">
                   {selectedFacility.title}
                 </h3>
 
 
-                <p className="mt-2 text-sm leading-relaxed text-slate-200">
+                <p className="mt-2 text-sm leading-relaxed text-white">
                   {selectedFacility.desc}
                 </p>
               </div>
@@ -641,7 +641,7 @@ export default function Page() {
       </section>
 
 
-      {/* <section id="academics" className="scroll-mt-24 bg-gradient-to-b from-stone-50 to-white"> */}
+      
        <section id="academics" className="scroll-mt-24 bg-[#0D8DD7]">
         <div className="mx-auto max-w-6xl px-4 py-24">
           <Reveal className="max-w-2xl">

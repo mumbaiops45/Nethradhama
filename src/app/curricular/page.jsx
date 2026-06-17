@@ -198,7 +198,7 @@ function EventCard({ e, i }) {
         </div>
 
 
-        <article className="relative h-full overflow-hidden rounded-3xl bg-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/5">
+        <article className="relative h-full overflow-hidden rounded-3xl bg-[#b6d4e6] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/5">
 
 
           <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
@@ -236,7 +236,7 @@ function EventCard({ e, i }) {
             <h3 className="text-xl font-semibold text-slate-900">
               {e.title}
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+            <p className="mt-2 text-sm leading-relaxed text-slate-900">
               {e.desc}
             </p>
           </div>

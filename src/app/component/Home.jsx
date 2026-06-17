@@ -145,13 +145,13 @@ function Eyebrow({ children, light = false }) {
 
 const gallery = [
     { src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80", label: "Clinical Skills" },
-    { src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80", label: "Refraction Lab" },
-    { src: "https://images.unsplash.com/photo-1581595219315-a187dd40c322?auto=format&fit=crop&w=800&q=80", label: "Diagnostics" },
-    { src: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=800&q=80", label: "Eye Examination" },
+    { src: "/refraction.jpg", label: "Refraction Lab" },
+    { src: "/Diagnostics.png", label: "Diagnostics" },
+    { src: "/Selection.jpg", label: "Eye Examination" },
     { src: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80", label: "Research" },
     { src: "/collegelife.jpg", label: "Campus Life" },
-    { src: "https://images.unsplash.com/photo-1579165466949-3180a3d056d5?auto=format&fit=crop&w=800&q=80", label: "Optical Lab" },
-    { src: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80", label: "Lecture Hall" },
+    { src: "/Optical.jpg", label: "Optical Lab" },
+    { src: "/lecturehall.jpg", label: "Lecture Hall" },
 ];
 
 

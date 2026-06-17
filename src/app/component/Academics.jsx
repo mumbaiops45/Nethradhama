@@ -44,15 +44,14 @@ function Card({ data, index, progress, range }) {
                 style={{
                     top: `calc(-12vh + ${index * 28}px)`,
                 }}
-                // className='group relative w-full max-w-6xl origin-top overflow-hidden rounded-3xl border border-slate-200 bg-gray-100 shadow-2xl will-change-transform'
-                className='group relative w-full max-w-6xl origin-top overflow-hidden rounded-3xl border border-slate-200 bg-black shadow-2xl will-change-transform'
+                className='group relative w-full max-w-6xl origin-top overflow-hidden rounded-3xl border border-slate-200 bg-[#0D8DD7] shadow-2xl will-change-transform'
             >
                 <div className='flex h-full flex-col md:flex-row'>
                     <div className='flex w-full flex-col justify-center p-8 md:w-[70%] md:p-10'>
-                        <span className='font-mono text-sm font-semibold text-[#0D8DD7]'>0{index + 1}</span>
+                        <span className='font-mono text-sm font-semibold text-white'>0{index + 1}</span>
                         <h3 className='mt-2 text-2xl font-semibold text-white md:text-3xl'>{data.k}</h3>
                         <p className='mt-4 text-base leading-relaxed text-white md:text-lg'>{data.v}</p>
-                        <div className='mt-6 h-[3px] w-0 rounded-full bg-[#0D8DD7]/40 transition-all duration-500 group-hover:w-full group-hover:bg-[#0D8DD7]' />
+                        <div className='mt-6 h-[3px] w-0 rounded-full bg-[#0D8DD7]/40 transition-all duration-500 group-hover:w-full group-hover:bg-white' />
                     </div>
 
                     {data.img && (
